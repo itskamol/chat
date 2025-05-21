@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb_container
+        restart: unless-stopped
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongo-data:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+        networks:
+            - microservices-network
+
+    rabbitmq:
+        image: rabbitmq:management
+        container_name: rabbitmq_container
+        restart: unless-stopped
+        ports:
+            - '5672:5672'
+            - '15672:15672'
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+        networks:
+            - microservices-network
+
+    user:
+        build:
+            context: ./user-service
+            dockerfile: Dockerfile
+        container_name: user_service_container
+        restart: always
+        depends_on:
+            - mongodb
+            - rabbitmq
+        environment:
+            NODE_ENV: production
+            MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
+            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+        networks:
+            - microservices-network
+
+    chat:
+        build:
+            context: ./chat-service
+            dockerfile: Dockerfile
+        container_name: chat_service_container
+        restart: always
+        depends_on:
+            - mongodb
+            - rabbitmq
+            - user
+        environment:
+            NODE_ENV: production
+            MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
+            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+        networks:
+            - microservices-network
+
+    notification:
+        build:
+            context: ./notification-service
+            dockerfile: Dockerfile
+        container_name: notification_service_container
+        restart: always
+        depends_on:
+            - rabbitmq
+        environment:
+            NODE_ENV: production
+            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+            SMTP_HOST: smtp-relay.brevo.com
+            SMTP_PORT: 587
+            SMTP_USER: mening_brevo_account_emailim@example.com
+            SMTP_PASS: mening_brevo_master_passwordim
+            EMAIL_FROM: chat-server@meningdomenim.com
+            SENDINBLUE_APIKEY: mening_brevo_api_kalitim
+        networks:
+            - microservices-network
+
+    gateway:
+        build:
+            context: ./gateway
+            dockerfile: Dockerfile
+        container_name: api_gateway_container
+        ports:
+            - '8080:8080'
+        restart: always
+        depends_on:
+            - user
+            - chat
+            - notification
+        environment:
+            PORT: 8080
+        networks:
+            - microservices-network
+
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        container_name: nginx_proxy_container
+        ports:
+            - '85:85'
+        restart: always
+        depends_on:
+            - gateway
+        networks:
+            - microservices-network
+
+volumes:
+    mongo-data:
+
+networks:
+    microservices-network:
+        driver: bridge

@@ -1,0 +1,8 @@
+{"level":"info","message":"Server is running on port 8081 (Environment: development)","service":"user-service","timestamp":"2025-05-20 15:11:05"}
+{"level":"info","message":"RabbitMQ client initialized successfully","service":"user-service","timestamp":"2025-05-20 15:11:05"}
+{"level":"http","message":"::1 - - [20/May/2025:10:11:24 +0000] \"POST /api/auth/login HTTP/1.1\" 404 154 \"-\" \"PostmanRuntime/7.44.0\"","service":"user-service","timestamp":"2025-05-20 15:11:24"}
+{"level":"http","message":"::1 - - [20/May/2025:10:11:36 +0000] \"POST /login HTTP/1.1\" 200 54 \"-\" \"PostmanRuntime/7.44.0\"","service":"user-service","timestamp":"2025-05-20 15:11:36"}
+{"level":"http","message":"::1 - - [20/May/2025:10:12:18 +0000] \"POST /login HTTP/1.1\" 200 54 \"-\" \"PostmanRuntime/7.44.0\"","service":"user-service","timestamp":"2025-05-20 15:12:18"}
+{"level":"http","message":"::1 - - [20/May/2025:10:12:29 +0000] \"POST /register HTTP/1.1\" 200 142 \"-\" \"PostmanRuntime/7.44.0\"","service":"user-service","timestamp":"2025-05-20 15:12:29"}
+{"level":"http","message":"::1 - - [20/May/2025:10:12:40 +0000] \"POST /login HTTP/1.1\" 200 297 \"-\" \"PostmanRuntime/7.44.0\"","service":"user-service","timestamp":"2025-05-20 15:12:40"}
+{"level":"info","message":"SIGINT received","service":"user-service","timestamp":"2025-05-20 15:13:05"}
