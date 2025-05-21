@@ -3,7 +3,7 @@ import { Socket, Server as SocketIOServer } from "socket.io";
 import app from "./app";
 import { Message, connectDB } from "./database";
 import config from "./config/config";
-import { logger } from './utils';
+import logger from "@shared/utils/logger";
 
 let server: Server;
 connectDB();
