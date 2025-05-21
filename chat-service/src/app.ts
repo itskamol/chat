@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import morgan from "morgan";
 import userRouter from "./routes/messageRoutes";
 import { errorConverter, errorHandler } from "./middleware";
-import { logger } from "./utils";
+import { logger } from "@shared/utils/logger";
 
 const app: Express = express();
 
