@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { User } from "../database";
-import { ApiError, encryptPassword, isPasswordMatch, logger } from "../utils";
+import { ApiError } from "@shared/utils/apiError";
+import { logger } from "@shared/utils/logger";
+import { encryptPassword, isPasswordMatch } from "../utils";
 import config from "../config/config";
 import { IUser } from "../database";
 

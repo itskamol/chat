@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import morgan from "morgan";
 import userRouter from "./routes/messageRoutes";
 import { errorConverter, errorHandler } from "./middleware";
-import { logger } from "./utils";
+import { logger } from "@shared/utils/logger";
 
 const app: Express = express();
 
@@ -17,6 +17,12 @@ app.use(morgan("combined", {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "UP" });
+});
+
 app.use(userRouter);
 app.use(errorConverter);
 app.use(errorHandler);
