@@ -69,37 +69,37 @@ my-chat-server/
 ### Environment Setup
 
 1. Clone the repository:
-\`\`\`bash
+```bash
 git clone <repository-url>
 cd my-chat-server
-\`\`\`
+```
 
 2. Create .env files for each service:
 
 **Gateway Service (.env)**
-\`\`\`env
+```env
 PORT=8080
 JWT_SECRET=your_jwt_secret
-\`\`\`
+```
 
 **User Service (.env)**
-\`\`\`env
+```env
 PORT=8081
 MONGO_URI=mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
 JWT_SECRET=your_jwt_secret
 MESSAGE_BROKER_URL=amqp://guest:guest@rabbitmq:5672
-\`\`\`
+```
 
 **Chat Service (.env)**
-\`\`\`env
+```env
 PORT=8082
 MONGO_URI=mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
 JWT_SECRET=your_jwt_secret
 MESSAGE_BROKER_URL=amqp://guest:guest@rabbitmq:5672
-\`\`\`
+```
 
 **Notification Service (.env)**
-\`\`\`env
+```env
 PORT=8083
 MESSAGE_BROKER_URL=amqp://guest:guest@rabbitmq:5672
 SMTP_HOST=smtp-relay.brevo.com
@@ -107,20 +107,20 @@ SMTP_PORT=587
 SMTP_USER=your_email@example.com
 SMTP_PASS=your_password
 EMAIL_FROM=chat-server@yourdomain.com
-\`\`\`
+```
 
 **UI (.env.local)**
-\`\`\`env
+```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost/api
 NEXT_PUBLIC_WS_URL=ws://localhost/ws
-\`\`\`
+```
 
 ### Running the Application
 
 1. Start all services:
-\`\`\`bash
+```bash
 docker-compose up --build
-\`\`\`
+```
 
 2. Access the application:
 - Frontend: http://localhost
@@ -132,17 +132,17 @@ docker-compose up --build
 For local development:
 
 1. Install dependencies:
-\`\`\`bash
+```bash
 # Install dependencies for all services
 cd user-service && pnpm install
 cd ../chat-service && pnpm install
 cd ../notification-service && pnpm install
 cd ../gateway && pnpm install
 cd ../ui && pnpm install
-\`\`\`
+```
 
 2. Run services individually:
-\`\`\`bash
+```bash
 # Terminal 1 - User Service
 cd user-service && pnpm dev
 
@@ -157,7 +157,7 @@ cd gateway && pnpm dev
 
 # Terminal 5 - UI
 cd ui && pnpm dev
-\`\`\`
+```
 
 ## 📦 API Endpoints
 
@@ -176,17 +176,17 @@ cd ui && pnpm dev
 ## 🔌 WebSocket Events
 
 ### Client Events
-- \`userOnline\` - Emit when user connects
-- \`sendMessage\` - Send new message
-- \`typing\` - User typing status
-- \`getOnlineUsers\` - Request online users list
+- `userOnline` - Emit when user connects
+- `sendMessage` - Send new message
+- `typing` - User typing status
+- `getOnlineUsers` - Request online users list
 
 ### Server Events
-- \`receiveMessage\` - New message received
-- \`messageSent\` - Message sent confirmation
-- \`userStatusChanged\` - User status updates
-- \`onlineUsersList\` - List of online users
-- \`userTyping\` - User typing indicator
+- `receiveMessage` - New message received
+- `messageSent` - Message sent confirmation
+- `userStatusChanged` - User status updates
+- `onlineUsersList` - List of online users
+- `userTyping` - User typing indicator
 
 ## 🔒 Security
 
@@ -201,19 +201,19 @@ cd ui && pnpm dev
 
 1. Configure environment variables for production
 2. Build Docker images:
-\`\`\`bash
+```bash
 docker-compose -f docker-compose.prod.yml build
-\`\`\`
+```
 
 3. Deploy containers:
-\`\`\`bash
+```bash
 docker-compose -f docker-compose.prod.yml up -d
-\`\`\`
+```
 
 ## 📝 Testing
 
 Run tests for each service:
-\`\`\`bash
+```bash
 # User Service
 cd user-service && pnpm test
 
@@ -225,7 +225,7 @@ cd notification-service && pnpm test
 
 # UI
 cd ui && pnpm test
-\`\`\`
+```
 
 ## 📈 Monitoring
 
