@@ -27,13 +27,13 @@ Modern real-time chat application built with microservices architecture using No
 The application follows a microservices architecture with the following components:
 
 ```
-my-chat-server/
-├── gateway/          # API Gateway service
-├── user-service/     # User management & authentication
-├── chat-service/     # Real-time chat functionality
+chat-app/
+├── gateway/              # API Gateway service
+├── user-service/         # User management & authentication
+├── chat-service/         # Real-time chat functionality
 ├── notification-service/ # Email notifications
-├── ui/              # Next.js frontend application
-└── nginx/           # Reverse proxy & load balancer
+├── ui/                   # Next.js frontend application
+└── nginx/                # Reverse proxy & load balancer
 ```
 
 ## 🛠️ Tech Stack
@@ -134,29 +134,29 @@ For local development:
 1. Install dependencies:
 ```bash
 # Install dependencies for all services
-cd user-service && pnpm install
-cd ../chat-service && pnpm install
-cd ../notification-service && pnpm install
-cd ../gateway && pnpm install
-cd ../ui && pnpm install
+cd user-service && npm install
+cd ../chat-service && npm install
+cd ../notification-service && npm install
+cd ../gateway && npm install
+cd ../ui && npm install
 ```
 
 2. Run services individually:
 ```bash
 # Terminal 1 - User Service
-cd user-service && pnpm dev
+cd user-service && npm run dev
 
 # Terminal 2 - Chat Service
-cd chat-service && pnpm dev
+cd chat-service && npm run dev
 
 # Terminal 3 - Notification Service
-cd notification-service && pnpm dev
+cd notification-service && npm run dev
 
 # Terminal 4 - Gateway
-cd gateway && pnpm dev
+cd gateway && npm run dev
 
 # Terminal 5 - UI
-cd ui && pnpm dev
+cd ui && npm run dev
 ```
 
 ## 📦 API Endpoints
@@ -202,29 +202,12 @@ cd ui && pnpm dev
 1. Configure environment variables for production
 2. Build Docker images:
 ```bash
-docker-compose -f docker-compose.prod.yml build
+docker-compose -f docker-compose.yml build
 ```
 
 3. Deploy containers:
 ```bash
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-## 📝 Testing
-
-Run tests for each service:
-```bash
-# User Service
-cd user-service && pnpm test
-
-# Chat Service
-cd chat-service && pnpm test
-
-# Notification Service
-cd notification-service && pnpm test
-
-# UI
-cd ui && pnpm test
+docker-compose -f docker-compose.yml up -d
 ```
 
 ## 📈 Monitoring
