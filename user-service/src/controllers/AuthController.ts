@@ -1,22 +1,11 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { User } from "../database";
-import { ApiError } from "@shared/utils/apiError";
-import { logger } from "@shared/utils/logger";
-import { encryptPassword, isPasswordMatch } from "../utils";
+import { ApiError, encryptPassword, isPasswordMatch, logger } from "../utils";
 import config from "../config/config";
 import { IUser } from "../database";
 
 const jwtSecret = config.JWT_SECRET as string;
-const COOKIE_EXPIRATION_DAYS = 90;
-const expirationDate = new Date(
-    Date.now() + COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000
-);
-const cookieOptions = {
-    expires: expirationDate,
-    secure: false,
-    httpOnly: true,
-};
 
 export const register = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -44,7 +33,7 @@ export const register = async (req: Request, res: Response): Promise<any> => {
             data: userData,
         });
     } catch (error: any) {
-        logger.error("Error in register:", error);
+        console.error("Error in register:", error);
         return res.json({
             status: 500,
             message: error.message,
@@ -52,14 +41,15 @@ export const register = async (req: Request, res: Response): Promise<any> => {
     }
 };
 
-const createSendToken = async (user: IUser, res: Response): Promise<string> => {
+// Updated to no longer set cookies directly
+const createToken = async (user: IUser): Promise<string> => {
     const { name, email, id } = user;
     const token = jwt.sign({ name, email, id }, jwtSecret, {
-        expiresIn: "1d",
+        expiresIn: "1d", // Or your desired expiration
     });
-    if (config.env === "production") cookieOptions.secure = true;
-    res.cookie("jwt", token, cookieOptions);
-
+    // Removed cookie setting logic:
+    // if (config.env === "production") cookieOptions.secure = true;
+    // res.cookie("jwt", token, cookieOptions);
     return token;
 };
 
@@ -74,18 +64,46 @@ export const login = async (req: Request, res: Response): Promise<any> => {
             throw new ApiError(400, "Incorrect email or password");
         }
 
-        const token = await createSendToken(user!, res);
+        const token = await createToken(user!); // Changed from createSendToken
 
         return res.json({
-            status: 200,
+            status: 200, // Consistent status code, should be number
             message: "User logged in successfully!",
             token,
         });
     } catch (error: any) {
-        logger.error("Error in login:", error);
-        return res.json({
-            status: 500,
-            message: error.message,
+        console.error("Error in login:", error);
+        // Ensure consistent error response structure if possible
+        const statusCode = error.statusCode || 500;
+        return res.status(statusCode).json({ // Send status code via res.status()
+            message: error.message || "Internal server error",
         });
+    }
+};
+
+// Add a new function or middleware to verify token from header
+export const protect = async (req: Request, res: Response, next: Function): Promise<any> => {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (!token) {
+        return res.status(401).json({ message: 'Not authorized, no token' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, jwtSecret) as any; // Adjust 'as any' with a proper type if available
+        // Attach user to request object
+        // req.user = await User.findById(decoded.id).select('-password'); // Example: Fetch user if needed
+        (req as any).user = { id: decoded.id, name: decoded.name, email: decoded.email }; // Or just attach decoded payload
+
+        if (!(req as any).user) {
+             return res.status(401).json({ message: 'User not found' });
+        }
+        next();
+    } catch (error) {
+        console.error("Token verification error:", error);
+        return res.status(401).json({ message: 'Not authorized, token failed' });
     }
 };

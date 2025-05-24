@@ -1,18 +1,11 @@
 import admin from 'firebase-admin';
-import logger from '@shared/utils/logger';
 
 admin.initializeApp({
     credential: admin.credential.applicationDefault(),
 });
 
 export class FCMService {
-    constructor() {
-        logger.info('FCM Service initialized');
-    }
-
     async sendPushNotification(token: string, message: string) {
-        logger.debug('Preparing push notification', { messageLength: message.length });
-        
         const payload = {
             notification: {
                 title: 'New Message',
@@ -22,16 +15,10 @@ export class FCMService {
         };
 
         try {
-            logger.debug('Sending FCM notification', { token });
-            const response = await admin.messaging().send(payload);
-            logger.info('Push notification sent successfully', { messageId: response });
+            await admin.messaging().send(payload);
+            console.log('Notification sent successfully');
         } catch (error) {
-            logger.error('Error sending push notification:', {
-                error,
-                token,
-                messageLength: message.length
-            });
-            throw error;
+            console.error('Error sending notification', error);
         }
     }
 }

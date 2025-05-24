@@ -66,7 +66,32 @@ const getConversation = async (req: AuthRequest, res: Response) => {
     }
 };
 
+const getChats = async (req: AuthRequest, res: Response) => {
+    try {
+        const senderId = req.user._id;
+
+        const chats = await Message.find({
+            $or: [
+                { senderId },
+                { receiverId: senderId },
+            ],
+        });
+
+        return res.json({
+            status: 200,
+            message: "Chats retrieved successfully!",
+            data: chats,
+        });
+    } catch (error: any) {
+        return res.json({
+            status: 500,
+            message: error.message,
+        });
+    }
+};
+
 export default {
     send,
     getConversation,
+    getChats,
 };

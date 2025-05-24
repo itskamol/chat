@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "NODE_ENV=development nodemon src/server.ts",
-        "build": "rm -rf dist/ && tsc -p .",
-        "start": "NODE_ENV=production node dist/server.js"
+        "build": "rm -rf build/ && tsc -p .",
+        "start": "NODE_ENV=production nodemon build/server.js"
     },
     "keywords": [],
     "author": "",
@@ -15,16 +15,13 @@
     "dependencies": {
         "@types/amqplib": "^0.10.7",
         "@types/express": "^5.0.2",
-        "@types/morgan": "^1.9.9",
         "@types/nodemailer": "^6.4.17",
         "amqplib": "^0.10.8",
         "dotenv": "^16.5.0",
         "express": "^5.1.0",
         "firebase-admin": "^13.4.0",
-        "morgan": "^1.10.0",
         "nodemailer": "^7.0.3",
         "nodemon": "^3.1.10",
-        "sib-api-v3-typescript": "^2.2.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
     }
