@@ -1,26 +1,27 @@
 {
-  "name": "media-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dist/app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node dist/app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^5.0.2",
-    "@types/node": "^22.15.21",
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "express": "^5.1.0",
-    "mediasoup": "^3.15.8",
-    "mediasoup-client": "^3.11.0",
-    "socket.io": "^4.8.1",
-    "winston": "^3.17.0"
-  }
+    "name": "media-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/app.js",
+    "scripts": {
+        "dev": "NODE_ENV=development nodemon src/app.ts",
+        "build": "rm -rf build/ && tsc -p .",
+        "start": "NODE_ENV=production nodemon build/app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^5.0.2",
+        "@types/node": "^22.15.21",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "express": "^5.1.0",
+        "mediasoup": "^3.15.8",
+        "mediasoup-client": "^3.11.0",
+        "socket.io": "^4.8.1",
+        "winston": "^3.17.0"
+    }
 }

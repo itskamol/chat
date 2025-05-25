@@ -189,8 +189,9 @@ services:
             DEBUG: mediasoup:* # Enable mediasoup logs
         # volumes:
             # - ./media-server-logs:/opt/media-server/logs # Optional: if your app logs to a file
-        # depends_on: # Add if media-server relies on other services at startup
-            # - rabbitmq
+        depends_on: # Add if media-server relies on other services at startup
+            rabbitmq:
+                condition: service_healthy # Ensure RabbitMQ is ready before starting media server
 
     turn_server:
         image: coturn/coturn
