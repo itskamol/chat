@@ -164,6 +164,66 @@ services:
         networks:
             - microservices-network
 
+    media_server:
+        build:
+            context: ./media-server
+            dockerfile: Dockerfile
+        container_name: media_server_container
+        restart: always
+        ports:
+            - '3001:3001' # As per media-server/src/config.ts (default)
+            # Mediasoup RTP ports (UDP) - These need to be open on the host
+            # and match MEDIASOUP_RTP_MIN_PORT and MEDIASOUP_RTP_MAX_PORT
+            - '20000-20020:20000-20020/udp'
+        networks:
+            - microservices-network
+        environment:
+            PORT: 3001
+            MEDIASOUP_LISTEN_IP: 0.0.0.0
+            # MEDIASOUP_ANNOUNCED_IP should be the IP address of the host machine accessible by clients.
+            # For local development, 127.0.0.1 or host's LAN IP. In production, public IP.
+            # This can also be the IP of Nginx if traffic is routed through it (more complex setup).
+            MEDIASOUP_ANNOUNCED_IP: 127.0.0.1 # Placeholder, adjust as needed
+            MEDIASOUP_RTP_MIN_PORT: 20000 # Renamed from MEDIASOUP_RTC_MIN_PORT for clarity
+            MEDIASOUP_RTP_MAX_PORT: 20020 # Renamed from MEDIASOUP_RTC_MAX_PORT for clarity
+            DEBUG: mediasoup:* # Enable mediasoup logs
+        # volumes:
+            # - ./media-server-logs:/opt/media-server/logs # Optional: if your app logs to a file
+        # depends_on: # Add if media-server relies on other services at startup
+            # - rabbitmq
+
+    turn_server:
+        image: coturn/coturn
+        container_name: coturn_container
+        restart: always
+        networks:
+            - microservices-network
+        ports:
+            - '3478:3478/tcp'
+            - '3478:3478/udp'
+            - '5349:5349/tcp' # TURN/TLS
+            - '5349:5349/udp' # TURN/DTLS
+            # Relay ports for media. Coturn's default is 49152-65535.
+            # If you want to restrict it, uncomment and set min-port/max-port in turnserver.conf
+            # and map them here. For now, we rely on coturn's default or what's in its config.
+            # Example: - '49152-49200:49152-49200/udp'
+        volumes:
+            - ./turn_config/turnserver.conf:/etc/coturn/turnserver.conf:ro
+        # The coturn image uses the config file by default.
+        # Environment variables can override some settings if the image supports it,
+        # but for a full config, the file mount is standard.
+        # The command can be used to pass additional CLI args to coturn, e.g., for logging.
+        # command: "-L stdout" # Example to force log to stdout if not default
+        healthcheck:
+            # Coturn doesn't have a simple TCP ping healthcheck by default.
+            # A simple check could be to see if the process is running.
+            # For a more robust check, a custom script or tool would be needed to test STUN/TURN functionality.
+            test: ["CMD-SHELL", "netstat -tulnp | grep 3478 || exit 1"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 20s
+
 volumes:
     mongo-data:
 

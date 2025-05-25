@@ -7,8 +7,11 @@ import { jwtDecode } from 'jwt-decode';
 import type { Socket } from 'socket.io-client';
 
 import ChatSidebar from '@/components/chat-sidebar';
-import ChatWindow from '@/components/chat-window';
+import ChatWindow, { ChatWindowProps } from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
 import type { User, Message } from '@/lib/types';
+import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
+import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
+import IncomingCallPopup from '@/components/video-call/partials/IncomingCallPopup'; // Import IncomingCallPopup
 import {
     getSocket,
     disconnectSocket,
@@ -40,6 +43,12 @@ export default function ChatPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const optimisticMessageRef = useRef<string | null>(null); // To store temp ID of optimistic message
+
+    // State for video call UI
+    const [showVideoCall, setShowVideoCall] = useState(false);
+    const [incomingCallVisible, setIncomingCallVisible] = useState(false);
+    const [callerInfo, setCallerInfo] = useState<{ name: string, roomId: string } | null>(null);
+
 
     // Effect for initialization, authentication, and fetching initial data
     useEffect(() => {
@@ -282,21 +291,82 @@ export default function ChatPage() {
         online: onlineUserIds.includes(contact._id)
     }));
 
+    // --- Mock Incoming Call ---
+    // Simulate receiving an incoming call for UI testing
+    useEffect(() => {
+        // Example: Simulate an incoming call after 10 seconds for 'test-user'
+        // In a real app, this would be triggered by a WebSocket event.
+        const timer = setTimeout(() => {
+            // console.log("Simulating incoming call...");
+            // setCallerInfo({ name: 'Mock Caller', roomId: 'mock-room-123' });
+            // setIncomingCallVisible(true);
+        }, 10000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleAcceptCall = () => {
+        if (callerInfo) {
+            // Here you would use the useVideoCall hook's functions if VideoCallProvider was above this component.
+            // For now, directly setting state to show VideoCallView.
+            // videoCall.joinCall(callerInfo.roomId); // This would be the ideal way
+            setShowVideoCall(true); 
+        }
+        setIncomingCallVisible(false);
+    };
+
+    const handleDeclineCall = () => {
+        setIncomingCallVisible(false);
+        setCallerInfo(null);
+    };
+    
+    const handleStartVideoCall = (contact: User | null) => {
+        if (contact) {
+            // videoCall.initiateCall(contact._id); // Use contact._id or a new unique room ID
+            setShowVideoCall(true); // Directly show the view for now
+            console.log(`Starting video call with ${contact.name}`);
+        }
+    };
+
+    const ChatPageContent = () => {
+        // Access video call context if needed for more complex interactions here
+        // const videoCall = useVideoCall(); 
+        
+        // If showVideoCall is true, render VideoCallView, otherwise the chat UI
+        if (showVideoCall) {
+            return <VideoCallView />;
+        }
+
+        return (
+            <div className="flex h-screen bg-gray-50">
+                <ChatSidebar
+                    currentUser={currentUser}
+                    contacts={contactsWithOnlineStatus}
+                    selectedContact={selectedContact}
+                    onSelectContact={handleContactSelect}
+                    onLogout={handleLogout}
+                    onStartVideoCall={handleStartVideoCall} // Pass handler
+                />
+                <ChatWindow
+                    currentUser={currentUser}
+                    selectedContact={selectedContact}
+                    messages={messages}
+                    onSendMessage={handleSendMessage}
+                    onStartVideoCall={() => handleStartVideoCall(selectedContact)} // Pass handler
+                />
+                <IncomingCallPopup
+                    isVisible={incomingCallVisible}
+                    callerName={callerInfo?.name}
+                    roomId={callerInfo?.roomId}
+                    onAccept={handleAcceptCall}
+                    onDecline={handleDeclineCall}
+                />
+            </div>
+        );
+    };
+
     return (
-        <div className="flex h-screen bg-gray-50">
-            <ChatSidebar
-                currentUser={currentUser}
-                contacts={contactsWithOnlineStatus}
-                selectedContact={selectedContact}
-                onSelectContact={handleContactSelect}
-                onLogout={handleLogout}
-            />
-            <ChatWindow
-                currentUser={currentUser}
-                selectedContact={selectedContact}
-                messages={messages}
-                onSendMessage={handleSendMessage}
-            />
-        </div>
+        <VideoCallProvider>
+            <ChatPageContent />
+        </VideoCallProvider>
     );
 }

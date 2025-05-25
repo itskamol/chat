@@ -1,0 +1,13 @@
+node_modules
+dist
+*.log
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md
+tsconfig.json
+package.json
+package-lock.json
+src/
