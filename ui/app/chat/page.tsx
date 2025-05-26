@@ -8,6 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 import ChatSidebar from '@/components/chat-sidebar';
 import ChatWindow from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
 import type { User, Message } from '@/lib/types';
+import NoSSR from '@/components/NoSSR'; // Import NoSSR component
 import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
 import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
 import IncomingCallPopup from '@/components/video-call/partials/IncomingCallPopup'; // Import IncomingCallPopup
@@ -21,7 +22,7 @@ import {
     onOnlineUsersList,
     onUserStatusChanged,
     onMessageSent,
-    onMessageError
+    onMessageError,
 } from '@/lib/socket';
 
 interface DecodedToken {
@@ -47,8 +48,10 @@ export default function ChatPage() {
     // State for video call UI
     const [showVideoCall, setShowVideoCall] = useState(false);
     const [incomingCallVisible, setIncomingCallVisible] = useState(false);
-    const [callerInfo, setCallerInfo] = useState<{ name: string, roomId: string } | null>(null);
-
+    const [callerInfo, setCallerInfo] = useState<{
+        name: string;
+        roomId: string;
+    } | null>(null);
 
     // Effect for initialization, authentication, and fetching initial data
     useEffect(() => {
@@ -70,7 +73,7 @@ export default function ChatPage() {
                 _id: decodedToken.id,
                 name: decodedToken.name,
                 email: decodedToken.email,
-                online: true, 
+                online: true,
             };
             setCurrentUser(user);
 
@@ -81,14 +84,11 @@ export default function ChatPage() {
 
             const fetchContacts = async () => {
                 try {
-                    const response = await fetch(
-                        '/api/users/contacts',
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                            },
-                        }
-                    );
+                    const response = await fetch('/api/users/contacts', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
                     if (!response.ok) {
                         const errorData = await response.json();
                         throw new Error(
@@ -116,7 +116,7 @@ export default function ChatPage() {
         }
 
         return () => {
-            // disconnectSocket(); 
+            // disconnectSocket();
         };
     }, [router]);
 
@@ -129,48 +129,90 @@ export default function ChatPage() {
         const removeReceiveMessageListener = onReceiveMessage((message) => {
             const newMessageReceived: Message = {
                 ...message,
-                createdAt: new Date(message.createdAt) 
+                createdAt: new Date(message.createdAt),
             };
             if (
-                (newMessageReceived.senderId === currentUser._id && newMessageReceived.receiverId === selectedContact?._id) ||
-                (newMessageReceived.senderId === selectedContact?._id && newMessageReceived.receiverId === currentUser._id)
+                (newMessageReceived.senderId === currentUser._id &&
+                    newMessageReceived.receiverId === selectedContact?._id) ||
+                (newMessageReceived.senderId === selectedContact?._id &&
+                    newMessageReceived.receiverId === currentUser._id)
             ) {
-                setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    newMessageReceived,
+                ]);
             } else {
-                console.log("Received message for another chat: ", newMessageReceived);
+                console.log(
+                    'Received message for another chat: ',
+                    newMessageReceived
+                );
             }
         });
 
         const removeOnlineUsersListener = onOnlineUsersList((users) => {
             console.log('Online users list:', users);
-            setOnlineUserIds(users.map(u => u.userId));
-            setContacts(prevContacts => prevContacts.map(c => ({
-                ...c,
-                online: users.some(u => u.userId === c._id && u.status === 'online')
-            })));
+            setOnlineUserIds(users.map((u) => u.userId));
+            setContacts((prevContacts) =>
+                prevContacts.map((c) => ({
+                    ...c,
+                    online: users.some(
+                        (u) => u.userId === c._id && u.status === 'online'
+                    ),
+                }))
+            );
         });
 
         const removeUserStatusListener = onUserStatusChanged((data) => {
-            setContacts(prevContacts => prevContacts.map(c =>
-                c._id === data.userId ? { ...c, online: data.status === 'online', lastSeen: new Date(data.lastSeen) } : c
-            ));
+            setContacts((prevContacts) =>
+                prevContacts.map((c) =>
+                    c._id === data.userId
+                        ? {
+                              ...c,
+                              online: data.status === 'online',
+                              lastSeen: new Date(data.lastSeen),
+                          }
+                        : c
+                )
+            );
             if (data.status === 'online') {
-                setOnlineUserIds(prev => [...new Set([...prev, data.userId])]);
+                setOnlineUserIds((prev) => [
+                    ...new Set([...prev, data.userId]),
+                ]);
             } else {
-                setOnlineUserIds(prev => prev.filter(id => id !== data.userId));
+                setOnlineUserIds((prev) =>
+                    prev.filter((id) => id !== data.userId)
+                );
             }
             if (selectedContact?._id === data.userId) {
-                setSelectedContact(prev => prev ? {...prev, online: data.status === 'online', lastSeen: new Date(data.lastSeen)} : null);
+                setSelectedContact((prev) =>
+                    prev
+                        ? {
+                              ...prev,
+                              online: data.status === 'online',
+                              lastSeen: new Date(data.lastSeen),
+                          }
+                        : null
+                );
             }
         });
-        
+
         const removeMessageSentListener = onMessageSent((confirmation) => {
             console.log('Message sent confirmation:', confirmation);
-            setMessages(prev => prev.map(m => 
-                m._id === optimisticMessageRef.current && m.senderId === confirmation.senderId && m.receiverId === confirmation.receiverId && m.message === confirmation.message ? 
-                {...m, _id: confirmation._id, delivered: confirmation.delivered, createdAt: new Date(confirmation.createdAt) } : 
-                m
-            ));
+            setMessages((prev) =>
+                prev.map((m) =>
+                    m._id === optimisticMessageRef.current &&
+                    m.senderId === confirmation.senderId &&
+                    m.receiverId === confirmation.receiverId &&
+                    m.message === confirmation.message
+                        ? {
+                              ...m,
+                              _id: confirmation._id,
+                              delivered: confirmation.delivered,
+                              createdAt: new Date(confirmation.createdAt),
+                          }
+                        : m
+                )
+            );
             optimisticMessageRef.current = null; // Reset ref
         });
 
@@ -178,7 +220,9 @@ export default function ChatPage() {
             console.error('Message send error:', err.error);
             // Potentially remove the optimistic message or mark it as failed
             if (optimisticMessageRef.current) {
-                setMessages(prev => prev.filter(m => m._id !== optimisticMessageRef.current));
+                setMessages((prev) =>
+                    prev.filter((m) => m._id !== optimisticMessageRef.current)
+                );
                 optimisticMessageRef.current = null;
             }
         });
@@ -218,10 +262,17 @@ export default function ChatPage() {
                 );
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch messages');
+                    throw new Error(
+                        errorData.message || 'Failed to fetch messages'
+                    );
                 }
                 const messagesData = await response.json();
-                setMessages(messagesData.data.map((msg: any) => ({...msg, createdAt: new Date(msg.createdAt)})) || []);
+                setMessages(
+                    messagesData.data.map((msg: any) => ({
+                        ...msg,
+                        createdAt: new Date(msg.createdAt),
+                    })) || []
+                );
             } catch (err: any) {
                 console.error('Failed to fetch messages:', err);
                 setError(err.message || 'Could not load messages.');
@@ -238,23 +289,196 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    const handleSendMessage = async (text: string, file?: File, fileType?: "text" | "image" | "video" | "audio" | "file") => {
+    const validateFile = (file: File, fileType: string): string | null => {
+        // File size check (10MB limit)
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        if (file.size > maxSize) {
+            return 'File size must be less than 10MB';
+        }
+
+        // File type validation
+        const allowedTypes: Record<string, string[]> = {
+            image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+            video: ['video/mp4', 'video/webm', 'video/ogg'],
+            audio: ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg'],
+            file: [
+                'application/pdf',
+                'text/plain',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            ],
+        };
+
+        if (
+            allowedTypes[fileType] &&
+            !allowedTypes[fileType].includes(file.type)
+        ) {
+            return `Invalid file type for ${fileType}. Allowed types: ${allowedTypes[
+                fileType
+            ].join(', ')}`;
+        }
+
+        return null;
+    };
+
+    const uploadFileWithRetry = async (
+        formData: FormData,
+        tempId: string,
+        maxRetries: number = 3
+    ): Promise<void> => {
+        let retryCount = 0;
+
+        const attemptUpload = (): Promise<void> => {
+            return new Promise((resolve, reject) => {
+                const token = localStorage.getItem('jwt');
+                const xhr = new XMLHttpRequest();
+
+                xhr.open(
+                    'POST',
+                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/messages/upload`,
+                    true
+                );
+                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                xhr.timeout = 30000; // 30 second timeout
+
+                xhr.upload.onprogress = (event) => {
+                    if (event.lengthComputable) {
+                        const progress = Math.round(
+                            (event.loaded / event.total) * 100
+                        );
+                        setMessages((prev) =>
+                            prev.map((m) =>
+                                m._id === tempId
+                                    ? {
+                                          ...m,
+                                          uploadProgress: progress,
+                                          status: 'uploading',
+                                      }
+                                    : m
+                            )
+                        );
+                    }
+                };
+
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve();
+                        try {
+                            const savedMessage: Message = JSON.parse(
+                                xhr.responseText
+                            );
+                            setMessages((prev) =>
+                                prev.map((m) =>
+                                    m._id === tempId
+                                        ? {
+                                              ...savedMessage,
+                                              createdAt: new Date(
+                                                  savedMessage.createdAt
+                                              ),
+                                              status: 'sent',
+                                              uploadProgress: 100,
+                                          }
+                                        : m
+                                )
+                            );
+                        } catch (parseError) {
+                            console.error('Parse error:', parseError);
+                            reject(new Error('Invalid server response'));
+                        }
+                    } else {
+                        reject(
+                            new Error(
+                                `Server error: ${xhr.status} ${xhr.statusText}`
+                            )
+                        );
+                    }
+                };
+
+                xhr.onerror = () => reject(new Error('Network error'));
+                xhr.ontimeout = () => reject(new Error('Upload timeout'));
+
+                xhr.send(formData);
+            });
+        };
+
+        while (retryCount < maxRetries) {
+            try {
+                await attemptUpload();
+                setIsSendingFile(false);
+                optimisticMessageRef.current = null;
+                return;
+            } catch (error: any) {
+                retryCount++;
+                console.error(`Upload attempt ${retryCount} failed:`, error);
+
+                if (retryCount < maxRetries) {
+                    // Wait before retry (exponential backoff)
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise((resolve) => setTimeout(resolve, delay));
+
+                    // Update UI to show retry
+                    setMessages((prev) =>
+                        prev.map((m) =>
+                            m._id === tempId
+                                ? ({
+                                      ...m,
+                                      status: 'retrying',
+                                      uploadProgress: 0,
+                                      message: `Retrying upload... (${retryCount}/${maxRetries})`,
+                                  } as unknown as Message)
+                                : m
+                        )
+                    );
+                } else {
+                    // Final failure
+                    setError(
+                        `Upload failed after ${maxRetries} attempts: ${error.message}`
+                    );
+                    setMessages((prev) =>
+                        prev.map((m) =>
+                            m._id === tempId
+                                ? { ...m, status: 'failed', uploadProgress: 0 }
+                                : m
+                        )
+                    );
+                }
+            }
+        }
+
+        setIsSendingFile(false);
+        optimisticMessageRef.current = null;
+    };
+
+    const handleSendMessage = async (
+        text: string,
+        file?: File,
+        fileType?: 'text' | 'image' | 'video' | 'audio' | 'file'
+    ) => {
         if (!currentUser?._id || !selectedContact?._id) return;
-        if (!text.trim() && !file) return; // Must have text or a file
+        if (!text.trim() && !file) return;
 
         const token = localStorage.getItem('jwt');
         if (!token) {
-            router.push('/'); // Or handle session expiry
+            router.push('/');
             return;
         }
-        
+
+        // File validation
+        if (file && fileType) {
+            const validationError = validateFile(file, fileType);
+            if (validationError) {
+                setError(validationError);
+                return;
+            }
+        }
+
         const tempId = `temp-${Date.now()}`;
         optimisticMessageRef.current = tempId;
 
-        if (file && fileType) { // Handle file message
-            setIsSendingFile(true); // Kept for general sending state if needed, but progress is primary
+        if (file && fileType) {
+            setIsSendingFile(true);
             setError(null);
-            
+
             const formData = new FormData();
             formData.append('mediaFile', file, file.name);
             formData.append('senderId', currentUser._id);
@@ -267,86 +491,55 @@ export default function ChatPage() {
                 senderId: currentUser._id,
                 receiverId: selectedContact._id,
                 message: text.trim() || `Sending ${fileType}...`,
-                messageType: fileType as "text" | "image" | "video" | "audio" | "file",
+                messageType: fileType as
+                    | 'text'
+                    | 'image'
+                    | 'video'
+                    | 'audio'
+                    | 'file',
                 fileName: file.name,
                 fileSize: file.size,
                 fileMimeType: file.type,
                 fileUrl: URL.createObjectURL(file),
                 createdAt: new Date(),
                 delivered: false,
-                status: 'uploading', // Initial status
-                uploadProgress: 0, // Initial progress
-            };
-            setMessages(prevMessages => [...prevMessages, optimisticFileMessage]);
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', `${process.env.NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE}/v1/messages/upload`, true);
-            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-            // 'Content-Type' for FormData is set by the browser
-
-            xhr.upload.onprogress = (event) => {
-                if (event.lengthComputable) {
-                    const progress = Math.round((event.loaded / event.total) * 100);
-                    setMessages(prev => prev.map(m => 
-                        m._id === tempId ? { ...m, uploadProgress: progress, status: 'uploading' } : m
-                    ));
-                }
+                status: 'uploading',
+                uploadProgress: 0,
             };
 
-            xhr.onload = () => {
-                setIsSendingFile(false);
-                optimisticMessageRef.current = null;
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const savedMessage: Message = JSON.parse(xhr.responseText);
-                    setMessages(prev => prev.map(m => 
-                        m._id === tempId ? 
-                        { ...savedMessage, createdAt: new Date(savedMessage.createdAt), status: 'sent', uploadProgress: 100 } : 
-                        m
-                    ));
-                    // Assuming server will emit socket event for real-time update to receiver
-                } else {
-                    console.error('Failed to send file message (XHR):', xhr.statusText, xhr.responseText);
-                    try {
-                        const errorData = JSON.parse(xhr.responseText);
-                        setError(errorData.message || 'Could not send file.');
-                    } catch (e) {
-                        setError('Could not send file: ' + xhr.statusText);
-                    }
-                    setMessages(prev => prev.map(m => 
-                        m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
-                    ));
-                }
-            };
-
-            xhr.onerror = () => {
-                setIsSendingFile(false);
-                optimisticMessageRef.current = null;
-                console.error('XHR request failed (network error).');
-                setError('Network error while uploading file.');
-                setMessages(prev => prev.map(m => 
-                    m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
-                ));
-            };
-
-            xhr.send(formData);
-
-        } else if (text.trim()) { // Handle text message
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                optimisticFileMessage,
+            ]);
+            
+            try {
+                await uploadFileWithRetry(formData, tempId);
+            } catch (error) {
+                console.error('File upload error:', error);
+                setError('Failed to upload file. Please try again.');
+                setMessages((prev) => prev.filter((m) => m._id !== tempId));
+            }
+        } else if (text.trim()) {
+            // Handle text message
             const messageData = {
                 senderId: currentUser._id,
                 receiverId: selectedContact._id,
                 message: text.trim(),
                 messageType: 'text',
             };
-            
+
             const optimisticTextMessage: Message = {
-                _id: tempId, 
+                _id: tempId,
                 ...messageData,
                 messageType: 'text', // Explicitly set to a valid type
-                createdAt: new Date(), 
+                createdAt: new Date(),
                 delivered: false,
-                status: 'sent'
+                status: 'sent',
             };
-            setMessages(prevMessages => [...prevMessages, optimisticTextMessage]);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                optimisticTextMessage,
+            ]);
             emitSendMessage(messageData); // Socket.IO for real-time text
         }
     };
@@ -367,7 +560,7 @@ export default function ChatPage() {
             </div>
         );
     }
-    
+
     if (error) {
         return (
             <div className="flex items-center justify-center min-h-screen text-red-500">
@@ -376,18 +569,17 @@ export default function ChatPage() {
         );
     }
 
-    const contactsWithOnlineStatus = contacts.map(contact => ({
+    const contactsWithOnlineStatus = contacts.map((contact) => ({
         ...contact,
-        online: onlineUserIds.includes(contact._id)
+        online: onlineUserIds.includes(contact._id),
     }));
-
 
     const handleAcceptCall = () => {
         if (callerInfo) {
             // Here you would use the useVideoCall hook's functions if VideoCallProvider was above this component.
             // For now, directly setting state to show VideoCallView.
             // videoCall.joinCall(callerInfo.roomId); // This would be the ideal way
-            setShowVideoCall(true); 
+            setShowVideoCall(true);
         }
         setIncomingCallVisible(false);
     };
@@ -396,7 +588,7 @@ export default function ChatPage() {
         setIncomingCallVisible(false);
         setCallerInfo(null);
     };
-    
+
     const handleStartVideoCall = (contact: User | null) => {
         if (contact) {
             // videoCall.initiateCall(contact._id); // Use contact._id or a new unique room ID
@@ -407,8 +599,8 @@ export default function ChatPage() {
 
     const ChatPageContent = () => {
         // Access video call context if needed for more complex interactions here
-        // const videoCall = useVideoCall(); 
-        
+        // const videoCall = useVideoCall();
+
         // If showVideoCall is true, render VideoCallView, otherwise the chat UI
         if (showVideoCall) {
             return <VideoCallView />;
@@ -429,7 +621,9 @@ export default function ChatPage() {
                     selectedContact={selectedContact}
                     messages={messages}
                     onSendMessage={handleSendMessage}
-                    onStartVideoCall={() => handleStartVideoCall(selectedContact)} // Pass handler
+                    onStartVideoCall={() =>
+                        handleStartVideoCall(selectedContact)
+                    } // Pass handler
                 />
                 <IncomingCallPopup
                     isVisible={incomingCallVisible}
@@ -443,8 +637,16 @@ export default function ChatPage() {
     };
 
     return (
-        <VideoCallProvider>
-            <ChatPageContent />
-        </VideoCallProvider>
+        <NoSSR
+            fallback={
+                <div className="flex items-center justify-center min-h-screen">
+                    Loading chat...
+                </div>
+            }
+        >
+            <VideoCallProvider>
+                <ChatPageContent />
+            </VideoCallProvider>
+        </NoSSR>
     );
 }

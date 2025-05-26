@@ -1,7 +1,10 @@
-version: '3.8'
+x-logging: &logging
+    logging:
+        driver: none
 
 services:
     mongodb:
+        <<: *logging
         image: mongo:latest
         container_name: mongodb_container
         restart: unless-stopped
@@ -28,13 +31,14 @@ services:
             start_period: 30s # Konteyner ishga tushgandan keyin healthcheck boshlanishidan oldin kutish vaqti
 
     rabbitmq:
+        <<: *logging
         image: rabbitmq:management
         container_name: rabbitmq_container
         restart: unless-stopped
         logging:
             driver: none # Agar muammo bo'lsa, loglarni ko'rish uchun buni olib tashlang yoki 'json-file' ga o'zgartiring
-        # ports:
-        #     - '5672:5672'  # Lokal test uchun kerak bo'lsa oching
+        ports:
+            - '5672:5672'  # Lokal test uchun kerak bo'lsa oching
         #     - '15672:15672' # RabbitMQ Management UI uchun
         environment:
             RABBITMQ_DEFAULT_USER: guest

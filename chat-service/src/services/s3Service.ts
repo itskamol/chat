@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk';
-import fs from 'fs';
 import config from '../config/config'; // Assuming config loads env variables
 import { logger } from '../utils';
 

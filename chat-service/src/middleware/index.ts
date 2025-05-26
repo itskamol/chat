@@ -12,7 +12,7 @@ interface TokenPayload {
     exp: number;
 }
 
-interface IUser {
+export interface IUser {
     _id: string;
     name: string;
     email: string;

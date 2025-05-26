@@ -1,20 +1,32 @@
-import type { Metadata } from 'next';
-import './globals.css';
+'use client';
 
-export const metadata: Metadata = {
-    title: 'v0 App',
-    description: 'Created with v0',
-    generator: 'v0.dev',
-};
+import { Inter } from 'next/font/google';
+import './globals.css';
+import dynamic from 'next/dynamic';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
     children,
-}: Readonly<{
+}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
-        <html lang="en">
-            <body>{children}</body>
+        <html lang="en" suppressHydrationWarning>
+            <body className={inter.className} suppressHydrationWarning>
+                <NoSSRWrapper>{children}</NoSSRWrapper>
+            </body>
         </html>
     );
 }
+
+// NoSSR wrapper component
+const NoSSRWrapper = dynamic(
+    () =>
+        Promise.resolve(({ children }: { children: React.ReactNode }) => (
+            <>{children}</>
+        )),
+    {
+        ssr: false,
+    }
+);
