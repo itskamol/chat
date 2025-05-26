@@ -1,7 +1,5 @@
 import { config } from "dotenv";
-
-const configFile = `./.env`;
-config({ path: configFile });
+config();
 
 const {
     PORT,

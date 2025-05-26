@@ -1,6 +1,6 @@
 import { Server } from 'http';
 import { Socket, Server as SocketIOServer } from 'socket.io';
-import fetch from 'node-fetch'; // For making HTTP requests to media-server
+import axios from 'axios'; // Replacing node-fetch with axios
 import app from './app';
 import { Message, connectDB } from './database';
 import config from './config/config';
@@ -60,9 +60,9 @@ const io = new SocketIOServer<
     SocketData
 >(server, {
     cors: {
-        origin: '*',
+        origin: 'http://localhost:3000',
         methods: ['GET', 'POST'],
-        credentials: true,
+        // credentials: true,
     },
     transports: ['websocket', 'polling'],
 });
@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
         const onlineUsersList = Array.from(onlineUsers.values()).map(
             (user) => ({
                 userId: user.userId,
-                status: 'online',
+                status: 'online' as const,
                 lastSeen: user.lastSeen,
             })
         );
@@ -157,7 +157,7 @@ io.on('connection', (socket) => {
             const { senderId, receiverId, message } = data; // Make sure 'data' is typed
 
             // Messageni bazaga saqlash
-            const msg = new Message({ senderId, receiverId, message });
+            const msg: InstanceType<typeof Message> = new Message({ senderId, receiverId, message });
             await msg.save();
 
             logger.info('Message saved successfully', { messageId: msg._id });
@@ -165,7 +165,7 @@ io.on('connection', (socket) => {
             const receiverInfo = onlineUsers.get(receiverId);
             if (receiverInfo) {
                 io.to(receiverInfo.socketId).emit('receiveMessage', { // Type this payload
-                    _id: msg._id.toString(),
+                    _id: (msg._id as unknown as string).toString(),
                     senderId,
                     receiverId,
                     message,
@@ -174,7 +174,7 @@ io.on('connection', (socket) => {
             }
 
             socket.emit('messageSent', { // Type this payload
-                _id: msg._id.toString(),
+                _id: (msg._id as unknown as string).toString(),
                 senderId,
                 receiverId,
                 message,
@@ -183,7 +183,7 @@ io.on('connection', (socket) => {
             });
 
             logger.debug('Message relayed', {
-                messageId: msg._id.toString(),
+                messageId: (msg._id as unknown as string).toString(),
                 delivered: !!receiverInfo,
             });
         } catch (error) {
@@ -197,7 +197,7 @@ io.on('connection', (socket) => {
         const onlineUsersList = Array.from(onlineUsers.values()).map(
             (user) => ({
                 userId: user.userId,
-                status: 'online',
+                status: 'online' as const,
                 lastSeen: user.lastSeen,
             })
         );
@@ -278,10 +278,14 @@ io.on('connection', (socket) => {
             room.producers.delete(producer.producerId);
             // Notify media-server to close this producer
             try {
-                await fetch(MediaServerApiEndpoints.closeProducer(roomId, producer.producerId), { method: 'POST' });
+                await axios.post(MediaServerApiEndpoints.closeProducer(roomId, producer.producerId));
                 logger.info(`Requested media-server to close producer ${producer.producerId} for user ${userId} in room ${roomId}`);
-            } catch (e) {
-                logger.error(`Error notifying media-server to close producer ${producer.producerId}:`, e);
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    logger.error(`Error notifying media-server to close producer ${producer.producerId}:`, error.response?.data || error.message);
+                } else {
+                    logger.error(`Error notifying media-server to close producer ${producer.producerId}:`, error);
+                }
             }
             // Notify other clients in the room that this producer is closed
             io.to(roomId).emit('producerClosed', { producerId: producer.producerId, userId, socketId: currentSocket.id });
@@ -320,16 +324,20 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} requesting RouterRtpCapabilities for room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.getRouterRtpCapabilities(roomId));
-            if (!response.ok) {
-                const errorText = await response.text();
+            const response = await axios.get(MediaServerApiEndpoints.getRouterRtpCapabilities(roomId));
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to get RouterRtpCapabilities for room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
-            const capabilities = await response.json() as RtpCapabilities;
+            const capabilities = response.data as RtpCapabilities;
             callback(capabilities);
         } catch (error) {
-            logger.error(`Error getting RouterRtpCapabilities for room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error getting RouterRtpCapabilities for room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error getting RouterRtpCapabilities for room ${roomId}:`, error);
+            }
             callback({ error: 'Failed to get router RTP capabilities' });
         }
     });
@@ -340,17 +348,16 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} requesting to create WebRTC transport in room ${roomId} (producing: ${producing}, consuming: ${consuming})`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.createTransport(roomId), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ producing, consuming, sctpCapabilities }),
-            });
-            if (!response.ok) {
-                const errorText = await response.text();
+            const response = await axios.post(MediaServerApiEndpoints.createTransport(roomId), 
+                { producing, consuming, sctpCapabilities },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to create transport for room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
-            const transportParams = await response.json() as WebRtcTransportParams;
+            const transportParams = response.data as WebRtcTransportParams;
             
             // Store transport info (simplified, might need more robust management)
             // This is a basic way; ideally, transports are more tightly coupled to the socket/user session on media-server.
@@ -358,7 +365,11 @@ io.on('connection', (socket) => {
             logger.info(`Transport ${transportParams.id} created for user ${userId} in room ${roomId}`);
             callback(transportParams);
         } catch (error) {
-            logger.error(`Error creating WebRTC transport for room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error creating WebRTC transport for room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error creating WebRTC transport for room ${roomId}:`, error);
+            }
             callback({ error: 'Failed to create WebRTC transport' });
         }
     });
@@ -369,13 +380,12 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} connecting WebRTC transport ${transportId} in room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.connectTransport(roomId, transportId), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ dtlsParameters }),
-            });
-            if (!response.ok) {
-                const errorText = await response.text();
+            const response = await axios.post(MediaServerApiEndpoints.connectTransport(roomId, transportId), 
+                { dtlsParameters },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to connect transport ${transportId} for room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
@@ -383,7 +393,11 @@ io.on('connection', (socket) => {
             logger.info(`WebRTC transport ${transportId} connected for user ${userId} in room ${roomId}`);
             callback({});
         } catch (error) {
-            logger.error(`Error connecting WebRTC transport ${transportId} for room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error connecting WebRTC transport ${transportId} for room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error connecting WebRTC transport ${transportId} for room ${roomId}:`, error);
+            }
             callback({ error: 'Failed to connect WebRTC transport' });
         }
     });
@@ -397,38 +411,37 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} producing ${kind} on transport ${transportId} in room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.produce(roomId, transportId), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ kind, rtpParameters, appData: { ...appData, userId, socketId: socket.id } }), // Pass userId & socketId in appData
-            });
+            const response = await axios.post(MediaServerApiEndpoints.produce(roomId, transportId), 
+                { kind, rtpParameters, appData: { ...appData, userId, socketId: socket.id } },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-            if (!response.ok) {
-                const errorText = await response.text();
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to create producer for transport ${transportId} in room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
-            const { id: producerId } = await response.json() as { id: string };
+            const { id: producerId } = response.data as { id: string };
 
-            const producerInfo: ProducerInfo = {
+            // Store producer info
+            room.producers.set(producerId, {
                 producerId,
                 userId,
                 socketId: socket.id,
                 kind,
-                rtpParameters, // Store if needed for local reference, though media-server is source of truth
-                appData: { ...appData, userId }, // Ensure userId is in appData
-                transportId,
-            };
-            room.producers.set(producerId, producerInfo);
+                appData: { ...appData, userId, socketId: socket.id },
+                rtpParameters, // Ensure rtpParameters is passed from the context
+                transportId // Ensure transportId is passed from the context
+            });
 
-            logger.info(`User ${userId} created producer ${producerId} (${kind}) in room ${roomId}`);
-            
-            // Notify other users in the room
-            socket.to(roomId).emit('newProducer', { producerId, userId, kind, appData: producerInfo.appData, socketId: socket.id });
-            
+            logger.info(`Producer ${producerId} created for user ${userId} in room ${roomId}`);
             callback({ producerId });
         } catch (error) {
-            logger.error(`Error producing ${kind} for transport ${transportId} in room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error producing ${kind} for transport ${transportId} in room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error producing ${kind} for transport ${transportId} in room ${roomId}:`, error);
+            }
             callback({ error: `Failed to produce ${kind}` });
         }
     });
@@ -444,22 +457,26 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} requesting to consume producer ${producerId} on transport ${transportId} in room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.consume(roomId, transportId), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ producerId, rtpCapabilities, consumingUserId: userId }), // Send consumingUserId for media-server context
-            });
-            if (!response.ok) {
-                const errorText = await response.text();
+            const response = await axios.post(MediaServerApiEndpoints.consume(roomId, transportId), 
+                { producerId, rtpCapabilities, consumingUserId: userId },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
+
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to create consumer for producer ${producerId} in room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
-            const consumerParams = await response.json() as ConsumerParams;
+            const consumerParams = response.data as ConsumerParams;
             
             logger.info(`User ${userId} created consumer ${consumerParams.id} for producer ${producerId} in room ${roomId}`);
             callback(consumerParams); // Send params back to the specific client
         } catch (error) {
-            logger.error(`Error consuming producer ${producerId} for transport ${transportId} in room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error consuming producer ${producerId} for transport ${transportId} in room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error consuming producer ${producerId} for transport ${transportId} in room ${roomId}:`, error);
+            }
             callback({ error: 'Failed to consume producer' });
         }
     });
@@ -471,45 +488,53 @@ io.on('connection', (socket) => {
         const room = rooms.get(roomId);
         if (!room) return callback({ error: 'Room not found' });
 
-        // Ensure appData correctly indicates screen sharing
-        const screenAppData = { ...appData, type: 'screen', userId, socketId: socket.id };
+        // Ensure appData correctly indicates screen sharing with correct type
+        const screenAppData = { ...appData, type: 'screen' as const, userId, socketId: socket.id };
 
         try {
             logger.info(`User ${userId} starting screen share on transport ${transportId} in room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.produce(roomId, transportId), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ kind, rtpParameters, appData: screenAppData }),
-            });
+            const response = await axios.post(MediaServerApiEndpoints.produce(roomId, transportId), 
+                { kind, rtpParameters, appData: screenAppData },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-            if (!response.ok) {
-                const errorText = await response.text();
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to create screen share producer for transport ${transportId} in room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
-            const { id: producerId } = await response.json() as { id: string };
-
-            const producerInfo: ProducerInfo = {
+            const { id: producerId } = response.data as { id: string };
+            
+            // Store producer info
+            room.producers.set(producerId, {
                 producerId,
                 userId,
                 socketId: socket.id,
                 kind,
-                rtpParameters,
                 appData: screenAppData,
-                transportId,
-            };
-            room.producers.set(producerId, producerInfo);
-            // Optional: Store this screen producer ID specifically if needed for quick lookup on disconnect for this socket
-            // socket.data.screenProducerId = producerId; // Or use a separate map
+                rtpParameters, // Adding the required rtpParameters from the function parameters
+                transportId   // Adding the required transportId from the function parameters
+            });
 
-            logger.info(`User ${userId} created screen share producer ${producerId} in room ${roomId}`);
-            
-            socket.to(roomId).emit('newProducer', { producerId, userId, kind, appData: screenAppData, socketId: socket.id });
-            
+            logger.info(`Screen share producer ${producerId} created for user ${userId} in room ${roomId}`);
+
+            // Broadcast new producer to all room participants (except sender)
+            socket.to(roomId).emit('newProducer', {
+                producerId,
+                userId,
+                kind,
+                appData: screenAppData,
+                socketId: socket.id
+            });
+
             callback({ producerId });
         } catch (error) {
-            logger.error(`Error starting screen share for transport ${transportId} in room ${roomId}:`, error);
-            callback({ error: `Failed to start screen share` });
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error creating screen share producer for transport ${transportId} in room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error creating screen share producer for transport ${transportId} in room ${roomId}:`, error);
+            }
+            callback({ error: 'Failed to start screen share' });
         }
     });
 
@@ -527,28 +552,28 @@ io.on('connection', (socket) => {
 
         try {
             logger.info(`User ${userId} stopping screen share producer ${producerId} in room ${roomId}`, { socketId: socket.id });
-            const response = await fetch(MediaServerApiEndpoints.closeProducer(roomId, producerId), {
-                method: 'DELETE', // Assuming DELETE, or POST if your API uses POST for closing
-            });
+            const response = await axios.delete(MediaServerApiEndpoints.closeProducer(roomId, producerId));
 
-            if (!response.ok) {
-                const errorText = await response.text();
+            if (response.status !== 200) {
+                const errorText = response.data;
                 logger.error(`Media-server failed to close screen share producer ${producerId} in room ${roomId}: ${response.status} ${errorText}`);
                 return callback({ error: `Media server error: ${errorText}` });
             }
 
+            // Remove producer from our map
             room.producers.delete(producerId);
-            // if (socket.data.screenProducerId === producerId) {
-            //     socket.data.screenProducerId = undefined;
-            // }
 
-            logger.info(`User ${userId} stopped screen share producer ${producerId} in room ${roomId}`);
-            
-            io.to(roomId).emit('producerClosed', { producerId, userId, socketId: socket.id });
-            
+            // Notify others in the room
+            socket.to(roomId).emit('producerClosed', { producerId, userId, socketId: socket.id });
+
+            logger.info(`Screen share producer ${producerId} closed for user ${userId} in room ${roomId}`);
             callback({});
         } catch (error) {
-            logger.error(`Error stopping screen share producer ${producerId} in room ${roomId}:`, error);
+            if (axios.isAxiosError(error)) {
+                logger.error(`Error closing screen share producer ${producerId} in room ${roomId}:`, error.response?.data || error.message);
+            } else {
+                logger.error(`Error closing screen share producer ${producerId} in room ${roomId}:`, error);
+            }
             callback({ error: 'Failed to stop screen share' });
         }
     });

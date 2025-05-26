@@ -5,6 +5,10 @@ import upload from '../middleware/uploadMiddleware'; // Import multer middleware
 import Message from '../database/models/MessageModel'; // Import Message model
 import { IMessage } from "../database/models/MessageModel"; // Import IMessage interface
 import { logger } from "../utils"; // Import logger
+// Add import for fs and s3Service at the top of the file
+import fs from 'fs';
+import { uploadFileToS3 } from '../services/s3Service';
+import config from '../config/config';
 
 const messageRoutes = Router();
 
@@ -129,7 +133,3 @@ messageRoutes.post(
 
 
 export default messageRoutes;
-// Add import for fs and s3Service at the top of the file
-import fs from 'fs';
-import { uploadFileToS3 } from '../services/s3Service';
-import config from '../config/config';

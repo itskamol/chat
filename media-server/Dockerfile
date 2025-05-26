@@ -1,22 +1,36 @@
 # Use an appropriate Node.js base image
 FROM node:18-alpine
 
+# Install build dependencies required for mediasoup including Linux headers
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    make \
+    g++ \
+    gcc \
+    libc-dev \
+    linux-headers
+
 # Set the working directory
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install production dependencies
-RUN npm ci --only=production
+# Install all dependencies (including dev dependencies for building)
+RUN npm ci
 
-# Copy the rest of the application code (compiled dist folder and node_modules)
-# Assuming your tsconfig.json outputs to a 'dist' folder
-COPY dist ./dist
-COPY node_modules ./node_modules
+# Copy the source code
+COPY . .
 
-# Expose the server port (make sure this matches the port in your config.ts or .env)
+# Build the TypeScript application
+RUN npm run build
+
+# Remove dev dependencies to reduce image size (but keep build tools for mediasoup)
+RUN npm prune --production
+
+# Expose the server port
 EXPOSE 3001
 
 # Define the CMD to run the application
-CMD ["node", "dist/app.js"]
+CMD ["npm", "run", "start"]

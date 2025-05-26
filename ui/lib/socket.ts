@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-const URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost/ws';
+const URL = process.env.NEXT_PUBLIC_WS_URL || 'http://localhost';
 
 let socket: Socket | null = null;
 

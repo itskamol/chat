@@ -19,7 +19,8 @@
             }
         ],
         "paths": {
-            "@/*": ["./*"]
+            "@/*": ["./*"],
+            "@/chat-service/*": ["../chat-service/*"] // Add this mapping for the alias
         },
         "types": ["node"] // Add or ensure "node" is in this array
     },

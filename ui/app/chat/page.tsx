@@ -4,10 +4,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import type { Socket } from 'socket.io-client';
 
 import ChatSidebar from '@/components/chat-sidebar';
-import ChatWindow, { ChatWindowProps } from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
+import ChatWindow from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
 import type { User, Message } from '@/lib/types';
 import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
 import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
@@ -83,7 +82,7 @@ export default function ChatPage() {
             const fetchContacts = async () => {
                 try {
                     const response = await fetch(
-                        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/contacts`,
+                        '/api/users/contacts',
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`,
@@ -239,7 +238,7 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    const handleSendMessage = async (text: string, file?: File, fileType?: string) => {
+    const handleSendMessage = async (text: string, file?: File, fileType?: "text" | "image" | "video" | "audio" | "file") => {
         if (!currentUser?._id || !selectedContact?._id) return;
         if (!text.trim() && !file) return; // Must have text or a file
 
@@ -268,7 +267,7 @@ export default function ChatPage() {
                 senderId: currentUser._id,
                 receiverId: selectedContact._id,
                 message: text.trim() || `Sending ${fileType}...`,
-                messageType: fileType,
+                messageType: fileType as "text" | "image" | "video" | "audio" | "file",
                 fileName: file.name,
                 fileSize: file.size,
                 fileMimeType: file.type,
@@ -342,9 +341,10 @@ export default function ChatPage() {
             const optimisticTextMessage: Message = {
                 _id: tempId, 
                 ...messageData,
+                messageType: 'text', // Explicitly set to a valid type
                 createdAt: new Date(), 
                 delivered: false,
-                status: 'Sent'
+                status: 'sent'
             };
             setMessages(prevMessages => [...prevMessages, optimisticTextMessage]);
             emitSendMessage(messageData); // Socket.IO for real-time text
@@ -381,18 +381,6 @@ export default function ChatPage() {
         online: onlineUserIds.includes(contact._id)
     }));
 
-    // --- Mock Incoming Call ---
-    // Simulate receiving an incoming call for UI testing
-    useEffect(() => {
-        // Example: Simulate an incoming call after 10 seconds for 'test-user'
-        // In a real app, this would be triggered by a WebSocket event.
-        const timer = setTimeout(() => {
-            // console.log("Simulating incoming call...");
-            // setCallerInfo({ name: 'Mock Caller', roomId: 'mock-room-123' });
-            // setIncomingCallVisible(true);
-        }, 10000);
-        return () => clearTimeout(timer);
-    }, []);
 
     const handleAcceptCall = () => {
         if (callerInfo) {

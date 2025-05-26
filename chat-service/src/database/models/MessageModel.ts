@@ -11,6 +11,13 @@ export interface IMessage extends Document {
     receiverId: string;
     message: string;
     status: Status;
+    fileUrl?: string; // URL to the file if messageType is not 'text'
+    fileName?: string; // Name of the file, if applicable
+    fileMimeType?: string; // MIME type of the file, if applicable
+    fileSize?: number; // Size of the file in bytes, if applicable
+    storedFileName?: string; // For local storage, the filename used on disk
+    originalMessage?: string; // Original message text if 'message' is repurposed for file messages
+    messageType: 'text' | 'image' | 'video' | 'audio' | 'file'; // Type of the message
     createdAt: Date;
     updatedAt: Date;
 }

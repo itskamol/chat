@@ -30,7 +30,7 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilt
   } else {
     // Pass an error to cb, multer will catch this and pass it to your error handler
     // Create a custom error object to identify it later
-    const error = new Error('File type not allowed');
+    const error: any = new Error('File type not allowed');
     // @ts-ignore // Add a custom property for easier identification
     error.code = 'INVALID_FILE_TYPE'; 
     cb(error, false);

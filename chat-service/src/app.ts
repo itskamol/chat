@@ -27,7 +27,7 @@ import Message from './database/models/MessageModel'; // Import Message model
 import config from "./config/config"; // Import config to check STORAGE_TYPE
 
 // Message routes
-app.use("/v1/messages", messageRoutes); 
+app.use(messageRoutes); 
 
 // Static file serving route for uploaded media - NOW WITH AUTH
 const UPLOAD_DIR = path.join(__dirname, '../uploads');

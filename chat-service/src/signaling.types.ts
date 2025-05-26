@@ -115,4 +115,4 @@ export const MediaServerApiEndpoints = {
 // POST /rooms/{roomId}/producers/{producerId}/close -> { closed: true }
 // POST /rooms/{roomId}/transports/{transportId}/close -> { closed: true }
 
-export {}; // Make this a module
+// export {}; // Make this a module

@@ -7,12 +7,13 @@ import { LogOut, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
-interface ChatSidebarProps {
+export interface ChatSidebarProps {
     currentUser: User | null;
     contacts: User[];
     selectedContact: User | null;
     onSelectContact: (contact: User) => void;
     onLogout: () => void;
+    onStartVideoCall: (contact: User | null) => void; // Added this property
 }
 
 export default function ChatSidebar({
