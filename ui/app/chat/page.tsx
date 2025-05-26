@@ -42,7 +42,8 @@ export default function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const optimisticMessageRef = useRef<string | null>(null); // To store temp ID of optimistic message
+    const optimisticMessageRef = useRef<string | null>(null);
+    const [isSendingFile, setIsSendingFile] = useState(false); // For loading state during file upload
 
     // State for video call UI
     const [showVideoCall, setShowVideoCall] = useState(false);
@@ -238,27 +239,116 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    const handleSendMessage = (text: string) => {
-        if (!currentUser?._id || !selectedContact?._id || !text.trim()) return;
+    const handleSendMessage = async (text: string, file?: File, fileType?: string) => {
+        if (!currentUser?._id || !selectedContact?._id) return;
+        if (!text.trim() && !file) return; // Must have text or a file
 
-        const messageData = {
-            senderId: currentUser._id,
-            receiverId: selectedContact._id,
-            message: text,
-        };
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+            router.push('/'); // Or handle session expiry
+            return;
+        }
         
         const tempId = `temp-${Date.now()}`;
-        optimisticMessageRef.current = tempId; // Store temp ID
+        optimisticMessageRef.current = tempId;
 
-        const optimisticMessage: Message = {
-            _id: tempId, 
-            ...messageData,
-            createdAt: new Date(), 
-            delivered: false 
-        };
-        setMessages(prevMessages => [...prevMessages, optimisticMessage]);
+        if (file && fileType) { // Handle file message
+            setIsSendingFile(true); // Kept for general sending state if needed, but progress is primary
+            setError(null);
+            
+            const formData = new FormData();
+            formData.append('mediaFile', file, file.name);
+            formData.append('senderId', currentUser._id);
+            formData.append('receiverId', selectedContact._id);
+            formData.append('messageType', fileType);
+            if (text.trim()) formData.append('originalMessage', text.trim());
 
-        emitSendMessage(messageData); 
+            const optimisticFileMessage: Message = {
+                _id: tempId,
+                senderId: currentUser._id,
+                receiverId: selectedContact._id,
+                message: text.trim() || `Sending ${fileType}...`,
+                messageType: fileType,
+                fileName: file.name,
+                fileSize: file.size,
+                fileMimeType: file.type,
+                fileUrl: URL.createObjectURL(file),
+                createdAt: new Date(),
+                delivered: false,
+                status: 'uploading', // Initial status
+                uploadProgress: 0, // Initial progress
+            };
+            setMessages(prevMessages => [...prevMessages, optimisticFileMessage]);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `${process.env.NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE}/v1/messages/upload`, true);
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            // 'Content-Type' for FormData is set by the browser
+
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const progress = Math.round((event.loaded / event.total) * 100);
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? { ...m, uploadProgress: progress, status: 'uploading' } : m
+                    ));
+                }
+            };
+
+            xhr.onload = () => {
+                setIsSendingFile(false);
+                optimisticMessageRef.current = null;
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const savedMessage: Message = JSON.parse(xhr.responseText);
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? 
+                        { ...savedMessage, createdAt: new Date(savedMessage.createdAt), status: 'sent', uploadProgress: 100 } : 
+                        m
+                    ));
+                    // Assuming server will emit socket event for real-time update to receiver
+                } else {
+                    console.error('Failed to send file message (XHR):', xhr.statusText, xhr.responseText);
+                    try {
+                        const errorData = JSON.parse(xhr.responseText);
+                        setError(errorData.message || 'Could not send file.');
+                    } catch (e) {
+                        setError('Could not send file: ' + xhr.statusText);
+                    }
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
+                    ));
+                }
+            };
+
+            xhr.onerror = () => {
+                setIsSendingFile(false);
+                optimisticMessageRef.current = null;
+                console.error('XHR request failed (network error).');
+                setError('Network error while uploading file.');
+                setMessages(prev => prev.map(m => 
+                    m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
+                ));
+            };
+
+            xhr.send(formData);
+
+        } else if (text.trim()) { // Handle text message
+            const messageData = {
+                senderId: currentUser._id,
+                receiverId: selectedContact._id,
+                message: text.trim(),
+                messageType: 'text',
+            };
+            
+            const optimisticTextMessage: Message = {
+                _id: tempId, 
+                ...messageData,
+                createdAt: new Date(), 
+                delivered: false,
+                status: 'Sent'
+            };
+            setMessages(prevMessages => [...prevMessages, optimisticTextMessage]);
+            emitSendMessage(messageData); // Socket.IO for real-time text
+        }
     };
 
     const handleLogout = () => {

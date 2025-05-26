@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import jwt from "jsonwebtoken";
+import multer from "multer"; // Import multer to check for MulterError instance
 import { ApiError } from "../utils";
 import config from "../config/config";
 
@@ -50,23 +51,46 @@ const authMiddleware = async (
         };
         return next();
     } catch (error) {
-        console.error(error);
-        return next(new ApiError(401, "Invalid token"));
+        console.error(error); // Keep this for server-side logging of JWT errors
+        return next(new ApiError(401, "Invalid or expired token")); // More specific message
     }
 };
 
 const errorConverter: ErrorRequestHandler = (err, req, res, next) => {
     let error = err;
-    if (!(error instanceof ApiError)) {
+    // Handle Multer errors
+    if (err instanceof multer.MulterError) {
+        let statusCode = 400;
+        let message = err.message;
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            statusCode = 413; // Payload Too Large
+            message = `File too large. Max size: ${config.maxFileSizeBytes / (1024 * 1024)}MB`;
+        } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+            message = 'Unexpected file field. Please use "mediaFile" field for uploads.';
+        }
+        // For other multer errors, use default message and status 400
+        error = new ApiError(statusCode, message, true, err.stack);
+    } 
+    // Handle custom errors (like from fileFilter or no file uploaded)
+    // @ts-ignore
+    else if (err.code === 'INVALID_FILE_TYPE') {
+    // @ts-ignore
+        error = new ApiError(415, err.message || 'Unsupported file type.', true, err.stack);
+    } 
+    // @ts-ignore
+    else if (err.code === 'NO_FILE_UPLOADED') {
+    // @ts-ignore
+        error = new ApiError(400, err.message || 'No file was uploaded.', true, err.stack);
+    }
+    // Handle other errors that are not ApiError instances
+    else if (!(error instanceof ApiError)) {
         const statusCode =
-            error.statusCode ||
-            (error instanceof Error
-                ? 400 // Bad Request
-                : 500); // Internal Server Error
+            // @ts-ignore
+            error.statusCode || 500; 
         const message =
-            error.message ||
-            (statusCode === 400 ? "Bad Request" : "Internal Server Error");
-        error = new ApiError(statusCode, message, false, err.stack.toString());
+            // @ts-ignore
+            error.message || "Internal Server Error";
+        error = new ApiError(statusCode, message, false, err.stack); // Mark as not operational for generic errors
     }
     next(error);
 };

@@ -44,7 +44,11 @@ interface VideoCallState {
   isInCall: boolean;
   isConnecting: boolean;
   error: string | null;
-    
+  
+  localStream: MediaStream | null;
+  localAudioEnabled: boolean;
+  localVideoEnabled: boolean;
+  
   // Store remote streams directly with their unique IDs (e.g., producerId)
   localStream: MediaStream | null; // Webcam/mic stream
   localAudioEnabled: boolean;

@@ -1,36 +1,22 @@
+# Use an appropriate Node.js base image
 FROM node:18-alpine
 
-# Install curl for health checks
-RUN apk add --no-cache curl
-
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy package files first for better Docker layer caching
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm i
+# Install production dependencies
+RUN npm ci --only=production
 
-# Copy source code
-COPY . .
+# Copy the rest of the application code (compiled dist folder and node_modules)
+# Assuming your tsconfig.json outputs to a 'dist' folder
+COPY dist ./dist
+COPY node_modules ./node_modules
 
-# Build the application
-RUN npm run build
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
-
-# Change ownership of the app directory
-RUN chown -R nodejs:nodejs /usr/src/app
-USER nodejs
-
-# Expose port
+# Expose the server port (make sure this matches the port in your config.ts or .env)
 EXPOSE 3001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3001/health || exit 1
-
-# Start application
-CMD ["npm", "start"]
+# Define the CMD to run the application
+CMD ["node", "dist/app.js"]

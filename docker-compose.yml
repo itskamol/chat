@@ -88,6 +88,8 @@ services:
             MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
             MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
             JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+        volumes: # Added volumes section for chat service
+            - ./chat_service_uploads:/app/uploads
         networks:
             - microservices-network
 
@@ -189,9 +191,8 @@ services:
             DEBUG: mediasoup:* # Enable mediasoup logs
         # volumes:
             # - ./media-server-logs:/opt/media-server/logs # Optional: if your app logs to a file
-        depends_on: # Add if media-server relies on other services at startup
-            rabbitmq:
-                condition: service_healthy # Ensure RabbitMQ is ready before starting media server
+        # depends_on: # Add if media-server relies on other services at startup
+            # - rabbitmq
 
     turn_server:
         image: coturn/coturn
