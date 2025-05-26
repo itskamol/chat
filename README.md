@@ -1,6 +1,6 @@
 # Real-time Chat Application
 
-Modern real-time chat application built with microservices architecture using Node.js, Next.js, Socket.IO, and MongoDB.
+Modern real-time chat application built with microservices architecture using Node.js, Next.js, Socket.IO, MongoDB, and WebRTC for video/audio calls.
 
 ## 🚀 Features
 
@@ -113,7 +113,36 @@ EMAIL_FROM=chat-server@yourdomain.com
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost/api
 NEXT_PUBLIC_WS_URL=ws://localhost/ws
+NEXT_PUBLIC_TURN_SERVER_URL=turn:localhost:3478
+NEXT_PUBLIC_TURN_SERVER_USERNAME=turnuser
+NEXT_PUBLIC_TURN_SERVER_PASSWORD=turnpassword
+
+# Media Server (if defaults in media-server/src/config.ts are not used or need override)
+# These are typically set in docker-compose.yml for the media-server service
+# MEDIA_SERVER_PORT=3001
+# MEDIA_SERVER_MEDIASOUP_LISTEN_IP=0.0.0.0
+# MEDIA_SERVER_MEDIASOUP_ANNOUNCED_IP=127.0.0.1 # CRITICAL: See notes below
+# MEDIA_SERVER_MEDIASOUP_RTP_MIN_PORT=20000
+# MEDIA_SERVER_MEDIASOUP_RTP_MAX_PORT=20020
+# MEDIA_SERVER_DEBUG=mediasoup:*
 ```
+
+**Important Notes on Environment Variables:**
+
+*   A comprehensive list of all environment variables used by `docker-compose` can be found in the root `.env.example` file. Create a `.env` file by copying `.env.example` and customize it as needed.
+*   **`MEDIASOUP_ANNOUNCED_IP` (for `media-server` service):**
+    *   This is crucial for WebRTC to work correctly.
+    *   **For local development (testing on the same machine where Docker is running):** `127.0.0.1` is usually correct if you access the UI via `http://localhost:3000`.
+    *   **For testing from other devices on your LAN:** Set this to your host machine's LAN IP address (e.g., `192.168.1.100`).
+    *   **For production:** This **must** be the public IP address of the server where the `media-server` is running.
+*   **`NEXT_PUBLIC_TURN_SERVER_URL` (for `ui` service):**
+    *   For local development, `turn:localhost:3478` works when `turn_server` is running and its port 3478 is mapped to the host.
+    *   If testing from other devices on LAN, change `localhost` to your host machine's LAN IP.
+    *   For production, this should be `turn:YOUR_PUBLIC_IP:3478` (or `turns:` if using TLS, which would require additional Nginx/coturn configuration).
+*   **`turnserver.conf` (`external-ip` setting):**
+    *   The `turn_config/turnserver.conf` file has an `external-ip` setting commented out.
+    *   For local Docker setups where clients connect via `localhost` or host LAN IP, coturn can often auto-detect the correct external IP to advertise to clients.
+    *   If you encounter NAT issues, or for production, you might need to uncomment and set `external-ip` in `turnserver.conf` to the host's public IP. If you set it, ensure the `relay-ip` is also set to the container's internal IP if necessary (though often not needed if `listening-ip` is `0.0.0.0`).
 
 ### Running the Application
 

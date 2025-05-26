@@ -7,8 +7,11 @@ import { jwtDecode } from 'jwt-decode';
 import type { Socket } from 'socket.io-client';
 
 import ChatSidebar from '@/components/chat-sidebar';
-import ChatWindow from '@/components/chat-window';
+import ChatWindow, { ChatWindowProps } from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
 import type { User, Message } from '@/lib/types';
+import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
+import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
+import IncomingCallPopup from '@/components/video-call/partials/IncomingCallPopup'; // Import IncomingCallPopup
 import {
     getSocket,
     disconnectSocket,
@@ -39,7 +42,14 @@ export default function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const optimisticMessageRef = useRef<string | null>(null); // To store temp ID of optimistic message
+    const optimisticMessageRef = useRef<string | null>(null);
+    const [isSendingFile, setIsSendingFile] = useState(false); // For loading state during file upload
+
+    // State for video call UI
+    const [showVideoCall, setShowVideoCall] = useState(false);
+    const [incomingCallVisible, setIncomingCallVisible] = useState(false);
+    const [callerInfo, setCallerInfo] = useState<{ name: string, roomId: string } | null>(null);
+
 
     // Effect for initialization, authentication, and fetching initial data
     useEffect(() => {
@@ -229,27 +239,116 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    const handleSendMessage = (text: string) => {
-        if (!currentUser?._id || !selectedContact?._id || !text.trim()) return;
+    const handleSendMessage = async (text: string, file?: File, fileType?: string) => {
+        if (!currentUser?._id || !selectedContact?._id) return;
+        if (!text.trim() && !file) return; // Must have text or a file
 
-        const messageData = {
-            senderId: currentUser._id,
-            receiverId: selectedContact._id,
-            message: text,
-        };
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+            router.push('/'); // Or handle session expiry
+            return;
+        }
         
         const tempId = `temp-${Date.now()}`;
-        optimisticMessageRef.current = tempId; // Store temp ID
+        optimisticMessageRef.current = tempId;
 
-        const optimisticMessage: Message = {
-            _id: tempId, 
-            ...messageData,
-            createdAt: new Date(), 
-            delivered: false 
-        };
-        setMessages(prevMessages => [...prevMessages, optimisticMessage]);
+        if (file && fileType) { // Handle file message
+            setIsSendingFile(true); // Kept for general sending state if needed, but progress is primary
+            setError(null);
+            
+            const formData = new FormData();
+            formData.append('mediaFile', file, file.name);
+            formData.append('senderId', currentUser._id);
+            formData.append('receiverId', selectedContact._id);
+            formData.append('messageType', fileType);
+            if (text.trim()) formData.append('originalMessage', text.trim());
 
-        emitSendMessage(messageData); 
+            const optimisticFileMessage: Message = {
+                _id: tempId,
+                senderId: currentUser._id,
+                receiverId: selectedContact._id,
+                message: text.trim() || `Sending ${fileType}...`,
+                messageType: fileType,
+                fileName: file.name,
+                fileSize: file.size,
+                fileMimeType: file.type,
+                fileUrl: URL.createObjectURL(file),
+                createdAt: new Date(),
+                delivered: false,
+                status: 'uploading', // Initial status
+                uploadProgress: 0, // Initial progress
+            };
+            setMessages(prevMessages => [...prevMessages, optimisticFileMessage]);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `${process.env.NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE}/v1/messages/upload`, true);
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            // 'Content-Type' for FormData is set by the browser
+
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const progress = Math.round((event.loaded / event.total) * 100);
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? { ...m, uploadProgress: progress, status: 'uploading' } : m
+                    ));
+                }
+            };
+
+            xhr.onload = () => {
+                setIsSendingFile(false);
+                optimisticMessageRef.current = null;
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const savedMessage: Message = JSON.parse(xhr.responseText);
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? 
+                        { ...savedMessage, createdAt: new Date(savedMessage.createdAt), status: 'sent', uploadProgress: 100 } : 
+                        m
+                    ));
+                    // Assuming server will emit socket event for real-time update to receiver
+                } else {
+                    console.error('Failed to send file message (XHR):', xhr.statusText, xhr.responseText);
+                    try {
+                        const errorData = JSON.parse(xhr.responseText);
+                        setError(errorData.message || 'Could not send file.');
+                    } catch (e) {
+                        setError('Could not send file: ' + xhr.statusText);
+                    }
+                    setMessages(prev => prev.map(m => 
+                        m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
+                    ));
+                }
+            };
+
+            xhr.onerror = () => {
+                setIsSendingFile(false);
+                optimisticMessageRef.current = null;
+                console.error('XHR request failed (network error).');
+                setError('Network error while uploading file.');
+                setMessages(prev => prev.map(m => 
+                    m._id === tempId ? { ...m, status: 'failed', uploadProgress: 0 } : m
+                ));
+            };
+
+            xhr.send(formData);
+
+        } else if (text.trim()) { // Handle text message
+            const messageData = {
+                senderId: currentUser._id,
+                receiverId: selectedContact._id,
+                message: text.trim(),
+                messageType: 'text',
+            };
+            
+            const optimisticTextMessage: Message = {
+                _id: tempId, 
+                ...messageData,
+                createdAt: new Date(), 
+                delivered: false,
+                status: 'Sent'
+            };
+            setMessages(prevMessages => [...prevMessages, optimisticTextMessage]);
+            emitSendMessage(messageData); // Socket.IO for real-time text
+        }
     };
 
     const handleLogout = () => {
@@ -282,21 +381,82 @@ export default function ChatPage() {
         online: onlineUserIds.includes(contact._id)
     }));
 
+    // --- Mock Incoming Call ---
+    // Simulate receiving an incoming call for UI testing
+    useEffect(() => {
+        // Example: Simulate an incoming call after 10 seconds for 'test-user'
+        // In a real app, this would be triggered by a WebSocket event.
+        const timer = setTimeout(() => {
+            // console.log("Simulating incoming call...");
+            // setCallerInfo({ name: 'Mock Caller', roomId: 'mock-room-123' });
+            // setIncomingCallVisible(true);
+        }, 10000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleAcceptCall = () => {
+        if (callerInfo) {
+            // Here you would use the useVideoCall hook's functions if VideoCallProvider was above this component.
+            // For now, directly setting state to show VideoCallView.
+            // videoCall.joinCall(callerInfo.roomId); // This would be the ideal way
+            setShowVideoCall(true); 
+        }
+        setIncomingCallVisible(false);
+    };
+
+    const handleDeclineCall = () => {
+        setIncomingCallVisible(false);
+        setCallerInfo(null);
+    };
+    
+    const handleStartVideoCall = (contact: User | null) => {
+        if (contact) {
+            // videoCall.initiateCall(contact._id); // Use contact._id or a new unique room ID
+            setShowVideoCall(true); // Directly show the view for now
+            console.log(`Starting video call with ${contact.name}`);
+        }
+    };
+
+    const ChatPageContent = () => {
+        // Access video call context if needed for more complex interactions here
+        // const videoCall = useVideoCall(); 
+        
+        // If showVideoCall is true, render VideoCallView, otherwise the chat UI
+        if (showVideoCall) {
+            return <VideoCallView />;
+        }
+
+        return (
+            <div className="flex h-screen bg-gray-50">
+                <ChatSidebar
+                    currentUser={currentUser}
+                    contacts={contactsWithOnlineStatus}
+                    selectedContact={selectedContact}
+                    onSelectContact={handleContactSelect}
+                    onLogout={handleLogout}
+                    onStartVideoCall={handleStartVideoCall} // Pass handler
+                />
+                <ChatWindow
+                    currentUser={currentUser}
+                    selectedContact={selectedContact}
+                    messages={messages}
+                    onSendMessage={handleSendMessage}
+                    onStartVideoCall={() => handleStartVideoCall(selectedContact)} // Pass handler
+                />
+                <IncomingCallPopup
+                    isVisible={incomingCallVisible}
+                    callerName={callerInfo?.name}
+                    roomId={callerInfo?.roomId}
+                    onAccept={handleAcceptCall}
+                    onDecline={handleDeclineCall}
+                />
+            </div>
+        );
+    };
+
     return (
-        <div className="flex h-screen bg-gray-50">
-            <ChatSidebar
-                currentUser={currentUser}
-                contacts={contactsWithOnlineStatus}
-                selectedContact={selectedContact}
-                onSelectContact={handleContactSelect}
-                onLogout={handleLogout}
-            />
-            <ChatWindow
-                currentUser={currentUser}
-                selectedContact={selectedContact}
-                messages={messages}
-                onSendMessage={handleSendMessage}
-            />
-        </div>
+        <VideoCallProvider>
+            <ChatPageContent />
+        </VideoCallProvider>
     );
 }
