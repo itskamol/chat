@@ -11,15 +11,16 @@ const {
     JWT_SECRET, 
     NODE_ENV, 
     MESSAGE_BROKER_URL,
-    STORAGE_TYPE,
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
-    AWS_REGION,
-    AWS_S3_BUCKET_NAME,
-    S3_FILE_BASE_URL,
+    // STORAGE_TYPE, // Removed
+    // AWS_ACCESS_KEY_ID, // Removed
+    // AWS_SECRET_ACCESS_KEY, // Removed
+    // AWS_REGION, // Removed
+    // AWS_S3_BUCKET_NAME, // Removed
+    // S3_FILE_BASE_URL, // Removed
     MEDIA_SERVER_URL,
-    MAX_FILE_SIZE_MB,
-    ALLOWED_MIME_TYPES,
+    // MAX_FILE_SIZE_MB, // Removed - will be handled by file-service
+    // ALLOWED_MIME_TYPES, // Removed - will be handled by file-service
+    FILE_SERVICE_URL, // Added
 } = process.env;
 
 const queue = { notifications: "NOTIFICATIONS" };
@@ -33,6 +34,10 @@ if (!JWT_SECRET) {
     console.error("FATAL ERROR: JWT_SECRET is not defined.");
     process.exit(1);
 }
+if (!FILE_SERVICE_URL) {
+    console.error("FATAL ERROR: FILE_SERVICE_URL is not defined.");
+    process.exit(1);
+}
 
 
 export default {
@@ -42,13 +47,14 @@ export default {
     env: NODE_ENV || "development",
     msgBrokerURL: MESSAGE_BROKER_URL,
     queue,
-    STORAGE_TYPE: STORAGE_TYPE || "local", // Default to local storage
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
-    AWS_REGION,
-    AWS_S3_BUCKET_NAME,
-    S3_FILE_BASE_URL,
+    // STORAGE_TYPE: STORAGE_TYPE || "local", // Removed
+    // AWS_ACCESS_KEY_ID, // Removed
+    // AWS_SECRET_ACCESS_KEY, // Removed
+    // AWS_REGION, // Removed
+    // AWS_S3_BUCKET_NAME, // Removed
+    // S3_FILE_BASE_URL, // Removed
     MEDIA_SERVER_URL,
-    maxFileSizeBytes: (parseInt(MAX_FILE_SIZE_MB || "10") * 1024 * 1024), // Default to 10MB if not set
-    allowedMimeTypesSet: new Set((ALLOWED_MIME_TYPES || "image/jpeg,image/png,video/mp4,audio/webm,application/pdf").split(',')),
+    // maxFileSizeBytes: (parseInt(MAX_FILE_SIZE_MB || "10") * 1024 * 1024), // Removed
+    // allowedMimeTypesSet: new Set((ALLOWED_MIME_TYPES || "image/jpeg,image/png,video/mp4,audio/webm,application/pdf").split(',')), // Removed
+    FILE_SERVICE_URL, // Added
 };
