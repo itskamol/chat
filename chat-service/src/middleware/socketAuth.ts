@@ -1,4 +1,3 @@
-import { Socket } from 'socket.io';
 import { ExtendedError } from 'socket.io/dist/namespace';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
@@ -28,7 +27,11 @@ export const socketAuthMiddleware = (
         const decoded = jwt.verify(token, config.JWT_SECRET) as TokenPayload;
         if (decoded && decoded.id) {
             // Store user data in socket.data instead of socket.user
-            socket.userId = decoded.id;
+            socket.data.user = {
+                id: decoded.id,
+                name: decoded.name,
+                email: decoded.email
+            };
             
             logger.info(`Socket authenticated for user: ${decoded.id}`);
             next();

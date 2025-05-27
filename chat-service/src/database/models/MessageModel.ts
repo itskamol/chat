@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { IMessage, MessageStatus, MessageType } from "@chat/shared";
+import { Message as IMessage, MessageStatus, MessageType } from "@chat/shared";
 
 const MessageSchema: Schema = new Schema(
     {
@@ -15,7 +15,7 @@ const MessageSchema: Schema = new Schema(
             type: String,
         required: false, // Not required if it's purely a file message, though often there's a caption
     },
-    messageType: {
+    type: {
         type: String,
         default: 'text', // 'text', 'image', 'video', 'audio', 'file'
             required: true,
@@ -38,7 +38,7 @@ const MessageSchema: Schema = new Schema(
     },
     storedFileName: { // Added for local storage to reliably link filename to message
         type: String,
-        required: false, // Only required if messageType is not 'text' and storage is 'local'
+        required: false, // Only required if type is not 'text' and storage is 'local'
     },
     originalMessage: { // Used if message field is repurposed, e.g. for a generic "File sent"
         type: String,
@@ -47,7 +47,7 @@ const MessageSchema: Schema = new Schema(
         status: {
             type: String,
             enum: Object.values(MessageStatus),
-            default: MessageStatus.NotDelivered,
+            default: MessageStatus.NOT_DELIVERED,
         },
     },
     {
@@ -61,19 +61,19 @@ MessageSchema.set('toJSON', { virtuals: true });
 MessageSchema.set('toObject', { virtuals: true });
 
 
-// Pre-save hook to ensure 'message' field is present if messageType is 'text'
+// Pre-save hook to ensure 'message' field is present if type is 'text'
 MessageSchema.pre<IMessage>('save', function (next) {
-    if (this.messageType === 'text' && !this.message) {
+    if (this.type === 'text' && !this.type) {
         return next(new Error('Message content is required for text messages.'));
     }
-    if (this.messageType !== 'text' && !this.fileUrl) {
+    if (this.type !== 'text' && !this.fileUrl) {
         // For non-text messages, fileUrl should ideally be present.
         // This could be made more stringent if needed.
         // For now, allow it, as fileUrl might be set after some processing.
     }
     // if there is a file, and no message, set message to something generic like "File: [fileName]"
-    if (this.fileUrl && !this.message && this.fileName) {
-        this.message = `File: ${this.fileName}`;
+    if (this.fileUrl && !this.content && this.fileName) {
+        this.content = `File: ${this.fileName}`;
     }
 
     next();

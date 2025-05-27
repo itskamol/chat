@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import ChatSidebar from '@/components/chat-sidebar';
 import ChatWindow from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
-import type { User, Message } from '@/lib/types';
+import type { Message } from '@/lib/types';
 import NoSSR from '@/components/NoSSR'; // Import NoSSR component
 import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
 import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
@@ -24,6 +24,7 @@ import {
     onMessageSent,
     onMessageError,
 } from '@/lib/socket';
+import { MessageStatus, MessageType, User } from '@chat/shared';
 
 interface DecodedToken {
     id: string;
@@ -70,14 +71,13 @@ export default function ChatPage() {
             }
 
             const user: User = {
-                _id: decodedToken.id,
+                id: decodedToken.id,
                 name: decodedToken.name,
                 email: decodedToken.email,
-                online: true,
             };
             setCurrentUser(user);
 
-            emitUserOnline(user._id);
+            emitUserOnline(user.id);
             emitGetOnlineUsers();
 
             const fetchContacts = async () => {
@@ -95,7 +95,7 @@ export default function ChatPage() {
                     }
                     const contactData = await response.json();
                     const filteredContacts = contactData.data.filter(
-                        (contact: User) => contact._id !== decodedToken.id
+                        (contact: User) => contact.id !== decodedToken.id
                     );
                     setContacts(filteredContacts);
                 } catch (err: any) {
@@ -120,20 +120,20 @@ export default function ChatPage() {
 
     // Effect for handling socket events
     useEffect(() => {
-        if (!currentUser?._id) return;
+        if (!currentUser?.id) return;
 
         const currentSocket = getSocket();
 
         const removeReceiveMessageListener = onReceiveMessage((message) => {
             const newMessageReceived: Message = {
                 ...message,
-                createdAt: new Date(message.createdAt),
+                createdAt: message.createdAt || new Date(),
             };
             if (
-                (newMessageReceived.senderId === currentUser._id &&
-                    newMessageReceived.receiverId === selectedContact?._id) ||
-                (newMessageReceived.senderId === selectedContact?._id &&
-                    newMessageReceived.receiverId === currentUser._id)
+                (newMessageReceived.senderId === currentUser.id &&
+                    newMessageReceived.receiverId === selectedContact?.id) ||
+                (newMessageReceived.senderId === selectedContact?.id &&
+                    newMessageReceived.receiverId === currentUser.id)
             ) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
@@ -147,14 +147,14 @@ export default function ChatPage() {
             }
         });
 
-        const removeOnlineUsersListener = onOnlineUsersList((users) => {
+        const removeOnlineUsersListener = onOnlineUsersList(({ users }) => {
             console.log('Online users list:', users);
             setOnlineUserIds(users.map((u) => u.userId));
             setContacts((prevContacts) =>
                 prevContacts.map((c) => ({
                     ...c,
                     online: users.some(
-                        (u) => u.userId === c._id && u.status === 'online'
+                        (u) => u.userId === c.id && u.status === 'online'
                     ),
                 }))
             );
@@ -163,7 +163,7 @@ export default function ChatPage() {
         const removeUserStatusListener = onUserStatusChanged((data) => {
             setContacts((prevContacts) =>
                 prevContacts.map((c) =>
-                    c._id === data.userId
+                    c.id === data.userId
                         ? {
                               ...c,
                               online: data.status === 'online',
@@ -181,8 +181,8 @@ export default function ChatPage() {
                     prev.filter((id) => id !== data.userId)
                 );
             }
-            if (selectedContact?._id === data.userId) {
-                setSelectedContact((prev) =>
+            if (selectedContact?.id === data.userId) {
+                setSelectedContact((prev: any) =>
                     prev
                         ? {
                               ...prev,
@@ -198,13 +198,13 @@ export default function ChatPage() {
             console.log('Message sent confirmation:', confirmation);
             setMessages((prev) =>
                 prev.map((m) =>
-                    m._id === optimisticMessageRef.current &&
+                    m.id === optimisticMessageRef.current &&
                     m.senderId === confirmation.senderId &&
                     m.receiverId === confirmation.receiverId &&
-                    m.message === confirmation.message
+                    m.content === confirmation.message
                         ? {
                               ...m,
-                              _id: confirmation._id,
+                              _id: confirmation.id,
                               delivered: confirmation.delivered,
                               createdAt: new Date(confirmation.createdAt),
                           }
@@ -219,7 +219,7 @@ export default function ChatPage() {
             // Potentially remove the optimistic message or mark it as failed
             if (optimisticMessageRef.current) {
                 setMessages((prev) =>
-                    prev.filter((m) => m._id !== optimisticMessageRef.current)
+                    prev.filter((m) => m.id !== optimisticMessageRef.current)
                 );
                 optimisticMessageRef.current = null;
             }
@@ -236,7 +236,7 @@ export default function ChatPage() {
 
     // Effect for fetching messages when a contact is selected
     useEffect(() => {
-        if (!selectedContact?._id || !currentUser?._id) {
+        if (!selectedContact?.id || !currentUser?.id) {
             setMessages([]);
             return;
         }
@@ -251,7 +251,7 @@ export default function ChatPage() {
                     return;
                 }
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/messages/get/${selectedContact._id}`,
+                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/messages/get/${selectedContact.id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -346,11 +346,11 @@ export default function ChatPage() {
                         );
                         setMessages((prev) =>
                             prev.map((m) =>
-                                m._id === tempId
+                                m.id === tempId
                                     ? {
                                           ...m,
                                           uploadProgress: progress,
-                                          status: 'uploading',
+                                          status: MessageStatus.PENDING,
                                       }
                                     : m
                             )
@@ -367,13 +367,13 @@ export default function ChatPage() {
                             );
                             setMessages((prev) =>
                                 prev.map((m) =>
-                                    m._id === tempId
+                                    m.id === tempId
                                         ? {
                                               ...savedMessage,
-                                              createdAt: new Date(
-                                                  savedMessage.createdAt
-                                              ),
-                                              status: 'sent',
+                                              createdAt:
+                                                  savedMessage.createdAt ||
+                                                  new Date(),
+                                              status: MessageStatus.SENT,
                                               uploadProgress: 100,
                                           }
                                         : m
@@ -417,7 +417,7 @@ export default function ChatPage() {
                     // Update UI to show retry
                     setMessages((prev) =>
                         prev.map((m) =>
-                            m._id === tempId
+                            m.id === tempId
                                 ? ({
                                       ...m,
                                       status: 'retrying',
@@ -434,8 +434,12 @@ export default function ChatPage() {
                     );
                     setMessages((prev) =>
                         prev.map((m) =>
-                            m._id === tempId
-                                ? { ...m, status: 'failed', uploadProgress: 0 }
+                            m.id === tempId
+                                ? {
+                                      ...m,
+                                      status: MessageStatus.FAILED,
+                                      uploadProgress: 0,
+                                  }
                                 : m
                         )
                     );
@@ -452,7 +456,7 @@ export default function ChatPage() {
         file?: File,
         fileType?: 'text' | 'image' | 'video' | 'audio' | 'file'
     ) => {
-        if (!currentUser?._id || !selectedContact?._id) return;
+        if (!currentUser?.id || !selectedContact?.id) return;
         if (!text.trim() && !file) return;
 
         const token = localStorage.getItem('jwt');
@@ -479,28 +483,23 @@ export default function ChatPage() {
 
             const formData = new FormData();
             formData.append('mediaFile', file, file.name);
-            formData.append('senderId', currentUser._id);
-            formData.append('receiverId', selectedContact._id);
-            formData.append('messageType', fileType);
+            formData.append('senderId', currentUser.id);
+            formData.append('receiverId', selectedContact.id);
+            formData.append('type', fileType);
             if (text.trim()) formData.append('originalMessage', text.trim());
 
             const optimisticFileMessage: Message = {
-                _id: tempId,
-                senderId: currentUser._id,
-                receiverId: selectedContact._id,
-                message: text.trim() || `Sending ${fileType}...`,
-                messageType: fileType as
-                    | 'text'
-                    | 'image'
-                    | 'video'
-                    | 'audio'
-                    | 'file',
+                id: tempId,
+                senderId: currentUser.id,
+                receiverId: selectedContact.id,
+                content: text.trim() || `Sending ${fileType}...`,
+                type: MessageType.FILE, // Use MessageType.FILE for file messages
                 fileName: file.name,
                 fileSize: file.size,
                 fileMimeType: file.type,
                 fileUrl: URL.createObjectURL(file),
                 createdAt: new Date(),
-                status: 'uploading',
+                status: MessageStatus.PENDING,
                 uploadProgress: 0,
             };
 
@@ -508,29 +507,29 @@ export default function ChatPage() {
                 ...prevMessages,
                 optimisticFileMessage,
             ]);
-            
+
             try {
                 await uploadFileWithRetry(formData, tempId);
             } catch (error) {
                 console.error('File upload error:', error);
                 setError('Failed to upload file. Please try again.');
-                setMessages((prev) => prev.filter((m) => m._id !== tempId));
+                setMessages((prev) => prev.filter((m) => m.id !== tempId));
             }
         } else if (text.trim()) {
             // Handle text message
             const messageData = {
-                senderId: currentUser._id,
-                receiverId: selectedContact._id,
-                message: text.trim(),
-                messageType: 'text',
+                senderId: currentUser.id,
+                receiverId: selectedContact.id,
+                content: text.trim(),
+                type: MessageType.TEXT, // Use MessageType.TEXT for text messages
             };
 
             const optimisticTextMessage: Message = {
-                _id: tempId,
+                id: tempId,
                 ...messageData,
-                messageType: 'text', // Explicitly set to a valid type
+                type: MessageType.TEXT, // Explicitly set to a valid type
                 createdAt: new Date(),
-                status: 'sent',
+                status: MessageStatus.SENT,
             };
             setMessages((prevMessages) => [
                 ...prevMessages,
@@ -543,7 +542,7 @@ export default function ChatPage() {
     const handleLogout = () => {
         localStorage.removeItem('jwt');
         if (currentUser) {
-            // emitUserOffline(currentUser._id); // If you implement this on backend
+            // emitUserOffline(currentUser.id); // If you implement this on backend
         }
         disconnectSocket();
         router.push('/');
@@ -567,7 +566,7 @@ export default function ChatPage() {
 
     const contactsWithOnlineStatus = contacts.map((contact) => ({
         ...contact,
-        online: onlineUserIds.includes(contact._id),
+        online: onlineUserIds.includes(contact.id),
     }));
 
     const handleAcceptCall = () => {
@@ -587,7 +586,7 @@ export default function ChatPage() {
 
     const handleStartVideoCall = (contact: User | null) => {
         if (contact) {
-            // videoCall.initiateCall(contact._id); // Use contact._id or a new unique room ID
+            // videoCall.initiateCall(contact.id); // Use contact.id or a new unique room ID
             setShowVideoCall(true); // Directly show the view for now
             console.log(`Starting video call with ${contact.name}`);
         }

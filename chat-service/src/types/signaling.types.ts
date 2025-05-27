@@ -1,3 +1,5 @@
+import { ConsumerParams, ProducerInfo } from "@chat/shared";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DtlsParameters = any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,14 +15,6 @@ export interface WebRtcTransportParams {
   iceCandidates: Record<string, unknown>[];
   dtlsParameters: DtlsParameters;
   sctpCapabilities?: SctpCapabilities;
-}
-
-export interface ConsumerParams {
-  id: string;
-  producerId: string;
-  kind: 'audio' | 'video';
-  rtpParameters: RtpParameters;
-  appData?: Record<string, unknown>;
 }
 
 export interface SignalingEvents {
@@ -60,17 +54,6 @@ export interface SignalingEvents {
   activeProducers: (payload: { producerId: string, kind: 'audio' | 'video', userId: string, appData?: Record<string, unknown> }[]) => void; // Sent upon joining a room with active producers
   transportProduceDone: (payload: { transportId: string; producerId: string }) => void; // Server confirms transport is ready for producing
   transportConsumeDone: (payload: { transportId: string; consumerId: string; producerId: string; kind: 'audio' | 'video'; rtpParameters: RtpParameters; appData?: Record<string, unknown> }) => void; // Server confirms transport is ready for consuming and provides consumer params
-}
-
-// For storing producer info on server-side (chat-service)
-export interface ProducerInfo {
-  producerId: string;
-  userId: string;
-  socketId: string;
-  kind: 'audio' | 'video';
-  rtpParameters: RtpParameters; // May not be needed here long-term, but good for reference
-  appData?: { type?: 'webcam' | 'screen', [key: string]: any }; // Updated appData
-  transportId: string; // Store the transportId associated with this producer
 }
 
 // For storing transport info on server-side (chat-service)

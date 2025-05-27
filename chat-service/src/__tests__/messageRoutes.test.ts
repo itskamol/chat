@@ -90,7 +90,7 @@ describe('File Upload and Serving API (/v1/messages & /media)', () => {
             expect(response.body.fileName).toBe(testFile.fileName);
             expect(response.body.fileMimeType).toBe(testFile.mimeType);
             expect(response.body.fileSize).toBe(testFile.fileSize);
-            expect(response.body.messageType).toBe('file'); // text/plain defaults to 'file'
+            expect(response.body.type).toBe('file'); // text/plain defaults to 'file'
             expect(response.body.fileUrl).toMatch(new RegExp(`/media/.+-${testFile.fileName.replace(/\s+/g, '_')}`));
             
             // Verify file exists in uploads (name will have unique prefix)

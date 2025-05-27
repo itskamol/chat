@@ -19,6 +19,7 @@ export interface ConsumerParams {
   kind: 'audio' | 'video';
   rtpParameters: RtpParameters; // RTP parameters for receiving
   appData?: Record<string, unknown>; // Application-specific data
+  track: MediaStreamTrack
 }
 
 export interface ProducerInfo {

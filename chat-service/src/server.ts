@@ -71,22 +71,22 @@ const socketMessageController = new SocketMessageController(
 io.use(socketAuthMiddleware);
 
 io.on('connection', async (socket: AuthenticatedSocket) => {
-    if (!socket.data.userId) {
+    if (!socket.data.user) {
         logger.error('Socket connected without user data');
         socket.disconnect();
         return;
     }
 
-    const userId = socket.userId;
+    const userId = socket.data.user.id;
     logger.info('Client connected', { socketId: socket.id, userId });
 
     // Setup connection
-    socketController.handleConnection(socket, userId);
+    socketController.handleConnection(socket);
 
     // Setup event handlers
     setupBasicHandlers(socket, socketController);
-    setupMessageHandlers(socket, socketMessageController, userId);
-    setupWebRTCHandlers(socket, webrtcController, userId);
+    setupMessageHandlers(socket, socketMessageController);
+    setupWebRTCHandlers(socket, webrtcController);
 });
 
 const exitHandler = () => {

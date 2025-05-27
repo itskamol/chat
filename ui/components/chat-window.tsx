@@ -307,7 +307,7 @@ export default function ChatWindow({
 
                                             const caption =
                                                 msg.originalMessage ||
-                                                (msg.messageType !== 'text' &&
+                                                (msg.type !== 'text' &&
                                                 msg.fileUrl
                                                     ? msg.message
                                                     : null);
@@ -324,7 +324,7 @@ export default function ChatWindow({
                                             let icon = null;
                                             let content = null;
 
-                                            switch (msg.messageType) {
+                                            switch (msg.type) {
                                                 case 'audio':
                                                     icon = (
                                                         <Headphones
@@ -513,26 +513,26 @@ export default function ChatWindow({
                                             return (
                                                 <div className="flex flex-col">
                                                     {icon &&
-                                                        msg.messageType !==
+                                                        msg.type !==
                                                             'file' && // Display icon for non-file types if caption or content exists
                                                         (caption ||
-                                                            msg.messageType ===
+                                                            msg.type ===
                                                                 'audio' ||
-                                                            msg.messageType ===
+                                                            msg.type ===
                                                                 'image' ||
-                                                            msg.messageType ===
+                                                            msg.type ===
                                                                 'video') && (
                                                             <div className="flex items-center mb-1 text-xs opacity-75">
                                                                 {icon}
                                                                 <span className="ml-1 truncate">
                                                                     {msg.fileName ||
-                                                                        (msg.messageType
-                                                                            ? msg.messageType
+                                                                        (msg.type
+                                                                            ? msg.type
                                                                                   .charAt(
                                                                                       0
                                                                                   )
                                                                                   .toUpperCase() +
-                                                                              msg.messageType.slice(
+                                                                              msg.type.slice(
                                                                                   1
                                                                               )
                                                                             : 'Media')}
@@ -583,7 +583,7 @@ export default function ChatWindow({
                                                         // This is a simplified retry that just re-triggers onSendMessage
                                                         // A more robust solution would store the File object or allow re-selection
                                                         if (
-                                                            msg.messageType !==
+                                                            msg.type !==
                                                                 'text' &&
                                                             msg.fileName &&
                                                             msg.fileMimeType &&
@@ -597,9 +597,9 @@ export default function ChatWindow({
                                                             console.warn(
                                                                 'Retry for failed file uploads needs more robust File handling.'
                                                             );
-                                                            // onSendMessage(msg.originalMessage || msg.message || '', /* Need File object here */, msg.messageType);
+                                                            // onSendMessage(msg.originalMessage || msg.message || '', /* Need File object here */, msg.type);
                                                         } else if (
-                                                            msg.messageType ===
+                                                            msg.type ===
                                                             'text'
                                                         ) {
                                                             onSendMessage(

@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
-import { RoomState, RoomParticipant } from '../types/room.types';
-import { ProducerInfo } from '../types/signaling.types';
 import { logger } from '../utils';
+import { RoomParticipant, RoomState } from '../types/room.types';
+import { ProducerInfo } from '@chat/shared';
 
 export class RoomService {
     private rooms: Map<string, RoomState>;
@@ -112,11 +112,17 @@ export class RoomService {
     }
 
     public getActiveProducers(roomId: string): ProducerInfo[] {
-        const room = this.getRoom(roomId);
-        if (!room) {
-            return [];
-        }
+    const room = this.rooms.get(roomId);
+    if (!room) return [];
 
-        return Array.from(room.producers.values());
-    }
+    return Array.from(room.producers.values()).map(producer => ({
+        producerId: producer.producerId,
+        userId: producer.userId, // You need to store this when creating the producer
+        kind: producer.kind,
+        appData: producer.appData,
+        socketId: producer.socketId, // You need to store this when creating the producer
+        rtpParameters: producer.rtpParameters,
+        transportId: producer.transportId, // You need to store this when creating the producer
+    }));
+}
 }

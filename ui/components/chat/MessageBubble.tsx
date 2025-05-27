@@ -27,7 +27,7 @@ export function MessageBubble({
   const renderFilePreview = () => {
     if (!message.fileUrl) return null;
 
-    switch (message.messageType) {
+    switch (message.type) {
       case 'image':
         return (
           <a

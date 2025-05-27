@@ -30,7 +30,7 @@ export default class FileController {
             }
 
             // Get message type and upload file
-            const messageType = FileService.getMessageType(req.file.mimetype);
+            const type = FileService.getMessageType(req.file.mimetype);
             const { fileUrl, s3Key } = await FileService.uploadFile(req.file);
 
             // Create and save message
@@ -40,7 +40,7 @@ export default class FileController {
                 chatId,
                 message: originalMessage || req.file.originalname,
                 originalMessage,
-                messageType,
+                type,
                 fileUrl,
                 fileName: req.file.originalname,
                 storedFileName: s3Key,

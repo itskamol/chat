@@ -2,7 +2,8 @@ import path from 'path';
 import fs from 'fs';
 import { logger } from '../utils';
 import config from '../config/config';
-import Message, { IMessage } from '../database/models/MessageModel';
+import Message from '../database/models/MessageModel';
+import { Message as IMessage } from '@chat/shared'; // Assuming IMessage is the interface for Message
 import { ApiError } from '../utils/apiError';
 
 export class FileAccessService {

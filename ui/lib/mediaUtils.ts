@@ -1,5 +1,3 @@
-import { WEBRTC_CONFIG } from '@/lib/constants';
-
 interface GetMediaConfig {
   audio?: boolean | MediaTrackConstraints;
   video?: boolean | MediaTrackConstraints;

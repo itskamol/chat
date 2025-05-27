@@ -17,7 +17,7 @@ export enum SocketEvent {
   GET_ONLINE_USERS = 'getOnlineUsers',
   ONLINE_USERS_LIST = 'onlineUsersList', // Standardized from onlineUsers
   USER_STATUS_CHANGED = 'userStatusChanged',
-
+  USER_ONLINE = "userOnline",
   // WebRTC Room Management & Signaling
   JOIN_ROOM = 'joinRoom',
   USER_JOINED = 'userJoined',

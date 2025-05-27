@@ -4,7 +4,7 @@ import {
     ErrorPayload, 
     TypingPayload,
     // No specific payload for getOnlineUsers from client
-} from '@shared'; // Assuming @shared is path-mapped in tsconfig
+} from '@chat/shared'; // Assuming @shared is path-mapped in tsconfig
 import { SocketController } from '../../controllers/SocketController';
 import { logger } from '../../utils';
 

@@ -9,7 +9,7 @@ import {
     SocketData,
     MessageType as SharedMessageType, // Enum for message type
     MessageStatus as SharedMessageStatus // Enum for message status
-} from '@shared';
+} from '@chat/shared';
 import { Server as SocketIOServer } from 'socket.io';
 import { Message as MessageModel } from '../database'; // Mongoose model
 import { logger } from '../utils';
@@ -23,7 +23,7 @@ export class MessageService {
         content: string, // Changed from 'message' to 'content' for consistency
         senderSocket: AuthenticatedSocket, // Use AuthenticatedSocket from @shared
         receiverSocketId?: string,
-        messageType?: SharedMessageType, // Use shared enum
+        type?: SharedMessageType, // Use shared enum
         tempId?: string // Added tempId from client
     ): Promise<{ success: boolean; error?: string; messageId?: string; tempId?: string }> {
         try {
@@ -31,11 +31,11 @@ export class MessageService {
                 senderId,
                 receiverId,
                 content: content, // Storing as 'content' in DB if model is updated, or map here
-                messageType: messageType || SharedMessageType.TEXT, // Default to TEXT
+                type: type || SharedMessageType.TEXT, // Default to TEXT
                 status: receiverSocketId ? SharedMessageStatus.DELIVERED : SharedMessageStatus.NOT_DELIVERED,
                 // fileUrl, fileName etc. would be set here if it's a file message
             });
-            // This part assumes the MessageModel uses 'content' and 'messageType' internally
+            // This part assumes the MessageModel uses 'content' and 'type' internally
             // or there's a mapping. For this refactor, we assume direct use or later model update.
             
             const savedMessage = await newMessage.save();
@@ -47,8 +47,7 @@ export class MessageService {
                 senderId,
                 receiverId,
                 content: savedMessage.content, 
-                type: savedMessage.messageType as SharedMessageType, // Cast if necessary
-                timestamp: savedMessage.createdAt, // Ensure this is a Date
+                type: savedMessage.type as SharedMessageType, // Cast if necessary
                 status: savedMessage.status as SharedMessageStatus, 
                 createdAt: savedMessage.createdAt,
                 updatedAt: savedMessage.updatedAt,
@@ -106,8 +105,7 @@ export class MessageService {
                 senderId: msg.senderId,
                 receiverId: msg.receiverId,
                 content: msg.content, // Assuming model uses 'content'
-                type: msg.messageType as SharedMessageType,
-                timestamp: msg.createdAt, // Ensure this is a Date
+                type: msg.type as SharedMessageType,
                 status: msg.status as SharedMessageStatus, // Cast if necessary
                 createdAt: msg.createdAt,
                 updatedAt: msg.updatedAt,
@@ -144,8 +142,7 @@ export class MessageService {
                     senderId: existingMsg.senderId,
                     receiverId: existingMsg.receiverId,
                     content: existingMsg.content,
-                    type: existingMsg.messageType as SharedMessageType,
-                    timestamp: existingMsg.createdAt,
+                    type: existingMsg.type as SharedMessageType,
                     status: existingMsg.status as SharedMessageStatus,
                     createdAt: existingMsg.createdAt,
                     updatedAt: existingMsg.updatedAt,
@@ -162,8 +159,7 @@ export class MessageService {
                 senderId: dbMessage.senderId,
                 receiverId: dbMessage.receiverId,
                 content: dbMessage.content,
-                type: dbMessage.messageType as SharedMessageType,
-                timestamp: dbMessage.createdAt,
+                type: dbMessage.type as SharedMessageType,
                 status: dbMessage.status as SharedMessageStatus,
                 createdAt: dbMessage.createdAt,
                 updatedAt: dbMessage.updatedAt,

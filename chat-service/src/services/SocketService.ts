@@ -9,7 +9,7 @@ import {
     OnlineUsersListPayload,
     UserTypingPayload,
     OnlineUser // Used within OnlineUsersListPayload
-} from '@shared';
+} from '@chat/shared';
 import { Server as SocketIOServer } from 'socket.io'; // Standard import
 
 export class SocketService {

@@ -28,7 +28,7 @@ The media messages feature allows users to send and receive not just text, but a
         *   If `STORAGE_TYPE=local`: Saves files to a local directory (`uploads/` within the service, mapped to `./chat_service_uploads` on the host via Docker volume).
         *   If `STORAGE_TYPE=s3`: Uploads files to an AWS S3 bucket using `aws-sdk`. Temporary local files created by Multer are deleted after successful S3 upload.
     *   **Database:** Saves message metadata to MongoDB, including:
-        *   `messageType` (e.g., 'audio', 'image', 'video', 'file', 'text').
+        *   `type` (e.g., 'audio', 'image', 'video', 'file', 'text').
         *   `fileUrl` (either a local path like `/media/unique-filename.ext` or an S3 URL).
         *   `fileName` (original name of the file).
         *   `storedFileName` (unique name on disk if local storage).
@@ -77,7 +77,7 @@ The UI also uses `NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE` (e.g., `http://localhos
     *   `mediaFile`: The actual file being uploaded.
     *   `senderId`: ID of the sender (usually derived from auth token on backend).
     *   `receiverId`: ID of the recipient.
-    *   `messageType`: Type of the media (e.g., 'audio', 'image', 'video', 'file').
+    *   `type`: Type of the media (e.g., 'audio', 'image', 'video', 'file').
     *   `originalMessage` (optional): Caption for the file.
 *   **Response (Success - 201 Created):** JSON object of the created message document from MongoDB, including the `fileUrl`.
 *   **Response (Error):**

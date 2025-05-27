@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 import { MediaServerClient } from './MediaServerClient';
 import { RoomService } from './RoomService';
-import { DtlsParameters, RtpCapabilities, RtpParameters, WebRtcTransportParams, ConsumerParams } from '../types/signaling.types';
 import { logger } from '../utils';
+import { ConsumerParams, DtlsParameters, RtpCapabilities, RtpParameters, WebRtcTransportParams } from '@chat/shared';
 
 export class WebRTCService {
     constructor(

@@ -1,5 +1,5 @@
-import { Socket } from 'socket.io';
-import { ProducerInfo, RoomState as BaseRoomState } from './signaling.types';
+import { ProducerInfo } from '@chat/shared';
+import { RoomState as BaseRoomState } from './signaling.types';
 
 export interface RoomParticipant {
     socketId: string;

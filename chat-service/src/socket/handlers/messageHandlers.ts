@@ -5,7 +5,7 @@ import {
     GetMessagesPayload,
     MarkMessageAsReadPayload,
     MessageType // Assuming MessageType might be used if not already part of SendMessagePayload
-} from '@shared';
+} from '@chat/shared';
 import { SocketMessageController } from '../../controllers/SocketMessageController';
 import { logger } from '../../utils'; // Added logger for safety
 
@@ -24,10 +24,7 @@ export const setupMessageHandlers = (
 
     // Message Events
     socket.on(SocketEvent.SEND_MESSAGE, (data: SendMessagePayload) => {
-        messageController.handleSendMessage(socket, {
-            senderId: userId,
-            // Ensure the controller and service layers consistently use 'content' and 'type'
-            // as defined in SendMessagePayload from @shared.
+        messageController.handleSendMessage(socket, userId, {
             content: data.content, 
             receiverId: data.receiverId,
             type: data.type,

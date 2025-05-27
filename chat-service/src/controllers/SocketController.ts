@@ -10,7 +10,7 @@ import {
     SocketEvent,
     OnlineUsersListPayload,
     TypingPayload // Base payload from client for typing
-} from '@shared';
+} from '@chat/shared';
 
 // Define the expected structure for typing data after augmentation in the handler
 interface AugmentedTypingData extends TypingPayload {

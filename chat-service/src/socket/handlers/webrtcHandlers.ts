@@ -21,7 +21,7 @@ import {
     ConsumeResponsePayload,
     StartScreenShareResponsePayload,
     StopScreenShareResponsePayload
-} from '@shared';
+} from '@chat/shared';
 import { WebRTCController } from '../../controllers/WebRTCController';
 import { logger } from '../../utils'; // Added logger for safety
 

@@ -9,7 +9,6 @@ export interface Message {
   chatId?: string;         // Optional: if messages are directly associated with a chat room ID
   content: string;        // Text content of the message or caption for a file
   type: MessageType;      // Use the MessageType enum
-  timestamp: Date;        // Should ideally represent the creation time
   status: MessageStatus;    // Use the MessageStatus enum
 
   fileUrl?: string;

@@ -9,19 +9,14 @@ import {
     InterServerEvents,
     SocketData,
     SocketEvent,
-    // Payloads for C2S events this controller handles
     SendMessagePayload,
     GetMessagesPayload,
     MarkMessageAsReadPayload,
-    // Payloads for S2C events this controller emits
     MessageErrorPayload,
     MessagesLoadedPayload,
-    // Shared types
-    Message as SharedMessage, 
-    MessageType as SharedMessageType,
-    // Import * as P to access P.EmptyPayload if it's used in callback types from shared
-} from '@shared';
-import * as P from '@shared/socket/payloads'; // To correctly reference P.EmptyPayload
+    EmptyPayload,
+} from '@chat/shared';
+import * as P from '@chat/shared'; // To correctly reference P.EmptyPayload
 
 export class SocketMessageController {
     constructor(
@@ -95,7 +90,7 @@ export class SocketMessageController {
         socket: AuthenticatedSocket, 
         userId: string, 
         data: MarkMessageAsReadPayload,
-        callback?: (response: MessageErrorPayload | P.EmptyPayload) => void // From shared ClientToServerEvents
+        callback?: (response: MessageErrorPayload | EmptyPayload) => void // From shared ClientToServerEvents
     ) {
         try {
             // Pass userId for validation in service (who is marking as read)

@@ -4,23 +4,7 @@ import { MESSAGE_TYPES, SOCKET_EVENTS } from './constants';
 import type {
     User,
     Message as SharedMessage,
-    MessageType,
-    MessageStatus,
-    SocketMessage as SharedSocketMessage,
-    FileUploadResponse,
-    ServerToClientEvents,
-    ClientToServerEvents,
 } from '@chat/shared';
-
-// Re-export shared types
-export type {
-    User,
-    MessageType,
-    MessageStatus,
-    FileUploadResponse,
-    ServerToClientEvents,
-    ClientToServerEvents,
-};
 
 // API Types
 export interface APIError extends Error {
@@ -38,9 +22,6 @@ export interface Message extends SharedMessage {
 export type SocketEventType =
     (typeof SOCKET_EVENTS)[keyof typeof SOCKET_EVENTS];
 
-export interface SocketMessage extends SharedSocketMessage {
-    type: SocketEventType;
-}
 
 // WebRTC Types
 export interface MediaDeviceInfo {
