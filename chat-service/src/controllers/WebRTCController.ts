@@ -3,288 +3,273 @@ import { RoomService } from '../services/RoomService';
 import { WebRTCService } from '../services/WebRTCService';
 import { logger } from '../utils';
 import {
-    RoomJoinRequest,
-    RoomJoinResponse,
-    RoomLeaveRequest,
-    RoomLeaveResponse,
-} from '../types/room.types';
-import { AuthenticatedSocket } from '@chat/shared';
+    AuthenticatedSocket,
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData,
+    SocketEvent,
+    // C2S Payload types (requests from client)
+    JoinRoomPayload,
+    LeaveRoomPayload,
+    GetRouterRtpCapabilitiesPayload,
+    CreateWebRtcTransportPayload,
+    ConnectWebRtcTransportPayload,
+    ProducePayload,
+    ConsumePayload,
+    StartScreenSharePayload,
+    StopScreenSharePayload,
+    // S2C Payload types (events emitted by this controller)
+    UserJoinedPayload,
+    UserLeftPayload,
+    NewProducerPayload,
+    // S2C Callback/Response payload types (for client requests)
+    JoinRoomResponsePayload,
+    LeaveRoomResponsePayload,
+    GetRouterRtpCapabilitiesResponsePayload,
+    CreateWebRtcTransportResponsePayload,
+    ConnectWebRtcTransportResponsePayload,
+    ProduceResponsePayload,
+    ConsumeResponsePayload,
+    StartScreenShareResponsePayload,
+    StopScreenShareResponsePayload,
+    // Shared WebRTC types
+    ProducerInfo,
+    RtpCapabilities,
+    WebRtcTransportParams,
+    DtlsParameters,
+    RtpParameters,
+    SctpCapabilities,
+    ConsumerParams
+} from '@shared';
 
 export class WebRTCController {
     constructor(
-        private io: SocketIOServer,
+        private io: SocketIOServer<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
         private roomService: RoomService,
         private webrtcService: WebRTCService
     ) {}
 
+    // Signature: (socket, userId, payload)
     public async handleJoinRoom(
         socket: AuthenticatedSocket,
-        { roomId }: RoomJoinRequest,
-        userId: string
-    ): Promise<RoomJoinResponse> {
+        userId: string,
+        payload: JoinRoomPayload
+    ): Promise<JoinRoomResponsePayload> {
         try {
-            // Join the room
-            this.roomService.joinRoom(socket, roomId, userId);
+            this.roomService.joinRoom(socket, payload.roomId, userId);
 
-            // Notify other users in the room
-            socket.to(roomId).emit('userJoined', {
+            const user = socket.data.user; // For name, avatar if available
+            const userJoinedPayload: UserJoinedPayload = {
                 userId,
-                roomId,
-            });
+                roomId: payload.roomId,
+                name: user?.name,
+                avatarUrl: user?.avatarUrl,
+                socketId: socket.id
+            };
+            socket.to(payload.roomId).emit(SocketEvent.USER_JOINED, userJoinedPayload);
 
-            // Get list of active producers to send to the new participant
             const activeProducers = this.roomService
-                .getActiveProducers(roomId)
-                .map((p) => ({
+                .getActiveProducers(payload.roomId)
+                .map((p: ProducerInfo) => ({ // Ensure p is ProducerInfo from @shared
                     producerId: p.producerId,
                     userId: p.userId,
                     kind: p.kind,
                     appData: p.appData,
+                    // Map other fields if ProducerInfo in RoomService is different from shared ProducerInfo
                 }));
-
+            
             logger.info(
-                `User ${userId} joined room ${roomId}. Active producers: ${activeProducers.length}`,
+                `User ${userId} joined room ${payload.roomId}. Active producers: ${activeProducers.length}`,
                 { socketId: socket.id }
             );
-
             return { activeProducers };
-        } catch (error) {
-            logger.error(
-                `Error in joinRoom for user ${userId}, room ${roomId}:`,
-                error
-            );
-            return { error: 'Failed to join room' };
+        } catch (error: any) {
+            logger.error(`Error in joinRoom for user ${userId}, room ${payload.roomId}:`, error);
+            return { error: 'Failed to join room: ' + error.message };
         }
     }
 
     public async handleLeaveRoom(
         socket: AuthenticatedSocket,
-        { roomId }: RoomLeaveRequest,
-        userId: string
-    ): Promise<RoomLeaveResponse> {
+        userId: string,
+        payload: LeaveRoomPayload
+    ): Promise<LeaveRoomResponsePayload> {
         try {
-            await this.roomService.leaveRoom(socket, roomId, userId);
-
-            // Notify other users in the room if it's an explicit leave
-            socket.to(roomId).emit('userLeft', {
-                userId,
-                roomId
-            });
-
+            await this.roomService.leaveRoom(socket, payload.roomId, userId);
+            const userLeftPayload: UserLeftPayload = { userId, roomId: payload.roomId, socketId: socket.id };
+            socket.to(payload.roomId).emit(SocketEvent.USER_LEFT, userLeftPayload);
             return {};
-        } catch (error) {
-            logger.error(
-                `Error in leaveRoom for user ${userId}, room ${roomId}:`,
-                error
-            );
-            return { error: 'Failed to leave room' };
+        } catch (error: any) {
+            logger.error(`Error in leaveRoom for user ${userId}, room ${payload.roomId}:`, error);
+            return { error: 'Failed to leave room: ' + error.message };
         }
     }
 
     public async handleGetRtpCapabilities(
         socket: AuthenticatedSocket,
-        { roomId }: { roomId: string },
-        userId: string
-    ) {
+        userId: string, // Though not directly used by webrtcService method here, good for consistency
+        payload: GetRouterRtpCapabilitiesPayload
+    ): Promise<GetRouterRtpCapabilitiesResponsePayload> {
         try {
-            return await this.webrtcService.handleGetRtpCapabilities(
-                socket,
-                roomId
-            );
-        } catch (error) {
-            return { error: 'Failed to get router RTP capabilities' };
+            const rtpCapabilities = await this.webrtcService.handleGetRtpCapabilities(socket, payload.roomId);
+            // Assuming handleGetRtpCapabilities returns RtpCapabilities directly or throws
+            return { rtpCapabilities };
+        } catch (error: any) {
+            logger.error(`Error getting RTP capabilities for room ${payload.roomId}:`, error);
+            return { error: 'Failed to get router RTP capabilities: ' + error.message };
         }
     }
 
     public async handleCreateTransport(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            producing,
-            consuming,
-            sctpCapabilities,
-        }: {
-            roomId: string;
-            producing: boolean;
-            consuming: boolean;
-            sctpCapabilities?: any;
-        },
-        userId: string
-    ) {
+        userId: string,
+        payload: CreateWebRtcTransportPayload
+    ): Promise<CreateWebRtcTransportResponsePayload> {
         try {
-            return await this.webrtcService.handleCreateTransport(
+            const transportOptions = await this.webrtcService.handleCreateTransport(
                 socket,
-                roomId,
-                producing,
-                consuming,
-                sctpCapabilities
+                payload.roomId,
+                payload.producing,
+                payload.consuming,
+                payload.sctpCapabilities
             );
-        } catch (error) {
-            return { error: 'Failed to create WebRTC transport' };
+            return { transportOptions };
+        } catch (error: any) {
+            logger.error(`Error creating transport for room ${payload.roomId}:`, error);
+            return { error: 'Failed to create WebRTC transport: ' + error.message };
         }
     }
 
     public async handleConnectTransport(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            transportId,
-            dtlsParameters,
-        }: {
-            roomId: string;
-            transportId: string;
-            dtlsParameters: any;
-        },
-        userId: string
-    ) {
+        userId: string,
+        payload: ConnectWebRtcTransportPayload
+    ): Promise<ConnectWebRtcTransportResponsePayload> {
         try {
             await this.webrtcService.handleConnectTransport(
                 socket,
-                roomId,
-                transportId,
-                dtlsParameters
+                payload.roomId,
+                payload.transportId,
+                payload.dtlsParameters
             );
-            return {};
-        } catch (error) {
-            return { error: 'Failed to connect WebRTC transport' };
+            return {}; // Success is an empty object for this response
+        } catch (error: any) {
+            logger.error(`Error connecting transport ${payload.transportId} for room ${payload.roomId}:`, error);
+            return { error: 'Failed to connect WebRTC transport: ' + error.message };
         }
     }
 
     public async handleProduce(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            transportId,
-            kind,
-            rtpParameters,
-            appData,
-        }: {
-            roomId: string;
-            transportId: string;
-            kind: 'audio' | 'video';
-            rtpParameters: any;
-            appData?: any;
-        },
-        userId: string
-    ) {
+        userId: string,
+        payload: ProducePayload
+    ): Promise<ProduceResponsePayload> {
         try {
             const producerId = await this.webrtcService.handleProduce(
                 socket,
-                roomId,
-                transportId,
-                kind,
-                rtpParameters,
-                appData,
-                userId
+                payload.roomId,
+                payload.transportId,
+                payload.kind,
+                payload.rtpParameters,
+                payload.appData,
+                userId // Pass userId to service
             );
 
-            // Notify other participants about the new producer
-            socket.to(roomId).emit('newProducer', {
+            const user = socket.data.user;
+            const newProducerPayload: NewProducerPayload = {
+                roomId: payload.roomId,
                 producerId,
                 userId,
-                kind,
-                appData,
+                name: user?.name,
+                avatarUrl: user?.avatarUrl,
+                kind: payload.kind,
+                appData: payload.appData,
                 socketId: socket.id,
-            });
-
+            };
+            socket.to(payload.roomId).emit(SocketEvent.NEW_PRODUCER, newProducerPayload);
             return { producerId };
-        } catch (error) {
-            return { error: `Failed to produce ${kind}` };
+        } catch (error: any) {
+            logger.error(`Error producing ${payload.kind} for room ${payload.roomId}:`, error);
+            return { error: `Failed to produce ${payload.kind}: ` + error.message };
         }
     }
-
+    
     public async handleConsume(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            transportId,
-            producerId,
-            rtpCapabilities,
-        }: {
-            roomId: string;
-            transportId: string;
-            producerId: string;
-            rtpCapabilities: any;
-        },
-        userId: string
-    ) {
+        userId: string, // User performing the consume action
+        payload: ConsumePayload
+    ): Promise<ConsumeResponsePayload> {
         try {
-            return await this.webrtcService.handleConsume(
+            const consumerOptions = await this.webrtcService.handleConsume(
                 socket,
-                roomId,
-                transportId,
-                producerId,
-                rtpCapabilities,
-                userId
+                payload.roomId,
+                payload.transportId,
+                payload.producerId,
+                payload.rtpCapabilities,
+                userId // Pass consuming user's ID
             );
-        } catch (error) {
-            return { error: 'Failed to consume producer' };
+            return { consumerOptions };
+        } catch (error: any) {
+            logger.error(`Error consuming producer ${payload.producerId} for room ${payload.roomId}:`, error);
+            return { error: 'Failed to consume producer: ' + error.message };
         }
     }
 
-    public async handleScreenShare(
+    public async handleStartScreenShare(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            transportId,
-            kind,
-            rtpParameters,
-            appData,
-        }: {
-            roomId: string;
-            transportId: string;
-            kind: 'video';
-            rtpParameters: any;
-            appData: { type: 'screen' } & Record<string, any>;
-        },
-        userId: string
-    ) {
+        userId: string,
+        payload: StartScreenSharePayload
+    ): Promise<StartScreenShareResponsePayload> {
         try {
-            const producerId = await this.webrtcService.handleScreenShare(
+            // Assuming kind is 'video' and appData includes { type: 'screen' }
+            const producerId = await this.webrtcService.handleScreenShare( // Or a more generic 'handleProduce' if screen share is not special in service
                 socket,
-                roomId,
-                transportId,
-                kind,
-                rtpParameters,
-                appData,
+                payload.roomId,
+                payload.transportId,
+                'video', // kind is video for screen share
+                payload.rtpParameters,
+                payload.appData || { type: 'screen' }, // Ensure appData indicates screen share
                 userId
             );
-
-            // Notify others about new screen share producer
-            socket.to(roomId).emit('newProducer', {
+            
+            const user = socket.data.user;
+            const newProducerPayload: NewProducerPayload = {
+                roomId: payload.roomId,
                 producerId,
                 userId,
-                kind,
-                appData: { ...appData, type: 'screen' },
+                name: user?.name,
+                avatarUrl: user?.avatarUrl,
+                kind: 'video',
+                appData: payload.appData || { type: 'screen' },
                 socketId: socket.id,
-            });
-
+            };
+            socket.to(payload.roomId).emit(SocketEvent.NEW_PRODUCER, newProducerPayload);
             return { producerId };
-        } catch (error) {
-            return { error: 'Failed to start screen share' };
+        } catch (error: any) {
+            logger.error(`Error starting screen share for room ${payload.roomId}:`, error);
+            return { error: 'Failed to start screen share: ' + error.message };
         }
     }
 
     public async handleStopScreenShare(
         socket: AuthenticatedSocket,
-        {
-            roomId,
-            producerId,
-        }: {
-            roomId: string;
-            producerId: string;
-        },
-        userId: string
-    ) {
+        userId: string, // User stopping their own screen share
+        payload: StopScreenSharePayload
+    ): Promise<StopScreenShareResponsePayload> {
         try {
-            await this.webrtcService.handleStopScreenShare(
+            await this.webrtcService.handleStopScreenShare( // This service method might also emit PRODUCER_CLOSED
                 socket,
-                roomId,
-                producerId
+                payload.roomId,
+                payload.producerId
+                // userId might be needed in service for validation
             );
+            // PRODUCER_CLOSED event for this producerId should be emitted by WebRTCService or RoomService
+            // after successfully stopping/closing the producer.
             return {};
-        } catch (error) {
-            return { error: 'Failed to stop screen share' };
+        } catch (error: any) {
+            logger.error(`Error stopping screen share producer ${payload.producerId} for room ${payload.roomId}:`, error);
+            return { error: 'Failed to stop screen share: ' + error.message };
         }
     }
 }
