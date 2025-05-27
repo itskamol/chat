@@ -4,24 +4,31 @@ import app from './app';
 import config from './config/config';
 import { logger } from './utils';
 import { connectDB } from './database';
-import { socketAuthMiddleware } from './middleware/socketAuth';
 
-// Import services and controllers
+// Services
 import { MediaServerClient } from './services/MediaServerClient';
 import { RoomService } from './services/RoomService';
 import { WebRTCService } from './services/WebRTCService';
 import { SocketService } from './services/SocketService';
 import { MessageService } from './services/MessageService';
+
+// Controllers
 import { WebRTCController } from './controllers/WebRTCController';
 import { SocketController } from './controllers/SocketController';
 import { SocketMessageController } from './controllers/SocketMessageController';
-import {
+
+// Socket and Auth
+import { socketAuthMiddleware } from './middleware/socketAuth';
+import { setupBasicHandlers } from './socket/handlers/basicHandlers';
+import { setupMessageHandlers } from './socket/handlers/messageHandlers';
+import { setupWebRTCHandlers } from './socket/handlers/webrtcHandlers';
+import type {
     ClientToServerEvents,
     ServerToClientEvents,
     InterServerEvents,
     SocketData,
     AuthenticatedSocket,
-} from './types/socket.types';
+} from '@chat/shared';
 
 // Initialize server and database
 let server: Server;
@@ -31,28 +38,27 @@ server = app.listen(config.PORT, () => {
     logger.info(`Server is running on port ${config.PORT}`);
 });
 
-// Initialize Socket.IO server
+// Initialize core services that don't depend on Socket.IO
+const mediaServerClient = new MediaServerClient();
+const roomService = new RoomService();
+const webrtcService = new WebRTCService(roomService, mediaServerClient);
+
+// Initialize Socket.IO first without controllers
 const io = new SocketIOServer<
     ClientToServerEvents,
     ServerToClientEvents,
     InterServerEvents,
     SocketData
 >(server, {
-    cors: {
-        origin: 'http://localhost:3000',
-        methods: ['GET', 'POST'],
-    },
+    cors: { origin: 'http://localhost:3000', methods: ['GET', 'POST'] },
     transports: ['websocket', 'polling'],
 });
 
-// Initialize services
-const mediaServerClient = new MediaServerClient();
-const roomService = new RoomService();
-const webrtcService = new WebRTCService(roomService, mediaServerClient);
+// Initialize services that depend on Socket.IO
 const socketService = new SocketService(io);
 const messageService = new MessageService(io);
 
-// Initialize controllers
+// Initialize controllers with all their dependencies
 const webrtcController = new WebRTCController(io, roomService, webrtcService);
 const socketController = new SocketController(io, socketService);
 const socketMessageController = new SocketMessageController(
@@ -61,175 +67,28 @@ const socketMessageController = new SocketMessageController(
     socketService
 );
 
-// Apply global socket authentication middleware
+// Setup socket handlers
 io.use(socketAuthMiddleware);
 
-// Socket.IO connection handling
 io.on('connection', async (socket: AuthenticatedSocket) => {
-    logger.info('Client connected', {
-        socketId: socket.id,
-        userId: socket.data.user?.id,
-    });
-
-    if (!socket.data.user) {
+    if (!socket.data.userId) {
         logger.error('Socket connected without user data');
         socket.disconnect();
         return;
     }
 
-    const userId = socket.data.user.id;
+    const userId = socket.userId;
+    logger.info('Client connected', { socketId: socket.id, userId });
 
-    // Generic error handler
-    socket.on('error', (error) => {
-        logger.error('Socket error:', error);
-        socket.emit('error', { message: 'Internal server error' });
-    });
+    // Setup connection
+    socketController.handleConnection(socket, userId);
 
-    // Disconnect
-    socket.on('disconnect', () => {
-        socketController.handleDisconnect(socket);
-    });
-
-    // Basic socket events
-    socket.on('getOnlineUsers', () => {
-        socketController.handleGetOnlineUsers(socket);
-    });
-
-    socket.on('typing', (data) => {
-        socketController.handleTyping(socket, { ...data, senderId: userId });
-    });
-
-    // Message Events
-    socket.on('sendMessage', (data) => {
-        socketMessageController.handleSendMessage(socket, {
-            senderId: userId,
-            message: data.content,
-            receiverId: data.receiverId,
-            messageType: data.messageType,
-        });
-    });
-
-    // socket.on('getMessages', (data) => {
-    //     socketMessageController.handleGetMessages(socket, { ...data, userId });
-    // });
-
-    // socket.on('markMessageAsRead', (data) => {
-    //     socketMessageController.handleMarkMessageAsRead(socket, {
-    //         ...data,
-    //     });
-    // });
-
-    // WebRTC Events
-    socket.on('joinRoom', async ({ roomId }, callback) => {
-        const result = await webrtcController.handleJoinRoom(
-            socket,
-            { roomId },
-            userId
-        );
-        callback(result);
-    });
-
-    socket.on('leaveRoom', async ({ roomId }, callback) => {
-        const result = await webrtcController.handleLeaveRoom(
-            socket,
-            { roomId },
-            userId
-        );
-        if (callback) callback(result);
-    });
-
-    socket.on('getRouterRtpCapabilities', async ({ roomId }, callback) => {
-        const result = await webrtcController.handleGetRtpCapabilities(
-            socket,
-            { roomId },
-            userId
-        );
-        callback(result);
-    });
-
-    socket.on(
-        'createWebRtcTransport',
-        async (
-            { roomId, producing, consuming, sctpCapabilities },
-            callback
-        ) => {
-            const result = await webrtcController.handleCreateTransport(
-                socket,
-                { roomId, producing, consuming, sctpCapabilities },
-                userId
-            );
-            callback(result);
-        }
-    );
-
-    socket.on(
-        'connectWebRtcTransport',
-        async ({ roomId, transportId, dtlsParameters }, callback) => {
-            const result = await webrtcController.handleConnectTransport(
-                socket,
-                { roomId, transportId, dtlsParameters },
-                userId
-            );
-            callback(result);
-        }
-    );
-
-    socket.on(
-        'produce',
-        async (
-            { roomId, transportId, kind, rtpParameters, appData },
-            callback
-        ) => {
-            const result = await webrtcController.handleProduce(
-                socket,
-                { roomId, transportId, kind, rtpParameters, appData },
-                userId
-            );
-            callback(result);
-        }
-    );
-
-    socket.on(
-        'consume',
-        async (
-            { roomId, transportId, producerId, rtpCapabilities },
-            callback
-        ) => {
-            const result = await webrtcController.handleConsume(
-                socket,
-                { roomId, transportId, producerId, rtpCapabilities },
-                userId
-            );
-            callback(result);
-        }
-    );
-
-    socket.on(
-        'startScreenShare',
-        async (
-            { roomId, transportId, kind, rtpParameters, appData },
-            callback
-        ) => {
-            const result = await webrtcController.handleScreenShare(
-                socket,
-                { roomId, transportId, kind, rtpParameters, appData },
-                userId
-            );
-            callback(result);
-        }
-    );
-
-    socket.on('stopScreenShare', async ({ roomId, producerId }, callback) => {
-        const result = await webrtcController.handleStopScreenShare(
-            socket,
-            { roomId, producerId },
-            userId
-        );
-        callback(result);
-    });
+    // Setup event handlers
+    setupBasicHandlers(socket, socketController);
+    setupMessageHandlers(socket, socketMessageController, userId);
+    setupWebRTCHandlers(socket, webrtcController, userId);
 });
 
-// ...existing code...
 const exitHandler = () => {
     if (server) {
         server.close(() => {

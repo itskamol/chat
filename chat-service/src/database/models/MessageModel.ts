@@ -1,26 +1,5 @@
-import mongoose, { Schema, Document } from "mongoose";
-
-enum Status {
-    NotDelivered = "NotDelivered",
-    Delivered = "Delivered",
-    Seen = "Seen",
-}
-
-export interface IMessage extends Document {
-    senderId: string;
-    receiverId: string;
-    message: string;
-    status: Status;
-    fileUrl?: string; // URL to the file if messageType is not 'text'
-    fileName?: string; // Name of the file, if applicable
-    fileMimeType?: string; // MIME type of the file, if applicable
-    fileSize?: number; // Size of the file in bytes, if applicable
-    storedFileName?: string; // For local storage, the filename used on disk
-    originalMessage?: string; // Original message text if 'message' is repurposed for file messages
-    messageType: 'text' | 'image' | 'video' | 'audio' | 'file'; // Type of the message
-    createdAt: Date;
-    updatedAt: Date;
-}
+import mongoose, { Schema } from "mongoose";
+import { IMessage, MessageStatus, MessageType } from "@chat/shared";
 
 const MessageSchema: Schema = new Schema(
     {
@@ -67,8 +46,8 @@ const MessageSchema: Schema = new Schema(
     },
         status: {
             type: String,
-            enum: Object.values(Status),
-            default: Status.NotDelivered,
+            enum: Object.values(MessageStatus),
+            default: MessageStatus.NotDelivered,
         },
     },
     {

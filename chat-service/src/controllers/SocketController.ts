@@ -1,7 +1,7 @@
-import { Socket } from 'socket.io';
 import { Server as SocketIOServer } from 'socket.io';
 import { SocketService } from '../services/SocketService';
 import { logger } from '../utils';
+import { AuthenticatedSocket } from '@chat/shared';
 
 export class SocketController {
     constructor(
@@ -9,7 +9,7 @@ export class SocketController {
         private socketService: SocketService
     ) {}
 
-    public handleConnection(socket: Socket, userId: string): void {
+    public handleConnection(socket: AuthenticatedSocket, userId: string): void {
         try {
             // Store user's socket and update online status
             this.socketService.setUserSocket(socket, userId);
@@ -17,7 +17,7 @@ export class SocketController {
             // Notify others that user is online
             this.socketService.notifyUserStatusChanged(userId, 'online', new Date());
 
-            socket.emit('onlineUsersList', this.socketService.getOnlineUsers());
+            socket.emit('onlineUsers', this.socketService.getOnlineUsers());
 
             logger.info(`User ${userId} connected`, { socketId: socket.id });
         } catch (error) {
@@ -25,7 +25,7 @@ export class SocketController {
         }
     }
 
-    public handleDisconnect(socket: Socket): void {
+    public handleDisconnect(socket: AuthenticatedSocket): void {
         try {
             const userId = this.socketService.getUserId(socket);
             if (userId) {
@@ -40,7 +40,7 @@ export class SocketController {
         }
     }
 
-    public handleGetOnlineUsers(socket: Socket): void {
+    public handleGetOnlineUsers(socket: AuthenticatedSocket): void {
         try {
             this.socketService.notifyOnlineUsers(socket);
         } catch (error) {
@@ -48,7 +48,7 @@ export class SocketController {
         }
     }
 
-    public handleTyping(socket: Socket, data: { senderId: string; receiverId: string; isTyping: boolean }): void {
+    public handleTyping(socket: AuthenticatedSocket, data: { senderId: string; receiverId: string; isTyping: boolean }): void {
         try {
             this.socketService.forwardTypingStatus(data.senderId, data.receiverId, data.isTyping);
         } catch (error) {

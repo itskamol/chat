@@ -9,7 +9,7 @@ interface UseAudioRecorderOutput {
     resetAudioBlob: () => void;
 }
 
-const useAudioRecorder = (): UseAudioRecorderOutput => {
+export const useAudioRecorder = (): UseAudioRecorderOutput => {
     const [isRecording, setIsRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
     const [recordingTime, setRecordingTime] = useState(0);
@@ -185,5 +185,3 @@ const useAudioRecorder = (): UseAudioRecorderOutput => {
         resetAudioBlob,
     };
 };
-
-export default useAudioRecorder;

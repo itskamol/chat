@@ -3,7 +3,7 @@ import { ExtendedError } from 'socket.io/dist/namespace';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 import { logger } from '../utils';
-import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData } from '../types/socket.types';
+import { AuthenticatedSocket } from '@chat/shared';
 
 interface TokenPayload {
     id: string;
@@ -14,7 +14,7 @@ interface TokenPayload {
 }
 
 export const socketAuthMiddleware = (
-    socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
+    socket: AuthenticatedSocket,
     next: (err?: ExtendedError) => void
 ) => {
     try {
@@ -28,11 +28,8 @@ export const socketAuthMiddleware = (
         const decoded = jwt.verify(token, config.JWT_SECRET) as TokenPayload;
         if (decoded && decoded.id) {
             // Store user data in socket.data instead of socket.user
-            socket.data.user = {
-                id: decoded.id,
-                name: decoded.name,
-                email: decoded.email
-            };
+            socket.userId = decoded.id;
+            
             logger.info(`Socket authenticated for user: ${decoded.id}`);
             next();
         } else {

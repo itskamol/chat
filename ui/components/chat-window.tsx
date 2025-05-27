@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { format } from 'date-fns';
-import useAudioRecorder from '@/hooks/useAudioRecorder';
+import { useAudioRecorder } from '@/hooks/useAudioRecorder';
 
 interface ChatWindowProps {
     currentUser: User | null;
@@ -289,7 +289,7 @@ export default function ChatWindow({
                                     >
                                         {/* Refactored Message content rendering */}
                                         {(() => {
-                                            console.log(msg.fileUrl)
+                                            console.log(msg.fileUrl);
                                             const chatServiceBaseUrl =
                                                 process.env
                                                     .NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE;

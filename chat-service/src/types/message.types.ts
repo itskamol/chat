@@ -1,7 +1,6 @@
 import { Request } from "express";
 import { IUser } from "../middleware";
-
-export type MessageType = 'text' | 'image' | 'video' | 'audio' | 'file';
+import { MessageType } from "@chat/shared";
 
 export interface FileUploadOptions {
     file: Express.Multer.File;

@@ -1,4 +1,4 @@
-import { Socket } from 'socket.io';
+import { AuthenticatedSocket } from '@chat/shared';
 import { Server as SocketIOServer } from 'socket.io';
 
 export class SocketService {
@@ -10,7 +10,7 @@ export class SocketService {
         this.onlineUsers = new Map();
     }
 
-    public setUserSocket(socket: Socket, userId: string): void {
+    public setUserSocket(socket: AuthenticatedSocket, userId: string): void {
         this.socketToUserIdMap.set(socket.id, userId);
         this.onlineUsers.set(userId, {
             userId,
@@ -19,7 +19,7 @@ export class SocketService {
         });
     }
 
-    public removeUserSocket(socket: Socket): void {
+    public removeUserSocket(socket: AuthenticatedSocket): void {
         const userId = this.getUserId(socket);
         if (userId) {
             this.socketToUserIdMap.delete(socket.id);
@@ -27,7 +27,7 @@ export class SocketService {
         }
     }
 
-    public getUserId(socket: Socket): string | undefined {
+    public getUserId(socket: AuthenticatedSocket): string | undefined {
         return this.socketToUserIdMap.get(socket.id);
     }
 
@@ -43,7 +43,7 @@ export class SocketService {
         this.io.emit('userStatusChanged', { userId, status, lastSeen });
     }
 
-    public notifyOnlineUsers(socket: Socket): void {
+    public notifyOnlineUsers(socket: AuthenticatedSocket): void {
         socket.emit('onlineUsersList', this.getOnlineUsers());
     }
 

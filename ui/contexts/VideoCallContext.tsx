@@ -17,8 +17,8 @@ import {
     emitLeaveRoom,
     onNewProducer,
     onProducerClosed,
-    onUserJoinedRoom,
-    onUserLeftRoom,
+    onUserJoined,
+    onUserLeft,
     onActiveProducers,
     // Assuming socket is managed or accessible, e.g. via getSocket()
     // If not, socket instance needs to be passed or handled here.
@@ -941,13 +941,17 @@ export const VideoCallProvider: React.FC<VideoCallProviderProps> = ({
     );
 
     const _handleUserJoined = useCallback(
-        (payload: { userId: string; socketId: string; name?: string }) => {
-            console.log('User joined room:', payload);
-            if (payload.userId === localUserId) return;
+        (data: {
+            userId: string;
+            socketId?: string; // Made socketId optional
+            name?: string;
+        }) => {
+            console.log('User joined room:', data);
+            if (data.userId === localUserId) return;
             addParticipant({
-                id: payload.userId,
-                name: payload.name || `User ${payload.userId.substring(0, 6)}`,
-                socketId: payload.socketId,
+                id: data.userId,
+                name: data.name || `User ${data.userId.substring(0, 6)}`,
+                socketId: data.socketId, // This will be undefined if not provided
                 audioEnabled: false,
                 videoEnabled: false,
                 isScreenSharing: false,
@@ -957,7 +961,7 @@ export const VideoCallProvider: React.FC<VideoCallProviderProps> = ({
     );
 
     const _handleUserLeft = useCallback(
-        (payload: { userId: string; socketId: string }) => {
+        (payload: { userId: string; socketId?: string }) => {
             console.log('User left room:', payload);
             if (payload.userId === localUserId) return;
             removeParticipant(payload.userId);
@@ -1019,8 +1023,8 @@ export const VideoCallProvider: React.FC<VideoCallProviderProps> = ({
             );
             cleanupFunctions.push(onNewProducer(_handleNewProducer));
             cleanupFunctions.push(onProducerClosed(_handleProducerClosed));
-            cleanupFunctions.push(onUserJoinedRoom(_handleUserJoined));
-            cleanupFunctions.push(onUserLeftRoom(_handleUserLeft));
+            cleanupFunctions.push(onUserJoined(_handleUserJoined));
+            cleanupFunctions.push(onUserLeft(_handleUserLeft));
             cleanupFunctions.push(onActiveProducers(_handleActiveProducers));
         }
         return () => {

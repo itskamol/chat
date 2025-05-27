@@ -59,7 +59,7 @@ export class MessageService {
 
     public async getMessages(
         userId: string,
-        contactId: string,
+        receiverId: string,
         page = 1,
         limit = 50
     ) {
@@ -67,8 +67,8 @@ export class MessageService {
             const skip = (page - 1) * limit;
             const messages = await Message.find({
                 $or: [
-                    { senderId: userId, receiverId: contactId },
-                    { senderId: contactId, receiverId: userId }
+                    { senderId: userId, receiverId: receiverId },
+                    { senderId: receiverId, receiverId: userId }
                 ]
             })
                 .sort({ createdAt: -1 })

@@ -1,7 +1,5 @@
 'use client';
 
-import type React from 'react';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -17,44 +15,51 @@ import {
 import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { apiClient } from '@/lib/api/apiClient';
+import { useApi } from '@/lib/api/hooks';
+import { toast } from '@/hooks/use-toast';
 
 export default function LoginForm() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+
+    const { execute: login, isLoading } = useApi(
+        () => apiClient.login(email, password),
+        {
+            manual: true,
+            onSuccess: () => {
+                toast({
+                    title: 'Success',
+                    description: 'Successfully logged in',
+                });
+                router.push('/chat');
+            },
+            onError: (err) => {
+                setError(err.message);
+                toast({
+                    variant: 'destructive',
+                    title: 'Error',
+                    description: err.message,
+                });
+            },
+        }
+    );
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
-        setLoading(true);
+        
+        if (!email || !password) {
+            setError('Please fill in all fields');
+            return;
+        }
 
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Login failed');
-            }
-
-            if (!data.token) {
-                throw new Error('Login failed: No token received');
-            }
-
-            localStorage.setItem('jwt', data.token);
-            router.push('/chat');
+            await login();
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Login failed');
-        } finally {
-            setLoading(false);
+            // Error is handled by useApi hook
         }
     };
 
@@ -94,8 +99,8 @@ export default function LoginForm() {
                                 autoComplete="current-password"
                             />
                         </div>
-                        <Button type="submit" disabled={loading}>
-                            {loading ? 'Logging in...' : 'Login'}
+                        <Button type="submit" disabled={isLoading}>
+                            {isLoading ? 'Logging in...' : 'Login'}
                         </Button>
                     </div>
                 </form>

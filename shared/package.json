@@ -1,0 +1,19 @@
+{
+  "name": "@chat/shared",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@types/socket.io": "^3.0.1",
+    "mongoose": "^7.6.3",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97",
+    "typescript": "^5.2.2"
+  }
+}

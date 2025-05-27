@@ -11,7 +11,7 @@ import {
     RtpCapabilities,
     ConsumerParams,
     WebRtcTransportParams,
-} from '@/chat-service/src/signaling.types'; // Adjust path as needed
+} from '../types/webrtc'; // Use local types
 
 export interface ProducerInfo {
     id: string; // Producer ID from server

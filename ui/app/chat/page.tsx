@@ -500,7 +500,6 @@ export default function ChatPage() {
                 fileMimeType: file.type,
                 fileUrl: URL.createObjectURL(file),
                 createdAt: new Date(),
-                delivered: false,
                 status: 'uploading',
                 uploadProgress: 0,
             };
@@ -531,7 +530,6 @@ export default function ChatPage() {
                 ...messageData,
                 messageType: 'text', // Explicitly set to a valid type
                 createdAt: new Date(),
-                delivered: false,
                 status: 'sent',
             };
             setMessages((prevMessages) => [
