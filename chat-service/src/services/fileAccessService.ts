@@ -6,7 +6,7 @@ import Message, { IMessage } from '../database/models/MessageModel';
 import { ApiError } from '../utils/apiError';
 
 export class FileAccessService {
-    private static readonly UPLOAD_DIR = path.join(__dirname, '../../uploads');
+    private static readonly UPLOAD_DIR = path.join(process.cwd(), '..', 'uploads', 'temp');
 
     static validateFilename(filename: string): boolean {
         return !filename.includes('..') && !filename.includes('/') && !filename.includes('\\');

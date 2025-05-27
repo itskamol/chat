@@ -4,7 +4,7 @@ import { FileAccessController } from '../controllers/FileAccessController';
 
 const fileRoutes = Router();
 
-fileRoutes.get('/media/:filename', 
+fileRoutes.get('/:filename', 
     // @ts-ignore
     authMiddleware, FileAccessController.serveFile);
 

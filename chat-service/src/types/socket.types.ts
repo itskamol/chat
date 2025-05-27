@@ -1,44 +1,70 @@
-import { SignalingEvents } from './signaling.types';
+import { Socket } from 'socket.io';
 
-export interface ServerToClientEvents extends SignalingEvents {
-    userStatusChanged: (data: { userId: string; status: 'online' | 'offline'; lastSeen: Date }) => void;
-    onlineUsersList: (data: Array<{ userId: string; status: 'online'; lastSeen: Date }>) => void;
-    receiveMessage: (data: { 
-        _id: string;
-        senderId: string;
-        receiverId: string;
-        message: string;
-        createdAt: Date;
-    }) => void;
-    messageSent: (data: {
-        _id: string;
-        senderId: string;
-        receiverId: string;
-        message: string;
-        createdAt: Date;
-        delivered: boolean;
-    }) => void;
-    messageError: (data: { error: string }) => void;
-    messagesLoaded: (data: { messages: any[] }) => void;
-    messageRead: (data: { messageId: string }) => void;
-    userTyping: (data: { senderId: string; isTyping: boolean }) => void;
+export interface SocketData {
+    user?: {
+        id: string;
+        name: string;
+        email: string;
+    };
 }
 
-export interface ClientToServerEvents extends SignalingEvents {
-    authenticate: (data: { userId: string }) => void;
-    userOnline: (userId: string) => void;
-    sendMessage: (data: { receiverId: string; message: string }) => void;
-    getMessages: (data: { contactId: string; page?: number; limit?: number }) => void;
+export interface ServerToClientEvents {
+    error: (data: { message: string }) => void;
+    messageReceived: (message: any) => void;
+    userTyping: (data: {
+        userId: string;
+        roomId: string;
+        isTyping: boolean;
+    }) => void;
+    userJoined: (data: { userId: string; roomId: string }) => void;
+    userLeft: (data: { userId: string; roomId: string }) => void;
+    onlineUsers: (users: string[]) => void;
+}
+
+export interface ClientToServerEvents {
+    sendMessage: (data: {
+        receiverId: string;
+        content: string;
+        messageType: string;
+    }) => void;
+    getMessages: (data: {
+        receiverId: string;
+        page?: number;
+        limit?: number;
+    }) => void;
     markMessageAsRead: (data: { messageId: string }) => void;
+    typing: (data: { receiverId: string; isTyping: boolean }) => void;
     getOnlineUsers: () => void;
-    typing: (data: { senderId: string; receiverId: string; isTyping: boolean }) => void;
+    joinRoom: (
+        data: { roomId: string },
+        callback: (result: any) => void
+    ) => void;
+    leaveRoom: (
+        data: { roomId: string },
+        callback?: (result: any) => void
+    ) => void;
+    getRouterRtpCapabilities: (
+        data: { roomId: string },
+        callback: (result: any) => void
+    ) => void;
+    createWebRtcTransport: (data: any, callback: (result: any) => void) => void;
+    connectWebRtcTransport: (
+        data: any,
+        callback: (result: any) => void
+    ) => void;
+    produce: (data: any, callback: (result: any) => void) => void;
+    consume: (data: any, callback: (result: any) => void) => void;
+    startScreenShare: (data: any, callback: (result: any) => void) => void;
+    stopScreenShare: (data: any, callback: (result: any) => void) => void;
 }
 
 export interface InterServerEvents {
-    // Currently empty
+    ping: () => void;
 }
 
-export interface SocketData {
-    userId?: string;
-    roomId?: string;
-}
+export type AuthenticatedSocket = Socket<
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData
+>;

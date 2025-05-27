@@ -4,7 +4,7 @@ import multer from "multer"; // Import multer to check for MulterError instance
 import { ApiError } from "../utils";
 import config from "../config/config";
 
-interface TokenPayload {
+export interface TokenPayload {
     id: string;
     name: string;
     email: string;

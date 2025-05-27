@@ -77,8 +77,6 @@ export default function ChatPage() {
             };
             setCurrentUser(user);
 
-            const currentSocket = getSocket();
-
             emitUserOnline(user._id);
             emitGetOnlineUsers();
 

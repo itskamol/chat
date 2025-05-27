@@ -11,8 +11,8 @@ export class FileService {
         audio: ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg'],
         file: ['application/pdf', 'text/plain']
     };
-
     static validateFileType(mimetype: string): boolean {
+        console.log('FileService initialized with allowed types:', mimetype);
         return Object.values(this.allowedTypes).flat().includes(mimetype);
     }
 

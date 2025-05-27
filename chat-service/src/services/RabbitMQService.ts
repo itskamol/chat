@@ -71,6 +71,7 @@ class RabbitMQService {
 
             console.log("RabbitMQ initialization completed successfully");
         } catch (error) {
+            console.error("Error initializing RabbitMQ:", error);
             console.error("Failed to initialize RabbitMQ:", error);
             // Wait before retrying
             setTimeout(() => this.init(), 5000);

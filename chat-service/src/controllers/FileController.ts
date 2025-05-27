@@ -46,7 +46,7 @@ export default class FileController {
                 storedFileName: s3Key,
                 fileMimeType: req.file.mimetype,
                 fileSize: req.file.size,
-                status: 'Sent'
+                status: 'Delivered'
             });
 
             await newMessage.save();

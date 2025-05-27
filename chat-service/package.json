@@ -16,6 +16,7 @@
     "dependencies": {
         "@types/amqplib": "^0.10.7",
         "@types/express": "^5.0.2",
+        "@types/http-proxy-middleware": "^0.19.3",
         "@types/jsonwebtoken": "^9.0.9",
         "@types/morgan": "^1.9.9",
         "@types/uuid": "^10.0.0",
@@ -24,6 +25,7 @@
         "axios": "^1.9.0",
         "dotenv": "^16.5.0",
         "express": "^5.1.0",
+        "http-proxy-middleware": "^3.0.5",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.15.0",
         "morgan": "^1.10.0",

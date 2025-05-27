@@ -11,7 +11,8 @@ export class MessageService {
         receiverId: string,
         message: string,
         senderSocket: Socket,
-        receiverSocketId?: string
+        receiverSocketId?: string,
+        messageType?: string
     ): Promise<{ success: boolean; error?: string; messageId?: string }> {
         try {
             // Save message to database
@@ -19,6 +20,7 @@ export class MessageService {
                 senderId,
                 receiverId,
                 message,
+                messageType
             }) as InstanceType<typeof Message> & { _id: string };
             await msg.save();
 
@@ -29,6 +31,7 @@ export class MessageService {
                 receiverId,
                 message,
                 createdAt: msg.createdAt,
+                messageType: messageType || 'text',
             };
 
             // If receiver is online, deliver message

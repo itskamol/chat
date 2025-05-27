@@ -146,7 +146,11 @@ export default function ChatWindow({
             fileType = 'file'; // Default to generic 'file' if not common media type
         }
 
-        onSendMessage(inputValue.trim(), selectedFile, fileType as 'image' | 'video' | 'audio' | 'file'); // Pass caption if any
+        onSendMessage(
+            inputValue.trim(),
+            selectedFile,
+            fileType as 'image' | 'video' | 'audio' | 'file'
+        ); // Pass caption if any
         setSelectedFile(null);
         setInputValue('');
     };
@@ -285,13 +289,18 @@ export default function ChatWindow({
                                     >
                                         {/* Refactored Message content rendering */}
                                         {(() => {
-                                            const chatServiceBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE;
+                                            console.log(msg.fileUrl)
+                                            const chatServiceBaseUrl =
+                                                process.env
+                                                    .NEXT_PUBLIC_API_BASE_URL_CHAT_SERVICE;
                                             const fullFileUrl =
                                                 msg.fileUrl &&
                                                 !msg.fileUrl.startsWith(
                                                     'blob:'
                                                 ) &&
-                                                !msg.fileUrl.startsWith('http') &&
+                                                !msg.fileUrl.startsWith(
+                                                    'http'
+                                                ) &&
                                                 chatServiceBaseUrl // Check if base URL is defined
                                                     ? `${chatServiceBaseUrl}${msg.fileUrl}`
                                                     : msg.fileUrl;
@@ -518,7 +527,14 @@ export default function ChatWindow({
                                                                 <span className="ml-1 truncate">
                                                                     {msg.fileName ||
                                                                         (msg.messageType
-                                                                            ? msg.messageType.charAt(0).toUpperCase() + msg.messageType.slice(1)
+                                                                            ? msg.messageType
+                                                                                  .charAt(
+                                                                                      0
+                                                                                  )
+                                                                                  .toUpperCase() +
+                                                                              msg.messageType.slice(
+                                                                                  1
+                                                                              )
                                                                             : 'Media')}
                                                                 </span>
                                                             </div>

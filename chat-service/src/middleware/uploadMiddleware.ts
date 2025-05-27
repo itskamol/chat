@@ -6,7 +6,7 @@ import { ApiError } from '../utils/apiError';
 import { FileService } from '../services/fileService';
 import config from '../config/config';
 
-const TEMP_UPLOAD_DIR = path.join(__dirname, '../../uploads/temp');
+const TEMP_UPLOAD_DIR = path.join(process.cwd(), '..', 'uploads', 'temp');
 
 // Ensure temp upload directory exists
 if (!fs.existsSync(TEMP_UPLOAD_DIR)) {

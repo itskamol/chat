@@ -29,7 +29,7 @@ export class FileAccessController {
 
             if (storageType === 'local') {
                 const filePath = await FileAccessService.getLocalFilePath(filename, userId);
-                
+                console.log(`Serving file from local storage: ${filePath}`);
                 res.sendFile(filePath, (err: any) => {
                     if (err) {
                         logger.error(`Error sending file ${filename} to user ${userId}:`, err);

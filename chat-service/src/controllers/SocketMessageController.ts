@@ -11,10 +11,10 @@ export class SocketMessageController {
         private socketService: SocketService
     ) {}
 
-    public async handleSendMessage(socket: Socket, data: { senderId: string; receiverId: string; message: string }) {
+    public async handleSendMessage(socket: Socket, data: { senderId: string; receiverId: string; message: string, messageType?: string }) {
         try {
-            const { senderId, receiverId, message } = data;
-            
+            const { senderId, receiverId, message, messageType } = data;
+
             // Get receiver's socket ID if they're online
             const receiverSocketId = this.socketService.getSocketIdByUserId(receiverId);
 
@@ -23,7 +23,8 @@ export class SocketMessageController {
                 receiverId,
                 message,
                 socket,
-                receiverSocketId
+                receiverSocketId,
+                messageType
             );
 
             if (!result.success) {

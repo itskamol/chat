@@ -1,9 +1,10 @@
 import { Server } from 'http';
-import { Socket, Server as SocketIOServer } from 'socket.io';
+import { Server as SocketIOServer } from 'socket.io';
 import app from './app';
 import config from './config/config';
 import { logger } from './utils';
 import { connectDB } from './database';
+import { socketAuthMiddleware } from './middleware/socketAuth';
 
 // Import services and controllers
 import { MediaServerClient } from './services/MediaServerClient';
@@ -14,8 +15,13 @@ import { MessageService } from './services/MessageService';
 import { WebRTCController } from './controllers/WebRTCController';
 import { SocketController } from './controllers/SocketController';
 import { SocketMessageController } from './controllers/SocketMessageController';
-import { SignalingEvents } from './types/signaling.types';
-import { ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData } from './types/socket.types';
+import {
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData,
+    AuthenticatedSocket,
+} from './types/socket.types';
 
 // Initialize server and database
 let server: Server;
@@ -49,38 +55,34 @@ const messageService = new MessageService(io);
 // Initialize controllers
 const webrtcController = new WebRTCController(io, roomService, webrtcService);
 const socketController = new SocketController(io, socketService);
-const socketMessageController = new SocketMessageController(io, messageService, socketService);
+const socketMessageController = new SocketMessageController(
+    io,
+    messageService,
+    socketService
+);
+
+// Apply global socket authentication middleware
+io.use(socketAuthMiddleware);
 
 // Socket.IO connection handling
-io.on('connection', async (socket: Socket) => {
-    logger.info('Client connected', { socketId: socket.id });
+io.on('connection', async (socket: AuthenticatedSocket) => {
+    logger.info('Client connected', {
+        socketId: socket.id,
+        userId: socket.data.user?.id,
+    });
 
-    // Helper to check user authentication
-    function getUserId(): string | undefined {
-        return socketService.getUserId(socket);
+    if (!socket.data.user) {
+        logger.error('Socket connected without user data');
+        socket.disconnect();
+        return;
     }
 
-    // Socket authentication middleware
-    socket.use(([event, ...args], next) => {
-        const userId = getUserId();
-        if (!userId && event !== 'authenticate') {
-            next(new Error('Not authenticated'));
-            return;
-        }
-        next();
-    });
+    const userId = socket.data.user.id;
 
     // Generic error handler
     socket.on('error', (error) => {
         logger.error('Socket error:', error);
         socket.emit('error', { message: 'Internal server error' });
-    });
-
-    // Socket Events
-
-    // Authentication
-    socket.on('authenticate', ({ userId }) => {
-        socketController.handleConnection(socket, userId);
     });
 
     // Disconnect
@@ -94,93 +96,140 @@ io.on('connection', async (socket: Socket) => {
     });
 
     socket.on('typing', (data) => {
-        socketController.handleTyping(socket, data);
+        socketController.handleTyping(socket, { ...data, senderId: userId });
     });
 
     // Message Events
     socket.on('sendMessage', (data) => {
-        const userId = getUserId();
-        if (!userId) return;
-        socketMessageController.handleSendMessage(socket, { ...data, senderId: userId });
+        socketMessageController.handleSendMessage(socket, {
+            senderId: userId,
+            message: data.content,
+            receiverId: data.receiverId,
+            messageType: data.messageType,
+        });
     });
 
-    socket.on('getMessages', (data) => {
-        const userId = getUserId();
-        if (!userId) return;
-        socketMessageController.handleGetMessages(socket, { ...data, userId });
-    });
+    // socket.on('getMessages', (data) => {
+    //     socketMessageController.handleGetMessages(socket, { ...data, userId });
+    // });
 
-    socket.on('markMessageAsRead', (data) => {
-        const userId = getUserId();
-        if (!userId) return;
-        socketMessageController.handleMarkMessageAsRead(socket, data);
-    });
+    // socket.on('markMessageAsRead', (data) => {
+    //     socketMessageController.handleMarkMessageAsRead(socket, {
+    //         ...data,
+    //     });
+    // });
 
     // WebRTC Events
     socket.on('joinRoom', async ({ roomId }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleJoinRoom(socket, { roomId }, userId);
+        const result = await webrtcController.handleJoinRoom(
+            socket,
+            { roomId },
+            userId
+        );
         callback(result);
     });
 
     socket.on('leaveRoom', async ({ roomId }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback?.({ error: 'User not authenticated' });
-        const result = await webrtcController.handleLeaveRoom(socket, { roomId }, userId);
+        const result = await webrtcController.handleLeaveRoom(
+            socket,
+            { roomId },
+            userId
+        );
         if (callback) callback(result);
     });
 
     socket.on('getRouterRtpCapabilities', async ({ roomId }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleGetRtpCapabilities(socket, { roomId }, userId);
+        const result = await webrtcController.handleGetRtpCapabilities(
+            socket,
+            { roomId },
+            userId
+        );
         callback(result);
     });
 
-    socket.on('createWebRtcTransport', async ({ roomId, producing, consuming, sctpCapabilities }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleCreateTransport(socket, { roomId, producing, consuming, sctpCapabilities }, userId);
-        callback(result);
-    });
+    socket.on(
+        'createWebRtcTransport',
+        async (
+            { roomId, producing, consuming, sctpCapabilities },
+            callback
+        ) => {
+            const result = await webrtcController.handleCreateTransport(
+                socket,
+                { roomId, producing, consuming, sctpCapabilities },
+                userId
+            );
+            callback(result);
+        }
+    );
 
-    socket.on('connectWebRtcTransport', async ({ roomId, transportId, dtlsParameters }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleConnectTransport(socket, { roomId, transportId, dtlsParameters }, userId);
-        callback(result);
-    });
+    socket.on(
+        'connectWebRtcTransport',
+        async ({ roomId, transportId, dtlsParameters }, callback) => {
+            const result = await webrtcController.handleConnectTransport(
+                socket,
+                { roomId, transportId, dtlsParameters },
+                userId
+            );
+            callback(result);
+        }
+    );
 
-    socket.on('produce', async ({ roomId, transportId, kind, rtpParameters, appData }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleProduce(socket, { roomId, transportId, kind, rtpParameters, appData }, userId);
-        callback(result);
-    });
+    socket.on(
+        'produce',
+        async (
+            { roomId, transportId, kind, rtpParameters, appData },
+            callback
+        ) => {
+            const result = await webrtcController.handleProduce(
+                socket,
+                { roomId, transportId, kind, rtpParameters, appData },
+                userId
+            );
+            callback(result);
+        }
+    );
 
-    socket.on('consume', async ({ roomId, transportId, producerId, rtpCapabilities }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleConsume(socket, { roomId, transportId, producerId, rtpCapabilities }, userId);
-        callback(result);
-    });
+    socket.on(
+        'consume',
+        async (
+            { roomId, transportId, producerId, rtpCapabilities },
+            callback
+        ) => {
+            const result = await webrtcController.handleConsume(
+                socket,
+                { roomId, transportId, producerId, rtpCapabilities },
+                userId
+            );
+            callback(result);
+        }
+    );
 
-    socket.on('startScreenShare', async ({ roomId, transportId, kind, rtpParameters, appData }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleScreenShare(socket, { roomId, transportId, kind, rtpParameters, appData }, userId);
-        callback(result);
-    });
+    socket.on(
+        'startScreenShare',
+        async (
+            { roomId, transportId, kind, rtpParameters, appData },
+            callback
+        ) => {
+            const result = await webrtcController.handleScreenShare(
+                socket,
+                { roomId, transportId, kind, rtpParameters, appData },
+                userId
+            );
+            callback(result);
+        }
+    );
 
     socket.on('stopScreenShare', async ({ roomId, producerId }, callback) => {
-        const userId = getUserId();
-        if (!userId) return callback({ error: 'User not authenticated' });
-        const result = await webrtcController.handleStopScreenShare(socket, { roomId, producerId }, userId);
+        const result = await webrtcController.handleStopScreenShare(
+            socket,
+            { roomId, producerId },
+            userId
+        );
         callback(result);
     });
 });
 
+// ...existing code...
 const exitHandler = () => {
     if (server) {
         server.close(() => {

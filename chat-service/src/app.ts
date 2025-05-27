@@ -20,8 +20,8 @@ app.use(morgan("combined", {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Routes
-app.use('/api', messageRoutes);
-app.use('/api', fileRoutes);
+// app.use(fileRoutes);
+app.use(messageRoutes);
 
 // Error handling middleware should be last
 app.use(errorConverter);
