@@ -36,6 +36,7 @@ export default function LoginForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include', // Send cookies with the request
                 body: JSON.stringify({ email, password }),
             });
 
@@ -49,7 +50,7 @@ export default function LoginForm() {
                 throw new Error('Login failed: No token received');
             }
 
-            localStorage.setItem('jwt', data.token);
+            // localStorage.setItem('jwt', data.token); // Removed: JWT is now in an httpOnly cookie
             router.push('/chat');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Login failed');

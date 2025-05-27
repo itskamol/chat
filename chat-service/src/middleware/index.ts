@@ -32,12 +32,40 @@ const authMiddleware = async (
     res: Response,
     next: NextFunction
 ) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return next(new ApiError(401, "Missing authorization header"));
+    // Prioritize cookie-based authentication
+    const token = req.cookies?.jwt || req.cookies?.token; // Common cookie names for JWT
+
+    if (!token) {
+        // Fallback to Authorization header for testing or other clients if needed,
+        // but primary expectation is httpOnly cookie
+        const authHeader = req.headers.authorization;
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            const headerToken = authHeader.split(' ')[1];
+            if (headerToken) {
+                try {
+                    const decoded = jwt.verify(headerToken, jwtSecret) as TokenPayload;
+                    req.user = {
+                        _id: decoded.id,
+                        email: decoded.email,
+                        createdAt: new Date(decoded.iat * 1000),
+                        updatedAt: new Date(decoded.exp * 1000),
+                        name: decoded.name,
+                        password: '', // Password should not be part of token payload
+                    };
+                    return next();
+                } catch (error) {
+                    // If header token is invalid, proceed to cookie check's error
+                    // or if no cookie, then it will fail as no token.
+                    console.error("Invalid header token:", error);
+                    // Do not call next(error) here yet, let the main cookie logic handle final error
+                }
+            }
+        }
+        // If no cookie and no valid header token (or no header at all)
+        return next(new ApiError(401, "Authentication token not found (expected in cookie or Authorization header)"));
     }
 
-    const [, token] = authHeader.split(" ");
+    // Proceed with cookie token verification
     try {
         const decoded = jwt.verify(token, jwtSecret) as TokenPayload;
 

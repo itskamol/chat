@@ -41,10 +41,15 @@ services:
             - '5672:5672'  # Lokal test uchun kerak bo'lsa oching
         #     - '15672:15672' # RabbitMQ Management UI uchun
         environment:
-            RABBITMQ_DEFAULT_USER: guest
-            RABBITMQ_DEFAULT_PASS: guest
+            # RABBITMQ_DEFAULT_USER: guest # Replaced by secret
+            # RABBITMQ_DEFAULT_PASS: guest # Replaced by secret
+            RABBITMQ_DEFAULT_USER_FILE: /run/secrets/rabbitmq_user
+            RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
         networks:
             - microservices-network
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
         healthcheck:
             test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
             interval: 10s
@@ -68,10 +73,20 @@ services:
         environment:
             NODE_ENV: production
             MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+            MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
+            # MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672 # Replaced by secret references
+            MESSAGE_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            MESSAGE_BROKER_PASS_FILE: /run/secrets/rabbitmq_password
+            MESSAGE_BROKER_HOST: rabbitmq # Added for clarity, assuming app can construct URL
+            MESSAGE_BROKER_PORT: 5672 # Added for clarity
+            # JWT_SECRET: mening_juda_maxfiy_kalitim_12345 # Replaced by secret
+            JWT_SECRET_FILE: /run/secrets/jwt_secret
         networks:
             - microservices-network
+        secrets:
+            - jwt_secret
+            - rabbitmq_user
+            - rabbitmq_password
 
     chat:
         build:
@@ -90,12 +105,21 @@ services:
             NODE_ENV: production
             PORT: 8082 # Bu environment qatori takrorlangan edi, bittasini qoldirdim
             MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+            # MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672 # Replaced by secret references
+            MESSAGE_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            MESSAGE_BROKER_PASS_FILE: /run/secrets/rabbitmq_password
+            MESSAGE_BROKER_HOST: rabbitmq # Added for clarity
+            MESSAGE_BROKER_PORT: 5672 # Added for clarity
+            # JWT_SECRET: mening_juda_maxfiy_kalitim_12345 # Replaced by secret
+            JWT_SECRET_FILE: /run/secrets/jwt_secret
         volumes: # Added volumes section for chat service
             - ./chat_service_uploads:/app/uploads
         networks:
             - microservices-network
+        secrets:
+            - jwt_secret
+            - rabbitmq_user
+            - rabbitmq_password
 
     notification:
         build:
@@ -110,7 +134,11 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+            # MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672 # Replaced by secret references
+            MESSAGE_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            MESSAGE_BROKER_PASS_FILE: /run/secrets/rabbitmq_password
+            MESSAGE_BROKER_HOST: rabbitmq # Added for clarity
+            MESSAGE_BROKER_PORT: 5672 # Added for clarity
             SMTP_HOST: smtp-relay.brevo.com
             SMTP_PORT: 587
             SMTP_USER: mening_brevo_account_emailim@example.com
@@ -119,6 +147,9 @@ services:
             SENDINBLUE_APIKEY: mening_brevo_api_kalitim
         networks:
             - microservices-network
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
 
     gateway:
         build:
@@ -236,3 +267,11 @@ volumes:
 networks:
     microservices-network:
         driver: bridge
+
+secrets:
+    jwt_secret:
+        file: ./secrets/jwt_secret.txt
+    rabbitmq_user:
+        file: ./secrets/rabbitmq_user.txt
+    rabbitmq_password:
+        file: ./secrets/rabbitmq_password.txt

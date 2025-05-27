@@ -7,13 +7,15 @@ import RegisterForm from '@/components/register-form';
 export default function Register() {
     const router = useRouter();
 
-    useEffect(() => {
-        // Check if user is already logged in
-        const token = localStorage.getItem('jwt');
-        if (token) {
-            router.push('/chat');
-        }
-    }, [router]);
+    // useEffect(() => {
+    //     // Check if user is already logged in - This is now handled by the /chat page
+    //     // or a dedicated auth check. If a user has a valid httpOnly cookie,
+    //     // they will be able to access authenticated routes.
+    //     // const token = localStorage.getItem('jwt');
+    //     // if (token) {
+    //     //     router.push('/chat');
+    //     // }
+    // }, [router]);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">

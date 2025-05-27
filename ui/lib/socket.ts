@@ -52,15 +52,16 @@ export const getSocket = (): Socket<
     ClientToServerEvents
 > => {
     if (!socket) {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-            throw new Error('No authentication token found');
-        }
+        // const token = localStorage.getItem('jwt'); // Removed: Rely on httpOnly cookie
+        // if (!token) { // Removed
+        //     throw new Error('No authentication token found'); // Removed
+        // } // Removed
 
         socket = io(
             process.env.NEXT_PUBLIC_WS_URL,
             {
-                auth: { token },
+                // auth: { token }, // Removed: Authentication will be cookie-based
+                withCredentials: true, // Added: Ensures cookies are sent with the connection request
                 transports: ['websocket', 'polling'],
                 reconnection: true,
                 reconnectionDelay: 1000,

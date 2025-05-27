@@ -55,63 +55,55 @@ export default function ChatPage() {
 
     // Effect for initialization, authentication, and fetching initial data
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-            router.push('/');
-            return;
-        }
+        const fetchCurrentUserAndContacts = async () => {
+            setLoading(true);
+            try {
+                // Fetch current user information
+                const userResponse = await fetch('/api/users/me', {
+                    credentials: 'include',
+                });
 
-        try {
-            const decodedToken = jwtDecode<DecodedToken>(token);
-            if (decodedToken.exp * 1000 < Date.now()) {
-                localStorage.removeItem('jwt');
-                router.push('/');
-                return;
-            }
-
-            const user: User = {
-                _id: decodedToken.id,
-                name: decodedToken.name,
-                email: decodedToken.email,
-                online: true,
-            };
-            setCurrentUser(user);
-
-            emitUserOnline(user._id);
-            emitGetOnlineUsers();
-
-            const fetchContacts = async () => {
-                try {
-                    const response = await fetch('/api/users/contacts', {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(
-                            errorData.message || 'Failed to fetch contacts'
-                        );
+                if (!userResponse.ok) {
+                    if (userResponse.status === 401) {
+                        router.push('/'); // Unauthorized, redirect to login
+                        return;
                     }
-                    const contactData = await response.json();
-                    const filteredContacts = contactData.data.filter(
-                        (contact: User) => contact._id !== decodedToken.id
-                    );
-                    setContacts(filteredContacts);
-                } catch (err: any) {
-                    console.error('Failed to fetch contacts:', err);
-                    setError(err.message || 'Could not load contacts.');
+                    throw new Error('Failed to fetch user data');
                 }
-            };
+                const userData = await userResponse.json();
+                const user: User = { ...userData.data, online: true }; // Assuming API returns user data in a 'data' field
+                setCurrentUser(user);
 
-            fetchContacts();
-        } catch (err) {
-            console.error('Invalid token or setup failed:', err);
-            localStorage.removeItem('jwt');
-            router.push('/');
-        } finally {
-            setLoading(false);
-        }
+                emitUserOnline(user._id);
+                emitGetOnlineUsers();
+
+                // Fetch contacts
+                const contactsResponse = await fetch('/api/users/contacts', {
+                    credentials: 'include',
+                });
+                if (!contactsResponse.ok) {
+                    const errorData = await contactsResponse.json();
+                    throw new Error(
+                        errorData.message || 'Failed to fetch contacts'
+                    );
+                }
+                const contactData = await contactsResponse.json();
+                const filteredContacts = contactData.data.filter(
+                    (contact: User) => contact._id !== user._id
+                );
+                setContacts(filteredContacts);
+            } catch (err: any) {
+                console.error('Initialization failed:', err);
+                setError(err.message || 'Could not load initial data.');
+                // Potentially redirect to login if there's an auth issue,
+                // but simple error display for now.
+                // router.push('/');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCurrentUserAndContacts();
 
         return () => {
             // disconnectSocket();
@@ -245,17 +237,18 @@ export default function ChatPage() {
             setLoading(true);
             setError(null);
             try {
-                const token = localStorage.getItem('jwt');
-                if (!token) {
-                    router.push('/');
-                    return;
-                }
+                // const token = localStorage.getItem('jwt'); // Removed: Rely on httpOnly cookie
+                // if (!token) { // Removed
+                //     router.push('/'); // Removed
+                //     return; // Removed
+                // } // Removed
                 const response = await fetch(
                     `${process.env.NEXT_PUBLIC_API_BASE_URL}/messages/get/${selectedContact._id}`,
                     {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
+                        // headers: { // Removed
+                        //     Authorization: `Bearer ${token}`, // Removed
+                        // }, // Removed
+                        credentials: 'include', // Added: Send cookies
                     }
                 );
                 if (!response.ok) {
@@ -328,7 +321,7 @@ export default function ChatPage() {
 
         const attemptUpload = (): Promise<void> => {
             return new Promise((resolve, reject) => {
-                const token = localStorage.getItem('jwt');
+                // const token = localStorage.getItem('jwt'); // Removed
                 const xhr = new XMLHttpRequest();
 
                 xhr.open(
@@ -336,7 +329,8 @@ export default function ChatPage() {
                     `${process.env.NEXT_PUBLIC_API_BASE_URL}/messages/upload`,
                     true
                 );
-                xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+                // xhr.setRequestHeader('Authorization', `Bearer ${token}`); // Removed
+                xhr.withCredentials = true; // Added: Send cookies with XHR
                 xhr.timeout = 30000; // 30 second timeout
 
                 xhr.upload.onprogress = (event) => {
@@ -455,11 +449,11 @@ export default function ChatPage() {
         if (!currentUser?._id || !selectedContact?._id) return;
         if (!text.trim() && !file) return;
 
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-            router.push('/');
-            return;
-        }
+        // const token = localStorage.getItem('jwt'); // Removed
+        // if (!token) { // Removed
+        //     router.push('/'); // Removed
+        //     return; // Removed
+        // } // Removed
 
         // File validation
         if (file && fileType) {
@@ -542,16 +536,26 @@ export default function ChatPage() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('jwt');
+    const handleLogout = async () => {
+        // localStorage.removeItem('jwt'); // Removed
+        try {
+            await fetch('/api/auth/logout', { // Assuming a logout endpoint exists
+                method: 'POST',
+                credentials: 'include',
+            });
+        } catch (error) {
+            console.error('Logout failed:', error);
+            // Even if API call fails, client-side cleanup should proceed
+        }
         if (currentUser) {
             // emitUserOffline(currentUser._id); // If you implement this on backend
         }
         disconnectSocket();
+        setCurrentUser(null); // Clear current user state
         router.push('/');
     };
 
-    if (loading && !contacts.length && !currentUser) {
+    if (loading && !currentUser) { // Condition updated as currentUser is now fetched async
         return (
             <div className="flex items-center justify-center min-h-screen">
                 Loading chat...
