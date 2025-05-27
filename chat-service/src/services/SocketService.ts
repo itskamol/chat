@@ -1,21 +1,37 @@
-import { AuthenticatedSocket } from '@chat/shared';
-import { Server as SocketIOServer } from 'socket.io';
+import { 
+    AuthenticatedSocket,
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData,
+    SocketEvent,
+    UserStatusChangedPayload,
+    OnlineUsersListPayload,
+    UserTypingPayload,
+    OnlineUser // Used within OnlineUsersListPayload
+} from '@shared';
+import { Server as SocketIOServer } from 'socket.io'; // Standard import
 
 export class SocketService {
     private socketToUserIdMap: Map<string, string>;
-    private onlineUsers: Map<string, { userId: string; socketId: string; lastSeen: Date }>;
+    // Store more user details for richer OnlineUser objects
+    private onlineUsers: Map<string, { userId: string; socketId: string; lastSeen: Date; name?: string; avatarUrl?: string }>;
 
-    constructor(private io: SocketIOServer) {
+    constructor(private io: SocketIOServer<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>) {
         this.socketToUserIdMap = new Map();
         this.onlineUsers = new Map();
     }
 
+    // When user connects, their basic info (name, avatar) might be available from auth/socket.data.user
     public setUserSocket(socket: AuthenticatedSocket, userId: string): void {
         this.socketToUserIdMap.set(socket.id, userId);
+        const user = socket.data.user; // User object from shared types, should be on socket.data
         this.onlineUsers.set(userId, {
             userId,
             socketId: socket.id,
-            lastSeen: new Date()
+            lastSeen: new Date(),
+            name: user?.name,
+            avatarUrl: user?.avatarUrl 
         });
     }
 
@@ -31,29 +47,41 @@ export class SocketService {
         return this.socketToUserIdMap.get(socket.id);
     }
 
-    public getOnlineUsers(): Array<{ userId: string; status: 'online'; lastSeen: Date }> {
+    public getOnlineUsers(): OnlineUser[] { // Using the OnlineUser type from shared/payloads
         return Array.from(this.onlineUsers.values()).map(user => ({
             userId: user.userId,
+            name: user.name,
+            avatarUrl: user.avatarUrl,
             status: 'online' as const,
             lastSeen: user.lastSeen
         }));
     }
 
     public notifyUserStatusChanged(userId: string, status: 'online' | 'offline', lastSeen: Date): void {
-        this.io.emit('userStatusChanged', { userId, status, lastSeen });
+        const user = this.onlineUsers.get(userId) || { userId, name: undefined, avatarUrl: undefined }; // Get user details if available
+        const payload: UserStatusChangedPayload = { 
+            userId, 
+            status, 
+            lastSeen,
+            name: user.name,
+            avatarUrl: user.avatarUrl
+        };
+        this.io.emit(SocketEvent.USER_STATUS_CHANGED, payload);
     }
 
     public notifyOnlineUsers(socket: AuthenticatedSocket): void {
-        socket.emit('onlineUsersList', this.getOnlineUsers());
+        const payload: OnlineUsersListPayload = { users: this.getOnlineUsers() };
+        socket.emit(SocketEvent.ONLINE_USERS_LIST, payload);
     }
 
     public forwardTypingStatus(senderId: string, receiverId: string, isTyping: boolean): void {
         const receiverInfo = this.onlineUsers.get(receiverId);
         if (receiverInfo) {
-            this.io.to(receiverInfo.socketId).emit('userTyping', {
+            const payload: UserTypingPayload = {
                 senderId,
                 isTyping
-            });
+            };
+            this.io.to(receiverInfo.socketId).emit(SocketEvent.USER_TYPING, payload);
         }
     }
 

@@ -1,69 +1,118 @@
-import { Socket } from 'socket.io';
 import { Server as SocketIOServer } from 'socket.io';
 import { MessageService } from '../services/MessageService';
-import { SocketService } from '../services/SocketService';
+import { SocketService } from '../services/SocketService'; // May not be directly used here but often included
 import { logger } from '../utils';
-import { AuthenticatedSocket } from '@chat/shared';
+import {
+    AuthenticatedSocket,
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData,
+    SocketEvent,
+    // Payloads for C2S events this controller handles
+    SendMessagePayload,
+    GetMessagesPayload,
+    MarkMessageAsReadPayload,
+    // Payloads for S2C events this controller emits
+    MessageErrorPayload,
+    MessagesLoadedPayload,
+    // Shared types
+    Message as SharedMessage, 
+    MessageType as SharedMessageType,
+    // Import * as P to access P.EmptyPayload if it's used in callback types from shared
+} from '@shared';
+import * as P from '@shared/socket/payloads'; // To correctly reference P.EmptyPayload
 
 export class SocketMessageController {
     constructor(
-        private io: SocketIOServer,
+        private io: SocketIOServer<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
         private messageService: MessageService,
-        private socketService: SocketService
+        private socketService: SocketService // Included for completeness, may not be used in every method
     ) {}
 
-    public async handleSendMessage(socket: AuthenticatedSocket, data: { senderId: string; receiverId: string; message: string, messageType?: string }) {
+    // Method signature updated: userId passed from handler, data is SendMessagePayload
+    public async handleSendMessage(socket: AuthenticatedSocket, userId: string, data: SendMessagePayload) {
         try {
-            const { senderId, receiverId, message, messageType } = data;
-
-            // Get receiver's socket ID if they're online
-            const receiverSocketId = this.socketService.getSocketIdByUserId(receiverId);
-
+            // Data from SendMessagePayload: data.receiverId, data.content, data.type, data.tempId
             const result = await this.messageService.saveAndDeliverMessage(
-                senderId,
-                receiverId,
-                message,
-                socket,
-                receiverSocketId,
-                messageType
+                userId, // senderId is the authenticated user
+                data.receiverId,
+                data.content,
+                socket, // Pass the sender's socket
+                this.socketService.getSocketIdByUserId(data.receiverId), // receiverSocketId
+                data.type,
+                data.tempId
             );
 
             if (!result.success) {
-                socket.emit('messageError', { error: result.error || 'Failed to send message' });
+                const errorPayload: MessageErrorPayload = { 
+                    error: result.error || 'Failed to send message',
+                    tempId: result.tempId // Pass back tempId if available from service layer
+                };
+                socket.emit(SocketEvent.MESSAGE_ERROR, errorPayload);
             }
+            // messageSent is handled by MessageService directly to the sender socket
         } catch (error) {
             logger.error('Error in handleSendMessage:', error);
-            socket.emit('messageError', { error: 'Internal server error' });
+            const errorPayload: MessageErrorPayload = { 
+                error: 'Internal server error during message sending.',
+                tempId: data.tempId // Pass back client's tempId in case of internal error too
+            };
+            socket.emit(SocketEvent.MESSAGE_ERROR, errorPayload);
         }
     }
 
-    public async handleGetMessages(socket: AuthenticatedSocket, data: { userId: string; receiverId: string; page?: number; limit?: number }) {
+    // Method signature updated: userId passed from handler, data is GetMessagesPayload, callback is present
+    public async handleGetMessages(
+        socket: AuthenticatedSocket, 
+        userId: string, 
+        data: GetMessagesPayload,
+        callback: (response: MessagesLoadedPayload | MessageErrorPayload) => void
+    ) {
         try {
-            const { userId, receiverId, page, limit } = data;
-            const result = await this.messageService.getMessages(userId, receiverId, page, limit);
+            const result = await this.messageService.getMessages(userId, data.receiverId, data.page, data.limit);
 
-            if (result.success) {
-                socket.emit('messagesLoaded', { messages: result.messages || [] });
+            if (result.success && result.messages) {
+                const responsePayload: MessagesLoadedPayload = { 
+                    messages: result.messages,
+                    receiverId: data.receiverId // Provide context back to client
+                };
+                // Instead of emitting, use the callback for request-response pattern
+                callback(responsePayload);
             } else {
-                socket.emit('messageError', { error: result.error || 'Failed to load messages' });
+                const errorPayload: MessageErrorPayload = { error: result.error || 'Failed to load messages' };
+                callback(errorPayload);
             }
         } catch (error) {
             logger.error('Error in handleGetMessages:', error);
-            socket.emit('messageError', { error: 'Internal server error' });
+            const errorPayload: MessageErrorPayload = { error: 'Internal server error while fetching messages.' };
+            callback(errorPayload);
         }
     }
 
-    public async handleMarkMessageAsRead(socket: AuthenticatedSocket, data: { messageId: string }) {
+    // Method signature updated: userId passed from handler, data is MarkMessageAsReadPayload, callback is present
+    public async handleMarkMessageAsRead(
+        socket: AuthenticatedSocket, 
+        userId: string, 
+        data: MarkMessageAsReadPayload,
+        callback?: (response: MessageErrorPayload | P.EmptyPayload) => void // From shared ClientToServerEvents
+    ) {
         try {
-            const { messageId } = data;
-            const result = await this.messageService.markMessageAsRead(messageId);
+            // Pass userId for validation in service (who is marking as read)
+            const result = await this.messageService.markMessageAsRead(data.messageId, userId);
 
-            if (!result.success) {
-                socket.emit('messageError', { error: result.error || 'Failed to mark message as read' });
+            if (result.success) {
+                // Successfully marked as read. Optionally send back the updated message or just success.
+                // The client might listen for a generic 'messageUpdated' event or handle this via this callback.
+                if (callback) callback({} as P.EmptyPayload); // Empty success response
+            } else {
+                const errorPayload: MessageErrorPayload = { error: result.error || 'Failed to mark message as read', messageId: data.messageId };
+                if (callback) callback(errorPayload);
             }
         } catch (error) {
             logger.error('Error in handleMarkMessageAsRead:', error);
-            socket.emit('messageError', { error: 'Internal server error' });
+            const errorPayload: MessageErrorPayload = { error: 'Internal server error while marking message as read.', messageId: data.messageId };
+            if (callback) callback(errorPayload);
         }
     }
 }

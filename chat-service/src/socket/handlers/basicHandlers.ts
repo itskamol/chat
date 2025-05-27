@@ -1,4 +1,10 @@
-import { AuthenticatedSocket } from '@chat/shared';
+import { 
+    AuthenticatedSocket, 
+    SocketEvent, 
+    ErrorPayload, 
+    TypingPayload,
+    // No specific payload for getOnlineUsers from client
+} from '@shared'; // Assuming @shared is path-mapped in tsconfig
 import { SocketController } from '../../controllers/SocketController';
 import { logger } from '../../utils';
 
@@ -7,25 +13,31 @@ export const setupBasicHandlers = (
     socketController: SocketController
 ): void => {
     // Generic error handler
-    socket.on('error', (error) => {
+    socket.on(SocketEvent.ERROR, (error: any) => { // error payload from socket.io itself can be varied
         logger.error('Socket error:', error);
-        socket.emit('error', { message: 'Internal server error' });
+        // Emitting our standardized error payload
+        socket.emit(SocketEvent.ERROR, { message: 'Internal server error' } as ErrorPayload);
     });
 
     // Disconnect handler
-    socket.on('disconnect', () => {
+    socket.on('disconnect', () => { // DISCONNECT is a standard event string 'disconnect'
         socketController.handleDisconnect(socket);
     });
 
     // Online users handlers
-    socket.on('getOnlineUsers', () => {
+    socket.on(SocketEvent.GET_ONLINE_USERS, () => {
         socketController.handleGetOnlineUsers(socket);
     });
 
-    socket.on('typing', (data) => {
+    socket.on(SocketEvent.TYPING, (data: TypingPayload) => { // Assuming client sends TypingPayload
+        if (!socket.data.user) {
+            logger.warn('Typing event from unauthenticated user or user data not set on socket.');
+            return;
+        }
+        // The controller will receive the augmented data including senderId
         socketController.handleTyping(socket, {
-            ...data,
-            senderId: socket.data.user!.id,
+            ...data, // receiverId, isTyping
+            senderId: socket.data.user.id,
         });
     });
 };
