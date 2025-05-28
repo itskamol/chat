@@ -81,11 +81,13 @@ services:
         restart: always
         ports:
             - '8082:8082'
-        depends_on:
+        depends_on: # Added depends_on for file-service
             mongodb:
                 condition: service_healthy
             rabbitmq:
                 condition: service_healthy
+            file-service: # Added dependency
+                condition: service_started # or service_healthy if file-service implements a healthcheck
         environment:
             NODE_ENV: production
             PORT: 8082
@@ -97,13 +99,6 @@ services:
             # - ./chat_service_uploads:/app/uploads 
         networks:
             - microservices-network
-        depends_on: # Added depends_on for file-service
-            mongodb:
-                condition: service_healthy
-            rabbitmq:
-                condition: service_healthy
-            file-service: # Added dependency
-                condition: service_started # or service_healthy if file-service implements a healthcheck
 
     file-service:
         <<: *logging
