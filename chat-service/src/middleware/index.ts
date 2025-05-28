@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import jwt from "jsonwebtoken";
-import multer from "multer"; // Import multer to check for MulterError instance
-import { ApiError } from "../utils";
-import { TokenPayload } from "@chat/shared";
-import config from "../config/config";
+import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
+import jwt from 'jsonwebtoken';
+import multer from 'multer'; // Import multer to check for MulterError instance
+import { ApiError } from '../utils';
+import { TokenPayload } from '@chat/shared';
+import config from '../config/config';
 
 export interface IUser {
     _id: string;
@@ -27,10 +27,10 @@ const authMiddleware = async (
 ) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-        return next(new ApiError(401, "Missing authorization header"));
+        return next(new ApiError(401, 'Missing authorization header'));
     }
 
-    const [, token] = authHeader.split(" ");
+    const [, token] = authHeader.split(' ');
     try {
         const decoded = jwt.verify(token, jwtSecret) as TokenPayload;
 
@@ -40,12 +40,12 @@ const authMiddleware = async (
             createdAt: new Date(decoded.iat * 1000),
             updatedAt: new Date(decoded.exp * 1000),
             name: decoded.name,
-            password: "",
+            password: '',
         };
         return next();
     } catch (error) {
         console.error(error); // Keep this for server-side logging of JWT errors
-        return next(new ApiError(401, "Invalid or expired token")); // More specific message
+        return next(new ApiError(401, 'Invalid or expired token')); // More specific message
     }
 };
 
@@ -57,32 +57,43 @@ const errorConverter: ErrorRequestHandler = (err, req, res, next) => {
         let message = err.message;
         if (err.code === 'LIMIT_FILE_SIZE') {
             statusCode = 413; // Payload Too Large
-            message = `File too large. Max size: ${config.maxFileSizeBytes / (1024 * 1024)}MB`;
+            message = `File too large`;
         } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-            message = 'Unexpected file field. Please use "mediaFile" field for uploads.';
+            message =
+                'Unexpected file field. Please use "mediaFile" field for uploads.';
         }
         // For other multer errors, use default message and status 400
         error = new ApiError(statusCode, message, true, err.stack);
-    } 
+    }
     // Handle custom errors (like from fileFilter or no file uploaded)
     // @ts-ignore
     else if (err.code === 'INVALID_FILE_TYPE') {
-    // @ts-ignore
-        error = new ApiError(415, err.message || 'Unsupported file type.', true, err.stack);
-    } 
+        // @ts-ignore
+        error = new ApiError(
+            415,
+            err.message || 'Unsupported file type.',
+            true,
+            err.stack
+        );
+    }
     // @ts-ignore
     else if (err.code === 'NO_FILE_UPLOADED') {
-    // @ts-ignore
-        error = new ApiError(400, err.message || 'No file was uploaded.', true, err.stack);
+        // @ts-ignore
+        error = new ApiError(
+            400,
+            err.message || 'No file was uploaded.',
+            true,
+            err.stack
+        );
     }
     // Handle other errors that are not ApiError instances
     else if (!(error instanceof ApiError)) {
         const statusCode =
             // @ts-ignore
-            error.statusCode || 500; 
+            error.statusCode || 500;
         const message =
             // @ts-ignore
-            error.message || "Internal Server Error";
+            error.message || 'Internal Server Error';
         error = new ApiError(statusCode, message, false, err.stack); // Mark as not operational for generic errors
     }
     next(error);
@@ -90,9 +101,9 @@ const errorConverter: ErrorRequestHandler = (err, req, res, next) => {
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     let { statusCode, message } = err;
-    if (process.env.NODE_ENV === "production" && !err.isOperational) {
+    if (process.env.NODE_ENV === 'production' && !err.isOperational) {
         statusCode = 500; // Internal Server Error
-        message = "Internal Server Error";
+        message = 'Internal Server Error';
     }
 
     res.locals.errorMessage = err.message;
@@ -100,10 +111,10 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     const response = {
         code: statusCode,
         message,
-        ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
     };
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
         console.error(err);
     }
 

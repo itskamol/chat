@@ -30,8 +30,8 @@ app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok', service: 'file-service', timestamp: new Date().toISOString() });
 });
 
-// Mount the API routes for file operations under the '/api/files' path
-app.use('/api/files', fileRoutes);
+// Mount the API routes for file operations under the '/files' path
+app.use('/files', fileRoutes);
 
 // Apply the global error handling middleware.
 // This must be the last middleware added to the app stack.
@@ -40,6 +40,4 @@ app.use(errorHandler);
 // Start the HTTP server and listen on the configured port
 app.listen(config.PORT, () => {
   console.log(`[Server] File Service is running on port ${config.PORT}`);
-  console.log(`[Server] Access health check at http://localhost:${config.PORT}/health`);
-  console.log(`[Server] File API available under http://localhost:${config.PORT}/api/files`);
 });

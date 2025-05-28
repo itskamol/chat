@@ -24,7 +24,7 @@ import {
     onMessageSent,
     onMessageError,
 } from '@/lib/socket';
-import { MessageStatus, MessageType, User } from '@chat/shared';
+import { MessageStatus, MessageType, User, validateFile } from '@chat/shared';
 
 interface DecodedToken {
     id: string;
@@ -287,37 +287,37 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    const validateFile = (file: File, fileType: string): string | null => {
-        // File size check (10MB limit)
-        const maxSize = 10 * 1024 * 1024; // 10MB
-        if (file.size > maxSize) {
-            return 'File size must be less than 10MB';
-        }
+    // const validateFile = (file: File, fileType: string): string | null => {
+    //     // File size check (10MB limit)
+    //     const maxSize = 10 * 1024 * 1024; // 10MB
+    //     if (file.size > maxSize) {
+    //         return 'File size must be less than 10MB';
+    //     }
 
-        // File type validation
-        const allowedTypes: Record<string, string[]> = {
-            image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-            video: ['video/mp4', 'video/webm', 'video/ogg'],
-            audio: ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg'],
-            file: [
-                'application/pdf',
-                'text/plain',
-                'application/msword',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            ],
-        };
+    //     // File type validation
+    //     const allowedTypes: Record<string, string[]> = {
+    //         image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+    //         video: ['video/mp4', 'video/webm', 'video/ogg'],
+    //         audio: ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg'],
+    //         file: [
+    //             'application/pdf',
+    //             'text/plain',
+    //             'application/msword',
+    //             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    //         ],
+    //     };
 
-        if (
-            allowedTypes[fileType] &&
-            !allowedTypes[fileType].includes(file.type)
-        ) {
-            return `Invalid file type for ${fileType}. Allowed types: ${allowedTypes[
-                fileType
-            ].join(', ')}`;
-        }
+    //     if (
+    //         allowedTypes[fileType] &&
+    //         !allowedTypes[fileType].includes(file.type)
+    //     ) {
+    //         return `Invalid file type for ${fileType}. Allowed types: ${allowedTypes[
+    //             fileType
+    //         ].join(', ')}`;
+    //     }
 
-        return null;
-    };
+    //     return null;
+    // };
 
     const uploadFileWithRetry = async (
         formData: FormData,
@@ -459,17 +459,11 @@ export default function ChatPage() {
         if (!currentUser?.id || !selectedContact?.id) return;
         if (!text.trim() && !file) return;
 
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-            router.push('/');
-            return;
-        }
-
-        // File validation
-        if (file && fileType) {
-            const validationError = validateFile(file, fileType);
-            if (validationError) {
-                setError(validationError);
+        // File validation using shared utility
+        if (file) {
+            const validation = validateFile(file);
+            if (!validation.isValid) {
+                setError(validation.error || 'Invalid file');
                 return;
             }
         }

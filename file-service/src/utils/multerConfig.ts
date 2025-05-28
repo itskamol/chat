@@ -7,36 +7,82 @@
 import multer, { FileFilterCallback } from 'multer';
 import { Request } from 'express';
 import { config } from '../config/config';
+import {
+    ALLOWED_MIME_TYPES,
+    validateNodeFile,
+    getFileCategory,
+} from '@chat/shared';
 
 /**
- * File filter function for Multer.
- * Validates the file's MIME type against the allowed types from config.
+ * Enhanced file filter with detailed validation
  */
-const fileFilter = (
-  req: Request,
-  file: Express.Multer.File,
-  callback: FileFilterCallback
+const enhancedFileFilter = (
+    req: Request,
+    file: Express.Multer.File,
+    callback: FileFilterCallback
 ) => {
-  if (config.ALLOWED_MIME_TYPES.includes(file.mimetype)) {
-    callback(null, true); // Accept file
-  } else {
-    callback(new Error(`Unsupported file type: ${file.mimetype}. Allowed types: ${config.ALLOWED_MIME_TYPES.join(', ')}`));
-  }
+    // Check file type
+    if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
+        return callback(new Error(`Unsupported file type: ${file.mimetype}`));
+    }
+
+    // Get file category for size validation
+    const category = getFileCategory(file.mimetype);
+    if (!category) {
+        return callback(
+            new Error(`Unable to determine file category for: ${file.mimetype}`)
+        );
+    }
+
+    // Note: File size validation will be handled by multer's limits
+    // Individual category size limits can be enforced in the route handler
+    callback(null, true);
 };
 
 /**
  * @constant upload
- * @description Configured Multer instance.
- * - `storage`: Uses `multer.memoryStorage()` to store files as Buffers in memory. This is suitable for passing to S3 without disk I/O.
- * - `fileFilter`: Custom function to validate file types based on `config.ALLOWED_MIME_TYPES`.
- * - `limits`: Sets file size limits based on `config.MAX_FILE_SIZE_MB`.
+ * @description Configured Multer instance with enhanced validation.
+ * - `storage`: Uses `multer.memoryStorage()` to store files as Buffers in memory.
+ * - `fileFilter`: Custom function using shared validation utilities.
+ * - `limits`: Sets file size limits based on configuration.
  */
 const upload = multer({
-  storage: multer.memoryStorage(), // Store files in memory as Buffers, suitable for forwarding to S3.
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: config.MAX_FILE_SIZE_MB * 1024 * 1024, // Convert MB to bytes
-  },
+    storage: multer.memoryStorage(), // Store files in memory as Buffers
+    fileFilter: enhancedFileFilter, // Use enhanced validation
+    limits: {
+        fileSize: config.MAX_FILE_SIZE_MB * 1024 * 1024, // Convert MB to bytes
+        files: 1, // Allow only one file per request
+        fieldSize: 1024 * 1024, // 1MB field size limit
+    },
 });
+
+/**
+ * Alternative upload configuration for different file categories
+ */
+export const createCategorySpecificUpload = (maxSizeMB?: number) => {
+    return multer({
+        storage: multer.memoryStorage(),
+        fileFilter: (
+            req: Request,
+            file: Express.Multer.File,
+            callback: FileFilterCallback
+        ) => {
+            const category = getFileCategory(file.mimetype);
+            if (!category) {
+                return callback(
+                    new Error(`Unsupported file type: ${file.mimetype}`)
+                );
+            }
+            // Size will be checked by multer limits, this is just for type validation
+            callback(null, true);
+        },
+        limits: {
+            fileSize: maxSizeMB
+                ? maxSizeMB * 1024 * 1024
+                : config.MAX_FILE_SIZE_MB * 1024 * 1024,
+            files: 1,
+        },
+    });
+};
 
 export default upload;

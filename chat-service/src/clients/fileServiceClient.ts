@@ -8,7 +8,7 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import FormData from 'form-data';
 import config from '../config/config'; // Application configuration, expecting FILE_SERVICE_URL
 import logger from '../utils/logger'; // Logger utility
-import ApiError from '../utils/apiError'; // Custom error class for consistent error handling
+import { ApiError } from '../utils/apiError'; // Custom error class for consistent error handling
 
 /**
  * @interface FileServiceUploadResponse
@@ -16,12 +16,12 @@ import ApiError from '../utils/apiError'; // Custom error class for consistent e
  * Includes details like the file URL, S3 key, MIME type, size, original name, and bucket.
  */
 export interface FileServiceUploadResponse {
-  url: string;
-  key: string;
-  type: string;
-  size: number;
-  originalName: string;
-  bucket: string; // The S3 bucket where the file is stored.
+    url: string;
+    key: string;
+    type: string;
+    size: number;
+    originalName: string;
+    bucket: string; // The S3 bucket where the file is stored.
 }
 
 /**
@@ -34,8 +34,8 @@ export interface FileServiceUploadResponse {
  * by the FormData library in conjunction with Axios on a per-request basis.
  */
 const fileServiceClient: AxiosInstance = axios.create({
-  baseURL: config.FILE_SERVICE_URL,
-  // timeout: 10000, // Optional: Configure a timeout for requests to the file-service
+    baseURL: config.FILE_SERVICE_URL,
+    // timeout: 10000, // Optional: Configure a timeout for requests to the file-service
 });
 
 /**
@@ -52,60 +52,83 @@ const fileServiceClient: AxiosInstance = axios.create({
  * @throws {ApiError} Throws an ApiError if the upload fails, with details from the File Service response or a generic error message.
  */
 export async function uploadFileToService(
-  fileBuffer: Buffer,
-  originalName: string,
-  mimeType: string
+    fileBuffer: Buffer,
+    originalName: string,
+    mimeType: string
 ): Promise<FileServiceUploadResponse> {
-  const formData = new FormData();
-  formData.append('file', fileBuffer, {
-    filename: originalName,
-    contentType: mimeType,
-  });
+    const formData = new FormData();
+    formData.append('file', fileBuffer, {
+        filename: originalName,
+        contentType: mimeType,
+    });
 
-  try {
-    logger.info(`[FileServiceClient] Uploading file to file-service: ${originalName}, type: ${mimeType}, size: ${fileBuffer.length} bytes`);
-    
-    const response = await fileServiceClient.post<FileServiceUploadResponse>(
-      '/upload', // Endpoint relative to baseURL
-      formData,
-      {
-        headers: {
-          ...formData.getHeaders(), // Important for multipart/form-data with axios and form-data lib
-          // Add any other specific headers if needed, e.g., an API key for file-service
-        },
-        maxBodyLength: Infinity, // Important for large file uploads
-        maxContentLength: Infinity, // Important for large file uploads
-      }
-    );
+    try {
+        logger.info(
+            `[FileServiceClient] Uploading file to file-service: ${originalName}, type: ${mimeType}, size: ${fileBuffer.length} bytes`
+        );
 
-    logger.info(`[FileServiceClient] File uploaded successfully to file-service. Key: ${response.data.key}, URL: ${response.data.url}`);
-    return response.data;
-  } catch (error) {
-    const axiosError = error as AxiosError;
-    if (axiosError.response) {
-      const errData = axiosError.response.data as { message?: string, statusCode?: number }; // Type assertion for error data
-      logger.error('[FileServiceClient] Error response from file-service:', {
-        status: axiosError.response.status,
-        data: errData,
-        originalName,
-      });
-      throw new ApiError(
-        errData?.statusCode || axiosError.response.status,
-        `File service error: ${errData?.message || axiosError.message}`
-      );
-    } else if (axiosError.request) {
-      logger.error(`[FileServiceClient] No response received from file-service for ${originalName}:`, {
-        message: axiosError.message,
-        code: axiosError.code,
-      });
-      throw new ApiError(503, `File service (${config.FILE_SERVICE_URL}) is unreachable or did not respond.`);
-    } else {
-      logger.error(`[FileServiceClient] Error setting up request to file-service for ${originalName}:`, {
-        message: axiosError.message,
-      });
-      throw new ApiError(500, `Failed to make request to file service: ${axiosError.message}`);
+        const response =
+            await fileServiceClient.post<FileServiceUploadResponse>(
+                '/upload', // Endpoint relative to baseURL
+                formData,
+                {
+                    headers: {
+                        ...formData.getHeaders(), // Important for multipart/form-data with axios and form-data lib
+                        // Add any other specific headers if needed, e.g., an API key for file-service
+                    },
+                    maxBodyLength: Infinity, // Important for large file uploads
+                    maxContentLength: Infinity, // Important for large file uploads
+                }
+            );
+
+        logger.info(
+            `[FileServiceClient] File uploaded successfully to file-service. Key: ${response.data.key}, URL: ${response.data.url}`
+        );
+        return response.data;
+    } catch (error) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+            const errData = axiosError.response.data as {
+                message?: string;
+                statusCode?: number;
+            }; // Type assertion for error data
+            logger.error(
+                '[FileServiceClient] Error response from file-service:',
+                {
+                    status: axiosError.response.status,
+                    data: errData,
+                    originalName,
+                }
+            );
+            throw new ApiError(
+                errData?.statusCode || axiosError.response.status,
+                `File service error: ${errData?.message || axiosError.message}`
+            );
+        } else if (axiosError.request) {
+            logger.error(
+                `[FileServiceClient] No response received from file-service for ${originalName}:`,
+                {
+                    message: axiosError.message,
+                    code: axiosError.code,
+                }
+            );
+            throw new ApiError(
+                503,
+                `File service (${config.FILE_SERVICE_URL}) is unreachable or did not respond.`
+            );
+        } else {
+            logger.error(
+                `[FileServiceClient] Error setting up request to file-service for ${originalName}:`,
+                {
+                    message: axiosError.message,
+                }
+            );
+            throw new ApiError(
+                500,
+                `Failed to make request to file service: ${axiosError.message}`
+            );
+        }
     }
-  }
 }
 
 /**
@@ -118,16 +141,16 @@ export async function uploadFileToService(
 export async function checkFileServiceHealth(): Promise<boolean> {
     try {
         // Attempt to GET the /health endpoint of the file-service
-        const response = await fileServiceClient.get('/health'); 
+        const response = await fileServiceClient.get('/health');
         // Consider a 2xx status as healthy
-        return response.status >= 200 && response.status < 300; 
+        return response.status >= 200 && response.status < 300;
     } catch (error) {
         const axiosError = error as AxiosError;
         logger.error('[FileServiceClient] File service health check failed:', {
             message: axiosError.message,
             url: `${config.FILE_SERVICE_URL}/health`,
             code: axiosError.code,
-            status: axiosError.response?.status
+            status: axiosError.response?.status,
         });
         return false;
     }

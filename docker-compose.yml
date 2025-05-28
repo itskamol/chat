@@ -86,7 +86,7 @@ services:
                 condition: service_healthy
             rabbitmq:
                 condition: service_healthy
-            file-service: # Added dependency
+            file: # Added dependency
                 condition: service_started # or service_healthy if file-service implements a healthcheck
         environment:
             NODE_ENV: production
@@ -94,14 +94,14 @@ services:
             MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
             MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
             JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-            FILE_SERVICE_URL: http://file-service:3001/api/files # Added for file-service integration
+            FILE_SERVICE_URL: http://file:3001/api/files # Added for file-service integration
         # volumes: # Removed old local upload volume
             # - ./chat_service_uploads:/app/uploads 
         networks:
             - microservices-network
 
-    file-service:
-        <<: *logging
+    file:
+        # <<: *logging
         build:
             context: ./file-service
             dockerfile: Dockerfile
@@ -143,23 +143,26 @@ services:
             SENDINBLUE_APIKEY: mening_brevo_api_kalitim
         networks:
             - microservices-network
-
     gateway:
-        build:
-            context: ./gateway
-            dockerfile: Dockerfile
-        container_name: api_gateway_container
-        restart: always
-        ports:
-            - '8080:8080'
-        depends_on:
-            - user
-            - chat
-            - notification
-        environment:
-            PORT: 8080
-        networks:
-            - microservices-network
+      build: ./gateway
+      container_name: api-gateway
+      ports:
+        - "8080:8080"
+      environment:
+        - GATEWAY_PORT=8080
+        - USER_SERVICE_URL=http://user:8081
+        - CHAT_SERVICE_URL=http://chat:8082
+        - FILE_SERVICE_URL=http://file:3001
+        - MEDIA_SERVICE_URL=http://media_server:3001
+        - NOTIFICATION_SERVICE_URL=http://notification:8083
+      depends_on:
+        - user
+        - chat
+        - file
+        - media_server
+      networks:
+        - microservices-network
+      restart: unless-stopped
 
     # ui:
     #     build:
