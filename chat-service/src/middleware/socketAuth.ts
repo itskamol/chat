@@ -2,15 +2,7 @@ import { ExtendedError } from 'socket.io/dist/namespace';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 import { logger } from '../utils';
-import { AuthenticatedSocket } from '@chat/shared';
-
-interface TokenPayload {
-    id: string;
-    name: string;
-    email: string;
-    iat?: number;
-    exp?: number;
-}
+import { AuthenticatedSocket, TokenPayload } from '@chat/shared';
 
 export const socketAuthMiddleware = (
     socket: AuthenticatedSocket,

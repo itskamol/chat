@@ -4,7 +4,6 @@ import {
     SendMessagePayload,
     GetMessagesPayload,
     MarkMessageAsReadPayload,
-    MessageType // Assuming MessageType might be used if not already part of SendMessagePayload
 } from '@chat/shared';
 import { SocketMessageController } from '../../controllers/SocketMessageController';
 import { logger } from '../../utils'; // Added logger for safety

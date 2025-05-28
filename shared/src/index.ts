@@ -1,3 +1,3 @@
 export * from './types';
-export * from './socket';
+export * from './socket/index';
 export * from './enums';

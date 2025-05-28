@@ -1,6 +1,5 @@
 import { Request } from "express";
 import { IUser } from "../middleware";
-import { MessageType } from "@chat/shared";
 
 export interface FileUploadOptions {
     file: Express.Multer.File;

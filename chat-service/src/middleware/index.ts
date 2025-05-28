@@ -2,15 +2,8 @@ import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import jwt from "jsonwebtoken";
 import multer from "multer"; // Import multer to check for MulterError instance
 import { ApiError } from "../utils";
+import { TokenPayload } from "@chat/shared";
 import config from "../config/config";
-
-export interface TokenPayload {
-    id: string;
-    name: string;
-    email: string;
-    iat: number;
-    exp: number;
-}
 
 export interface IUser {
     _id: string;
