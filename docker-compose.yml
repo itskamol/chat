@@ -88,14 +88,43 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
-            PORT: 8082 # Bu environment qatori takrorlangan edi, bittasini qoldirdim
+            PORT: 8082
             MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
             MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
             JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-        volumes: # Added volumes section for chat service
-            - ./chat_service_uploads:/app/uploads
+            FILE_SERVICE_URL: http://file-service:3001/api/files # Added for file-service integration
+        # volumes: # Removed old local upload volume
+            # - ./chat_service_uploads:/app/uploads 
         networks:
             - microservices-network
+        depends_on: # Added depends_on for file-service
+            mongodb:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+            file-service: # Added dependency
+                condition: service_started # or service_healthy if file-service implements a healthcheck
+
+    file-service:
+        <<: *logging
+        build:
+            context: ./file-service
+            dockerfile: Dockerfile
+        container_name: file_service_container
+        restart: unless-stopped
+        ports:
+            - "3001:3001" # Expose port 3001 on host to container's port 3001
+        env_file:
+            - ./file-service/.env # Assumes file-service has its own .env for S3 creds etc.
+        networks:
+            - microservices-network
+        # depends_on: # Add if file-service depends on other services like a database (not in this case)
+        # healthcheck: # Optional: Implement a healthcheck in file-service if needed
+            # test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+            # interval: 10s
+            # timeout: 5s
+            # retries: 5
+            # start_period: 30s
 
     notification:
         build:

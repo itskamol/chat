@@ -30,12 +30,16 @@ import type {
     AuthenticatedSocket,
 } from '@chat/shared';
 
-// Initialize server and database
+// Global variable for the HTTP server instance
 let server: Server;
+
+// Establish connection to MongoDB
 connectDB();
 
+// Start the HTTP server, listening on the port defined in the configuration.
+// The Express app instance (from app.ts) handles HTTP requests.
 server = app.listen(config.PORT, () => {
-    logger.info(`Server is running on port ${config.PORT}`);
+    logger.info(`Chat Service HTTP server is running on port ${config.PORT}`);
 });
 
 // Initialize core services that don't depend on Socket.IO
@@ -45,10 +49,10 @@ const webrtcService = new WebRTCService(roomService, mediaServerClient);
 
 // Initialize Socket.IO first without controllers
 const io = new SocketIOServer<
-    ClientToServerEvents,
-    ServerToClientEvents,
-    InterServerEvents,
-    SocketData
+    ClientToServerEvents,  // Typed events from client to server
+    ServerToClientEvents,  // Typed events from server to client
+    InterServerEvents,     // Typed events for server-to-server communication (not used here)
+    SocketData             // Typed data associated with each socket (e.g., user info)
 >(server, {
     cors: { origin: 'http://localhost:3000', methods: ['GET', 'POST'] },
     transports: ['websocket', 'polling'],
@@ -61,19 +65,15 @@ const messageService = new MessageService(io);
 // Initialize controllers with all their dependencies
 const webrtcController = new WebRTCController(io, roomService, webrtcService);
 const socketController = new SocketController(io, socketService);
-const socketMessageController = new SocketMessageController(
-    io,
-    messageService,
-    socketService
-);
+const socketMessageController = new SocketMessageController(io, messageService, socketService);
 
 // Setup socket handlers
 io.use(socketAuthMiddleware);
 
 io.on('connection', async (socket: AuthenticatedSocket) => {
     if (!socket.data.user) {
-        logger.error('Socket connected without user data');
-        socket.disconnect();
+        logger.error('Socket connected without user data after auth middleware. Disconnecting.', { socketId: socket.id });
+        socket.disconnect(true); // true for server-initiated disconnect
         return;
     }
 
@@ -91,7 +91,7 @@ io.on('connection', async (socket: AuthenticatedSocket) => {
 
 const exitHandler = () => {
     if (server) {
-        server.close(() => {
+        server.close(() => { // Close the HTTP server
             logger.info('Server closed');
             process.exit(1);
         });
