@@ -1,6 +1,6 @@
 import * as amqp from 'amqplib';
 import { v4 as uuidv4 } from "uuid";
-import config from "../config/config";
+import { env, queueConfig } from "../config/env";
 
 class RabbitMQService {
     private requestQueue = "USER_DETAILS_REQUEST";
@@ -17,11 +17,11 @@ class RabbitMQService {
 
     async init() {
         try {
-            if (!config.msgBrokerURL) {
+            if (!env.MESSAGE_BROKER_URL) {
                 throw new Error("RabbitMQ URL not configured");
             }
 
-            const connection = await amqp.connect(config.msgBrokerURL);
+            const connection = await amqp.connect(env.MESSAGE_BROKER_URL);
             this.channel = await connection.createChannel();
 
             const queueConfig = {
@@ -112,7 +112,7 @@ class RabbitMQService {
             throw new Error('RabbitMQ channel not available');
         }
 
-        if (!config.queue?.notifications) {
+        if (!queueConfig?.notifications) {
             throw new Error('Notifications queue not configured');
         }
 
@@ -127,7 +127,7 @@ class RabbitMQService {
             };
 
             try {
-                await this.channel?.assertQueue(config.queue.notifications, {
+                await this.channel?.assertQueue(queueConfig.notifications, {
                     durable: true,
                     arguments: {
                         'x-message-ttl': 24 * 60 * 60 * 1000,
@@ -136,7 +136,7 @@ class RabbitMQService {
                 });
 
                 this.channel?.sendToQueue(
-                    config.queue.notifications,
+                    queueConfig.notifications,
                     Buffer.from(JSON.stringify(notificationPayload)),
                     { persistent: true }
                 );

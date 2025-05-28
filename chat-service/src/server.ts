@@ -1,7 +1,7 @@
 import { Server } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import app from './app';
-import config from './config/config';
+import { env } from './config/env';
 import { logger } from './utils';
 import { connectDB } from './database';
 
@@ -34,8 +34,8 @@ import type {
 let server: Server;
 connectDB();
 
-server = app.listen(config.PORT, () => {
-    logger.info(`Server is running on port ${config.PORT}`);
+server = app.listen(env.PORT, () => {
+    logger.info(`Server is running on port ${env.PORT}`);
 });
 
 // Initialize core services that don't depend on Socket.IO

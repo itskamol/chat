@@ -1,13 +1,13 @@
 import AWS from 'aws-sdk';
-import config from '../config/config'; // Assuming config loads env variables
+import { env } from '../config/env'; // Assuming config loads env variables
 import { logger } from '../utils';
 
 // Configure AWS S3
 // Ensure your environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_S3_BUCKET_NAME are set.
 const s3 = new AWS.S3({
-    accessKeyId: config.AWS_ACCESS_KEY_ID,
-    secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
-    region: config.AWS_REGION,
+    accessKeyId: env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+    region: env.AWS_REGION,
 });
 
 interface UploadResult {
@@ -27,14 +27,14 @@ export const uploadFileToS3 = async (
     originalname: string,
     mimeType: string
 ): Promise<UploadResult> => {
-    if (!config.AWS_S3_BUCKET_NAME) {
+    if (!env.AWS_S3_BUCKET_NAME) {
         throw new Error('AWS_S3_BUCKET_NAME is not defined in environment variables.');
     }
 
     const s3Key = `${Date.now()}-${originalname.replace(/\s+/g, '_')}`;
 
     const params: AWS.S3.PutObjectRequest = {
-        Bucket: config.AWS_S3_BUCKET_NAME,
+        Bucket: env.AWS_S3_BUCKET_NAME,
         Key: s3Key,
         Body: fileBuffer,
         ContentType: mimeType,
@@ -57,7 +57,7 @@ export const uploadFileToS3 = async (
  * @returns Promise resolving to void.
  */
 export const deleteFileFromS3 = async (s3Key: string): Promise<void> => {
-    if (!config.AWS_S3_BUCKET_NAME) {
+    if (!env.AWS_S3_BUCKET_NAME) {
         throw new Error('AWS_S3_BUCKET_NAME is not defined in environment variables.');
     }
     if (!s3Key) {
@@ -66,7 +66,7 @@ export const deleteFileFromS3 = async (s3Key: string): Promise<void> => {
     }
 
     const params: AWS.S3.DeleteObjectRequest = {
-        Bucket: config.AWS_S3_BUCKET_NAME,
+        Bucket: env.AWS_S3_BUCKET_NAME,
         Key: s3Key,
     };
 

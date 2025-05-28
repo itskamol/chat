@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Request } from 'express';
 import { ApiError } from '../utils/apiError';
 import { FileService } from '../services/fileService';
-import config from '../config/config';
+import { env } from '../config/env';
 
 const TEMP_UPLOAD_DIR = path.join(process.cwd(), '..', 'uploads', 'temp');
 
@@ -43,7 +43,7 @@ const upload = multer({
     storage,
     fileFilter,
     limits: {
-        fileSize: config.maxFileSizeBytes || 10 * 1024 * 1024, // Default 10MB if not configured
+        fileSize: env.MAX_FILE_SIZE_MB * 1024 * 1024, // Convert MB to Bytes
         files: 1,
     },
 });

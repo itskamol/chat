@@ -1,6 +1,6 @@
 import { ExtendedError } from 'socket.io/dist/namespace';
 import jwt from 'jsonwebtoken';
-import config from '../config/config';
+import { env } from '../config/env';
 import { logger } from '../utils';
 import { AuthenticatedSocket, TokenPayload } from '@chat/shared';
 
@@ -16,7 +16,7 @@ export const socketAuthMiddleware = (
         }
 
         // Verify JWT token
-        const decoded = jwt.verify(token, config.JWT_SECRET) as TokenPayload;
+        const decoded = jwt.verify(token, env.JWT_SECRET) as TokenPayload;
         if (decoded && decoded.id) {
             // Store user data in socket.data instead of socket.user
             socket.data.user = {

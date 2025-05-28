@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { uploadFileToS3 } from './s3Service';
-import config from '../config/config';
+import { env } from '../config/env';
 import { logger } from '../utils';
 import type { FileUploadResult } from '../types/message.types';
 
@@ -24,7 +24,7 @@ export class FileService {
     }
 
     static async uploadFile(file: Express.Multer.File): Promise<FileUploadResult> {
-        if (config.STORAGE_TYPE === 's3') {
+        if (env.STORAGE_TYPE === 's3') {
             if (!file.path) {
                 throw new Error('Temporary file path missing for S3 upload.');
             }

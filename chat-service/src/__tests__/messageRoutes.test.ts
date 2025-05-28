@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../app'; // Adjust path to your Express app
 import fs from 'fs';
 import path from 'path';
-import config from '../config/config'; // To access config values
+import { env } from '../config/env'; // To access config values
 import Message from '../database/models/MessageModel'; // For DB cleanup or setup if needed
 import mongoose from 'mongoose';
 
@@ -38,9 +38,9 @@ describe('File Upload and Serving API (/v1/messages & /media)', () => {
         // This example assumes your app.ts or database connection logic handles this,
         // or you might need to explicitly connect here.
         // For simplicity, we're not managing a separate test DB here, which is not ideal for real projects.
-        if (mongoose.connection.readyState === 0 && config.MONGO_URI) {
+        if (mongoose.connection.readyState === 0 && env.MONGO_URI) {
              try {
-                await mongoose.connect(config.MONGO_URI);
+                await mongoose.connect(env.MONGO_URI);
              } catch (e) {
                 console.error("Failed to connect to MongoDB for tests", e);
                 process.exit(1);
@@ -103,12 +103,12 @@ describe('File Upload and Serving API (/v1/messages & /media)', () => {
         });
 
         it('should reject upload if file is too large', async () => {
-            // This test assumes config.maxFileSizeBytes is set (e.g., 1MB)
+            // This test assumes env.MAX_FILE_SIZE_MB is set (e.g., 1MB)
             // We create a file slightly larger than the default 10MB to test the hardcoded limit if not overriding config
-            // For a more robust test, you'd mock config.maxFileSizeBytes
-            const originalMaxFileSize = config.maxFileSizeBytes;
-            // @ts-ignore - Temporarily modify config for this test
-            config.maxFileSizeBytes = 1 * 1024; // 1KB for test
+            // For a more robust test, you'd mock env.MAX_FILE_SIZE_MB
+            const originalMaxFileSize = env.MAX_FILE_SIZE_MB * 1024 * 1024; // Convert MB to Bytes
+            // @ts-ignore - Temporarily modify env for this test
+            env.MAX_FILE_SIZE_MB = (1 * 1024) / (1024 * 1024); // 1KB for test, store as MB
 
             testFile = createDummyFile('large-file.txt', 2 * 1024); // 2KB
 
@@ -122,14 +122,14 @@ describe('File Upload and Serving API (/v1/messages & /media)', () => {
             expect(response.body.message).toMatch(/File too large/);
             
             // @ts-ignore
-            config.maxFileSizeBytes = originalMaxFileSize; // Restore original config
+            env.MAX_FILE_SIZE_MB = originalMaxFileSize / (1024*1024); // Restore original config by converting back to MB
             if (fs.existsSync(testFile.filePath)) fs.unlinkSync(testFile.filePath);
         });
 
         it('should reject upload for disallowed MIME type', async () => {
-            const originalAllowedTypes = new Set(config.allowedMimeTypesSet);
+            const originalAllowedTypes = env.ALLOWED_MIME_TYPES;
             // @ts-ignore
-            config.allowedMimeTypesSet = new Set(['image/png']); // Only allow PNG for this test
+            env.ALLOWED_MIME_TYPES = new Set(['image/png']); // Only allow PNG for this test
 
             testFile = createDummyFile('disallowed-type.txt', 100, 'text/plain');
 
@@ -143,7 +143,7 @@ describe('File Upload and Serving API (/v1/messages & /media)', () => {
             expect(response.body.message).toBe('File type not allowed');
 
             // @ts-ignore
-            config.allowedMimeTypesSet = originalAllowedTypes; // Restore
+            env.ALLOWED_MIME_TYPES = originalAllowedTypes; // Restore
             if (fs.existsSync(testFile.filePath)) fs.unlinkSync(testFile.filePath);
         });
 

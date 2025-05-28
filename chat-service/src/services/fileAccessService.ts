@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { logger } from '../utils';
-import config from '../config/config';
+import { env } from '../config/env';
 import Message from '../database/models/MessageModel';
 import { Message as IMessage } from '@chat/shared'; // Assuming IMessage is the interface for Message
 import { ApiError } from '../utils/apiError';
@@ -44,10 +44,10 @@ export class FileAccessService {
     }
 
     static getStorageType(): 'local' | 's3' {
-        if (config.STORAGE_TYPE !== 'local' && config.STORAGE_TYPE !== 's3') {
-            logger.error(`Unknown STORAGE_TYPE: ${config.STORAGE_TYPE}`);
+        if (env.STORAGE_TYPE !== 'local' && env.STORAGE_TYPE !== 's3') {
+            logger.error(`Unknown STORAGE_TYPE: ${env.STORAGE_TYPE}`);
             throw new ApiError(500, 'Server storage configuration error');
         }
-        return config.STORAGE_TYPE;
+        return env.STORAGE_TYPE;
     }
 }
