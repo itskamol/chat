@@ -1,23 +1,21 @@
 {
   "name": "chat-app",
   "private": true,
-  "workspaces": [
-    "shared",
-    "ui",
-    "chat-service",
-    "user-service",
-    "notification-service",
-    "file-service",
-    "media-server",
-    "gateway"
-  ],
   "scripts": {
-    "build:shared": "cd shared && npm run build",
-    "dev": "npm run build:shared && concurrently \"npm run dev:ui\" \"npm run dev:services\"",
-    "dev:ui": "cd ui && npm run dev",
-    "dev:services": "concurrently \"cd chat-service && npm run dev\" \"cd user-service && npm run dev\" \"cd notification-service && npm run dev\" \"cd media-server && npm run dev\" \"cd gateway && npm run dev\""
+    "build:shared": "cd shared && pnpm run build",
+    "dev": "pnpm run build:shared && concurrently \"pnpm run dev:ui\" \"pnpm run dev:services\"",
+    "dev:ui": "cd ui && pnpm run dev",
+    "dev:services": "concurrently \"cd chat-service && pnpm run dev\" \"cd user-service && pnpm run dev\" \"cd notification-service && pnpm run dev\" \"cd media-server && pnpm run dev\" \"cd gateway && pnpm run dev\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "@chat/shared": "link:../../.local/share/pnpm/global/5/node_modules/@chat/shared"
+    }
+  },
+  "dependencies": {
+    "@chat/shared": "link:../../.local/share/pnpm/global/5/node_modules/@chat/shared"
   }
 }

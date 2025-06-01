@@ -1,265 +1,274 @@
+version: '3.8'
+
 x-logging: &logging
-    logging:
-        driver: none
+  logging:
+    driver: none # Loglarni ko'rish uchun "json-file" ga o'zgartiring yoki olib tashlang
+
+x-node-service-defaults: &node-service-defaults
+  build:
+    context: . # Monorepo root
+    # dockerfile va args har bir servisda alohida ko'rsatiladi
+  restart: always
+  networks:
+    - microservices-network
+  volumes:
+    # SERVICE_CODE_PATH va SERVICE_PACKAGE_NAME har bir servisda alohida o'rnatiladi
+    # - ./SERVICE_CODE_PATH:/usr/src/app # Bu o'rniga har bir servisda aniq yo'l
+    - ./packages/shared:/usr/src/app/node_modules/@chat/shared # @chat/shared uchun umumiy
+    - /usr/src/app/node_modules # Har bir servisning o'z node_modules ini saqlash uchun
+  working_dir: /usr/src/app # Dockerfile dagi WORKDIR bilan bir xil
+  command: pnpm run dev # Mahalliy ishlab chiqish uchun standart buyruq
+  environment:
+    NODE_ENV: development
+    CHOKIDAR_USEPOLLING: "true" # Nodemon uchun fayl o'zgarishlarini yaxshiroq kuzatish
 
 services:
-    mongodb:
-        <<: *logging
-        image: mongo:latest
-        container_name: mongodb_container
-        restart: unless-stopped
-        logging:
-            driver: none # Agar muammo bo'lsa, loglarni ko'rish uchun buni olib tashlang yoki 'json-file' ga o'zgartiring
-        # ports:
-        #     - '27017:27017' # Lokal test uchun kerak bo'lsa oching
-        volumes:
-            - mongo-data:/data/db
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: password
-        networks:
-            - microservices-network
-        healthcheck:
-            # MongoDB 6+ versiyalari uchun `mongosh` dan foydalaning.
-            # Eski versiyalar uchun `mongo --eval 'db.runCommand("ping").ok'`
-            test: |
-                mongosh --host localhost --port 27017 --eval \
-                'db.runCommand("ping").ok' || exit 1
-            interval: 10s
-            timeout: 5s
-            retries: 5
-            start_period: 30s # Konteyner ishga tushgandan keyin healthcheck boshlanishidan oldin kutish vaqti
+  mongodb:
+    <<: *logging
+    image: mongo:latest
+    container_name: mongodb_container
+    restart: unless-stopped
+    ports:
+      - '27017:27017' # Mahalliy ulanish uchun ochamiz
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - microservices-network
+    healthcheck:
+      test: |
+        mongosh --host localhost --port 27017 --eval \
+        'db.runCommand("ping").ok' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-    rabbitmq:
-        <<: *logging
-        image: rabbitmq:management
-        container_name: rabbitmq_container
-        restart: unless-stopped
-        logging:
-            driver: none # Agar muammo bo'lsa, loglarni ko'rish uchun buni olib tashlang yoki 'json-file' ga o'zgartiring
-        ports:
-            - '5672:5672'  # Lokal test uchun kerak bo'lsa oching
-        #     - '15672:15672' # RabbitMQ Management UI uchun
-        environment:
-            RABBITMQ_DEFAULT_USER: guest
-            RABBITMQ_DEFAULT_PASS: guest
-        networks:
-            - microservices-network
-        healthcheck:
-            test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
-            interval: 10s
-            timeout: 5s
-            retries: 5
-            start_period: 30s
+  rabbitmq:
+    <<: *logging
+    image: rabbitmq:management
+    container_name: rabbitmq_container
+    restart: unless-stopped
+    ports:
+      - '5672:5672'
+      - '15672:15672' # RabbitMQ Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-    user:
-        build:
-            context: ./user-service
-            dockerfile: Dockerfile
-        container_name: user_service_container
-        restart: always
-        ports:
-            - '8081:8081'
-        depends_on:
-            mongodb:
-                condition: service_healthy # MongoDB tayyor bo'lguncha kutadi
-            rabbitmq:
-                condition: service_healthy # RabbitMQ tayyor bo'lguncha kutadi
-        environment:
-            NODE_ENV: production
-            MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-        networks:
-            - microservices-network
+  user:
+    <<: *node-service-defaults # Umumiy sozlamalarni meros qilib oladi
+    build:
+      context: .
+      dockerfile: ./services/user-service/Dockerfile
+      args: # Dockerfile dagi ARG larni o'rnatish
+        SERVICE_NAME: "@chat/user-service"
+        SERVICE_PATH: "services/user-service"
+    container_name: user_service_container
+    ports:
+      - '8081:8081' # Dockerfile dagi EXPOSE portiga mos kelishi kerak
+    depends_on:
+      mongodb: { condition: service_healthy }
+      rabbitmq: { condition: service_healthy }
+    volumes: # Umumiy volumes ni kengaytiramiz
+      - ./services/user-service:/usr/src/app # User-service kodini mount qilish
+      - ./packages/shared:/usr/src/app/node_modules/@chat/shared # Bu x-node-service-defaults da bor, lekin aniqlik uchun
+      - /usr/src/app/node_modules # Bu ham x-node-service-defaults da bor
+    environment:
+      <<: *node-service-defaults.environment # Umumiy environment ni meros qilib oladi
+      # Servisga xos environment o'zgaruvchilari
+      MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
+      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+      JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+      PORT: 8081
 
-    chat:
-        build:
-            context: ./chat-service
-            dockerfile: Dockerfile
-        container_name: chat_service_container
-        restart: always
-        ports:
-            - '8082:8082'
-        depends_on: # Added depends_on for file-service
-            mongodb:
-                condition: service_healthy
-            rabbitmq:
-                condition: service_healthy
-            file: # Added dependency
-                condition: service_started # or service_healthy if file-service implements a healthcheck
-        environment:
-            NODE_ENV: production
-            PORT: 8082
-            MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-            JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-            FILE_SERVICE_URL: http://file:3001/api/files # Added for file-service integration
-        # volumes: # Removed old local upload volume
-            # - ./chat_service_uploads:/app/uploads 
-        networks:
-            - microservices-network
+  chat:
+    <<: *node-service-defaults
+    build:
+      context: .
+      dockerfile: ./services/chat-service/Dockerfile
+      args:
+        SERVICE_NAME: "@chat/chat-service"
+        SERVICE_PATH: "services/chat-service"
+    container_name: chat_service_container
+    ports:
+      - '8082:8082'
+    depends_on:
+      mongodb: { condition: service_healthy }
+      rabbitmq: { condition: service_healthy }
+      file: { condition: service_started } # Yoki service_healthy
+    volumes:
+      - ./services/chat-service:/usr/src/app
+      - ./packages/shared:/usr/src/app/node_modules/@chat/shared
+      - /usr/src/app/node_modules
+    environment:
+      <<: *node-service-defaults.environment
+      MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
+      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+      JWT_SECRET: mening_juda_maxfiy_kalitim_12345
+      FILE_SERVICE_URL: http://file:3001 # Konteyner nomi bilan
+      PORT: 8082
 
-    file:
-        # <<: *logging
-        build:
-            context: ./file-service
-            dockerfile: Dockerfile
-        container_name: file_service_container
-        restart: unless-stopped
-        ports:
-            - "3001:3001" # Expose port 3001 on host to container's port 3001
-        env_file:
-            - ./file-service/.env # Assumes file-service has its own .env for S3 creds etc.
-        networks:
-            - microservices-network
-        # depends_on: # Add if file-service depends on other services like a database (not in this case)
-        # healthcheck: # Optional: Implement a healthcheck in file-service if needed
-            # test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
-            # interval: 10s
-            # timeout: 5s
-            # retries: 5
-            # start_period: 30s
+  file:
+    <<: *node-service-defaults
+    build:
+      context: .
+      dockerfile: ./services/file-service/Dockerfile
+      args:
+        SERVICE_NAME: "@chat/file-service" # package.json ga moslang
+        SERVICE_PATH: "services/file-service"
+    container_name: file_service_container
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./services/file-service:/usr/src/app
+      # Agar file-service @chat/shared ni ishlatsa:
+      - ./packages/shared:/usr/src/app/node_modules/@chat/shared
+      - /usr/src/app/node_modules
+    environment:
+      <<: *node-service-defaults.environment
+      PORT: 3001
+      AWS_ACCESS_KEY_ID: dummy_key_for_testing # .env faylidan olish yaxshiroq
+      AWS_SECRET_ACCESS_KEY: dummy_secret_for_testing
+      AWS_REGION: us-east-1
+      BUCKET_NAME: test-bucket
+      # ... (qolgan file-service environment o'zgaruvchilari)
 
-    notification:
-        build:
-            context: ./notification-service
-            dockerfile: Dockerfile
-        container_name: notification_service_container
-        restart: always
-        ports:
-            - '8083:8083'
-        depends_on:
-            rabbitmq:
-                condition: service_healthy
-        environment:
-            NODE_ENV: production
-            MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-            SMTP_HOST: smtp-relay.brevo.com
-            SMTP_PORT: 587
-            SMTP_USER: mening_brevo_account_emailim@example.com
-            SMTP_PASS: mening_brevo_master_passwordim
-            EMAIL_FROM: chat-server@meningdomenim.com
-            SENDINBLUE_APIKEY: mening_brevo_api_kalitim
-        networks:
-            - microservices-network
-    gateway:
-      build: ./gateway
-      container_name: api-gateway
-      ports:
-        - "8080:8080"
-      environment:
-        - GATEWAY_PORT=8080
-        - USER_SERVICE_URL=http://user:8081
-        - CHAT_SERVICE_URL=http://chat:8082
-        - FILE_SERVICE_URL=http://file:3001
-        - MEDIA_SERVICE_URL=http://media_server:3001
-        - NOTIFICATION_SERVICE_URL=http://notification:8083
-      depends_on:
-        - user
-        - chat
-        - file
-        - media_server
-      networks:
-        - microservices-network
-      restart: unless-stopped
+  notification:
+    <<: *node-service-defaults
+    build:
+      context: .
+      dockerfile: ./services/notification-service/Dockerfile
+      args:
+        SERVICE_NAME: "@chat/notification-service" # package.json ga moslang
+        SERVICE_PATH: "services/notification-service"
+    container_name: notification_service_container
+    ports:
+      - '8083:8083'
+    depends_on:
+      rabbitmq: { condition: service_healthy }
+    volumes:
+      - ./services/notification-service:/usr/src/app
+      # Agar notification-service @chat/shared ni ishlatsa:
+      - ./packages/shared:/usr/src/app/node_modules/@chat/shared
+      - /usr/src/app/node_modules
+    environment:
+      <<: *node-service-defaults.environment
+      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
+      SMTP_HOST: smtp-relay.brevo.com # .env faylidan olish yaxshiroq
+      # ... (qolgan notification-service environment o'zgaruvchilari)
+      PORT: 8083
 
-    # ui:
-    #     build:
-    #         context: ./ui
-    #         dockerfile: Dockerfile
-    #     container_name: ui_container
-    #     ports:
-    #         - '3000:3000'
-    #     restart: always
-    #     depends_on:
-    #         - gateway
-    #         - chat # UI chat servisiga to'g'ridan-to'g'ri WS orqali ulanishi mumkin
-    #     environment:
-    #         # Docker network ichida gateway container nomi ishlatiladi
-    #         NEXT_PUBLIC_API_BASE_URL: http://localhost/api
-    #         NEXT_PUBLIC_WS_URL: http://localhost
-    #     networks:
-    #         - microservices-network
-    nginx:
-        build:
-            context: ./nginx
-            dockerfile: Dockerfile
-        container_name: nginx_container
-        restart: always
-        ports:
-            - '80:80'
-            # - '443:443' # SSL uchun (keyinchalik)
-        depends_on:
-            - gateway
-            # - ui
-            - chat
-        networks:
-            - microservices-network
+  gateway:
+    # Gateway uchun alohida sozlamalar, agar u Node.js va pnpm workspace qismi bo'lsa,
+    # <<: *node-service-defaults dan foydalanish mumkin
+    build:
+      context: ./gateway # Yoki context: . agar Dockerfile monorepo rootida bo'lsa va args ishlatsa
+      dockerfile: Dockerfile # ./gateway/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    volumes: # Agar gateway kodini live-reload qilish kerak bo'lsa
+      - ./gateway:/usr/src/app
+      # Agar gateway @chat/shared ni ishlatsa:
+      # - ./packages/shared:/usr/src/app/node_modules/@chat/shared
+      # - /usr/src/app/node_modules
+    # working_dir va command ni gateway ning ehtiyojlariga moslang
+    environment:
+      NODE_ENV: development # Yoki production
+      GATEWAY_PORT: 8080
+      USER_SERVICE_URL: http://user:8081
+      CHAT_SERVICE_URL: http://chat:8082
+      FILE_SERVICE_URL: http://file:3001
+      NOTIFICATION_SERVICE_URL: http://notification:8083
+      MEDIA_SERVICE_URL: http://media_server:3001 # media_server porti
+    depends_on:
+      - user
+      - chat
+      - file
+      - notification
+      - media_server # Gateway media_server ga bog'liq bo'lsa
+    networks:
+      - microservices-network
+    restart: unless-stopped
 
-    media_server:
-        build:
-            context: ./media-server
-            dockerfile: Dockerfile
-        container_name: media_server_container
-        restart: always
-        ports:
-            - '3001:3001' # As per media-server/src/config.ts (default)
-            # Mediasoup RTP ports (UDP) - These need to be open on the host
-            # and match MEDIASOUP_RTP_MIN_PORT and MEDIASOUP_RTP_MAX_PORT
-            - '20000-20020:20000-20020/udp'
-        networks:
-            - microservices-network
-        environment:
-            PORT: 3001
-            MEDIASOUP_LISTEN_IP: 0.0.0.0
-            # MEDIASOUP_ANNOUNCED_IP should be the IP address of the host machine accessible by clients.
-            # For local development, 127.0.0.1 or host's LAN IP. In production, public IP.
-            # This can also be the IP of Nginx if traffic is routed through it (more complex setup).
-            MEDIASOUP_ANNOUNCED_IP: 127.0.0.1 # Placeholder, adjust as needed
-            MEDIASOUP_RTP_MIN_PORT: 20000 # Renamed from MEDIASOUP_RTC_MIN_PORT for clarity
-            MEDIASOUP_RTP_MAX_PORT: 20020 # Renamed from MEDIASOUP_RTC_MAX_PORT for clarity
-            DEBUG: mediasoup:* # Enable mediasoup logs
-        # volumes:
-            # - ./media-server-logs:/opt/media-server/logs # Optional: if your app logs to a file
-        # depends_on: # Add if media-server relies on other services at startup
-            # - rabbitmq
+  nginx:
+    # <<: *logging # Agar kerak bo'lsa
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx_container
+    restart: always
+    ports:
+      - '80:80'
+    depends_on:
+      - gateway
+      - chat # WebSocket uchun to'g'ridan-to'g'ri ulanish bo'lsa
+    networks:
+      - microservices-network
 
-    turn_server:
-        image: coturn/coturn
-        container_name: coturn_container
-        restart: always
-        networks:
-            - microservices-network
-        ports:
-            - '3478:3478/tcp'
-            - '3478:3478/udp'
-            - '5349:5349/tcp' # TURN/TLS
-            - '5349:5349/udp' # TURN/DTLS
-            # Relay ports for media. Coturn's default is 49152-65535.
-            # If you want to restrict it, uncomment and set min-port/max-port in turnserver.conf
-            # and map them here. For now, we rely on coturn's default or what's in its config.
-            # Example: - '49152-49200:49152-49200/udp'
-        volumes:
-            - ./turn_config/turnserver.conf:/etc/coturn/turnserver.conf:ro
-        # The coturn image uses the config file by default.
-        # Environment variables can override some settings if the image supports it,
-        # but for a full config, the file mount is standard.
-        # The command can be used to pass additional CLI args to coturn, e.g., for logging.
-        # command: "-L stdout" # Example to force log to stdout if not default
-        healthcheck:
-            # Coturn doesn't have a simple TCP ping healthcheck by default.
-            # A simple check could be to see if the process is running.
-            # For a more robust check, a custom script or tool would be needed to test STUN/TURN functionality.
-            test: ["CMD-SHELL", "netstat -tulnp | grep 3478 || exit 1"]
-            interval: 30s
-            timeout: 10s
-            retries: 3
-            start_period: 20s
+  media_server:
+    # <<: *logging # Agar kerak bo'lsa
+    build:
+      context: ./media-server # Agar monorepo qismi bo'lsa
+      dockerfile: Dockerfile
+    container_name: media_server_container
+    restart: always
+    ports:
+      - '3002:3001' # Host portini o'zgartirdik (file-service bilan to'qnashmasligi uchun)
+      - '20000-20020:20000-20020/udp'
+    volumes: # Agar media-server kodini live-reload qilish kerak bo'lsa va monorepo qismi bo'lsa
+      - ./media-server:/usr/src/app
+      # Agar media-server @chat/shared ni ishlatsa:
+      # - ./packages/shared:/usr/src/app/node_modules/@chat/shared
+      # - /usr/src/app/node_modules
+    # working_dir va command ni media-server ehtiyojlariga moslang
+    environment:
+      NODE_ENV: development # Yoki production
+      PORT: 3001
+      MEDIASOUP_LISTEN_IP: 0.0.0.0
+      MEDIASOUP_ANNOUNCED_IP: 127.0.0.1 # Tashqi IP ga o'zgartiring
+      MEDIASOUP_RTP_MIN_PORT: 20000
+      MEDIASOUP_RTP_MAX_PORT: 20020
+      DEBUG: mediasoup:*
+    networks:
+      - microservices-network
+
+  turn_server:
+    # <<: *logging # Agar kerak bo'lsa
+    image: coturn/coturn
+    container_name: coturn_container
+    restart: always
+    networks:
+      - microservices-network
+    ports:
+      - '3478:3478/tcp'
+      - '3478:3478/udp'
+      - '5349:5349/tcp'
+      - '5349:5349/udp'
+      - '49152-49200:49152-49200/udp' # Relay portlarini cheklash (turnserver.conf ga mos)
+    volumes:
+      - ./turn_config/turnserver.conf:/etc/coturn/turnserver.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "netstat -tulnp | grep 3478 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
 volumes:
-    mongo-data:
+  mongo-data:
 
 networks:
-    microservices-network:
-        driver: bridge
+  microservices-network:
+    driver: bridge
