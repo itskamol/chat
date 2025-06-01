@@ -1,15 +1,26 @@
-FROM node:18-alpine
+FROM node:22-alpine
+
+# Install pnpm globally
+RUN npm install -g pnpm
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+# Copy package.json and pnpm-lock.yaml first for better caching
+COPY services/notification-service/package*.json ./
+COPY services/notification-service/pnpm-lock.yaml* ./
 
-RUN npm install
+# Install dependencies
+RUN pnpm install
 
-COPY . .
+# Copy service source code
+COPY services/notification-service .
 
-RUN npm run build
+# Copy shared package if needed
+COPY packages/shared ./node_modules/@chat/shared
+
+# Build the application
+RUN pnpm build
 
 EXPOSE 8083
 
-CMD [ "npm", "start" ]
+CMD ["pnpm", "run", "start"]

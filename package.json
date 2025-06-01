@@ -1,21 +1,29 @@
 {
-  "name": "chat-app",
-  "private": true,
-  "scripts": {
-    "build:shared": "cd shared && pnpm run build",
-    "dev": "pnpm run build:shared && concurrently \"pnpm run dev:ui\" \"pnpm run dev:services\"",
-    "dev:ui": "cd ui && pnpm run dev",
-    "dev:services": "concurrently \"cd chat-service && pnpm run dev\" \"cd user-service && pnpm run dev\" \"cd notification-service && pnpm run dev\" \"cd media-server && pnpm run dev\" \"cd gateway && pnpm run dev\""
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "@chat/shared": "link:../../.local/share/pnpm/global/5/node_modules/@chat/shared"
+    "name": "@chat/monorepo",
+    "private": true,
+    "workspaces": [
+        "services/*",
+        "packages/*",
+        "gateway",
+        "ui"
+    ],
+    "scripts": {
+        "build": "pnpm run build:shared && pnpm run build:services && pnpm run build:gateway && pnpm run build:ui",
+        "build:shared": "pnpm --filter @chat/shared build",
+        "build:services": "pnpm --filter './services/*' build",
+        "build:gateway": "pnpm --filter gateway build",
+        "build:ui": "pnpm --filter ui build",
+        "dev": "pnpm run build:shared && concurrently \"pnpm run dev:shared\" \"pnpm run dev:services\" \"pnpm run dev:gateway\" \"pnpm run dev:ui\"",
+        "dev:shared": "pnpm --filter @chat/shared dev",
+        "dev:services": "pnpm --filter './services/*' dev",
+        "dev:gateway": "pnpm --filter gateway dev",
+        "dev:ui": "pnpm --filter ui dev",
+        "clean": "pnpm -r clean && rm -rf node_modules",
+        "type-check": "pnpm -r type-check",
+        "lint": "pnpm -r lint"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "typescript": "^5.8.3"
     }
-  },
-  "dependencies": {
-    "@chat/shared": "link:../../.local/share/pnpm/global/5/node_modules/@chat/shared"
-  }
 }

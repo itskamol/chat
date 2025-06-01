@@ -1,7 +1,7 @@
 # Use an appropriate Node.js base image
 FROM node:22-alpine
 
-# Install build dependencies required for mediasoup including Linux headers
+# Install pnpm globally and build dependencies required for mediasoup including Linux headers
 RUN apk add --no-cache \
     python3 \
     py3-pip \
@@ -9,28 +9,33 @@ RUN apk add --no-cache \
     g++ \
     gcc \
     libc-dev \
-    linux-headers
+    linux-headers && \
+    npm install -g pnpm
 
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package.json and pnpm-lock.yaml first for better caching
+COPY services/media-service/package*.json ./
+COPY services/media-service/pnpm-lock.yaml* ./
 
 # Install all dependencies (including dev dependencies for building)
-RUN npm ci
+RUN pnpm install
 
-# Copy the source code
-COPY . .
+# Copy service source code
+COPY services/media-service .
+
+# Copy shared package if needed
+COPY packages/shared ./node_modules/shared
 
 # Build the TypeScript application
-RUN npm run build
+RUN pnpm build
 
 # Remove dev dependencies to reduce image size (but keep build tools for mediasoup)
-RUN npm prune --production
+RUN pnpm prune --prod
 
 # Expose the server port
-EXPOSE 3001
+EXPOSE 8085
 
 # Define the CMD to run the application
-CMD ["npm", "run", "start"]
+CMD ["pnpm", "run", "start"]

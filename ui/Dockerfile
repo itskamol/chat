@@ -1,23 +1,27 @@
-# 1. Rasm sifatida Node.js tanlanadi
-FROM node:18-alpine
+# Use Node.js 22 with Alpine for smaller image size
+FROM node:22-alpine
 
-# 2. Loyihani konteyner ichiga nusxalash
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Set working directory
 WORKDIR /app
 
-# 3. package.json va package-lock.json fayllarni nusxalash
-COPY package*.json ./
+# Copy package.json and pnpm-lock.yaml first for better caching
+COPY ui/package*.json ./
+COPY ui/pnpm-lock.yaml* ./
 
-# 4. Bog‘liqliklarni o‘rnatish
-RUN npm install --legacy-peer-deps
+# Install dependencies
+RUN pnpm install
 
-# 5. Barcha fayllarni konteynerga nusxalash
-COPY . .
+# Copy UI source code
+COPY ui .
 
-# 6. Next.js loyihasini build qilish
-RUN npm run build
+# Build Next.js application
+RUN pnpm build
 
-# 7. Portni ochish (default Next.js porti)
+# Expose port (default Next.js port)
 EXPOSE 3000
 
-# 8. Loyihani start qilish
-CMD ["npm", "start"]
+# Start the application
+CMD ["pnpm", "run", "start"]

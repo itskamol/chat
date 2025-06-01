@@ -19,9 +19,9 @@ The video calling functionality is distributed across several microservices:
     *   Acts as the primary signaling server for WebRTC.
     *   Manages room creation/membership for video calls.
     *   Relays signaling messages between clients.
-    *   Communicates with the `media-server`'s HTTP API to manage server-side WebRTC resources (routers, transports, producers, consumers) on behalf of clients.
+    *   Communicates with the `media-service`'s HTTP API to manage server-side WebRTC resources (routers, transports, producers, consumers) on behalf of clients.
 
-3.  **Media Server (`media-server`):**
+3.  **Media Server (`media-service`):**
     *   The core SFU, built using Mediasoup.
     *   Responsible for receiving media streams from clients and forwarding them to other clients in the same room.
     *   Manages Mediasoup workers, routers, WebRTC transports, producers, and consumers.
@@ -35,10 +35,10 @@ The video calling functionality is distributed across several microservices:
 
 Correct configuration is crucial for the video calling feature to work.
 
-### `media-server` service:
+### `media-service` service:
 *(Typically set in `.env` at the project root and used by `docker-compose.yml`)*
 ```env
-# Port the media-server listens on
+# Port the media-service listens on
 PORT=3001
 
 # IP address for Mediasoup to listen on (usually 0.0.0.0 in Docker)
@@ -84,30 +84,30 @@ NEXT_PUBLIC_TURN_SERVER_PASSWORD=turnpassword
 ### `chat-service` service:
 *(Typically set in `.env` at the project root and used by `docker-compose.yml`)*
 ```env
-# URL for the chat-service to communicate with the media-server
-MEDIA_SERVER_URL=http://media_server_container:3001
+# URL for the chat-service to communicate with the media-service
+MEDIA_SERVER_URL=http://media_server_container:8085
 ```
 
 ## Signaling Flow (Simplified)
 
 1.  **Join Room:** Client A sends `joinRoom` to `chat-service`.
-2.  **Router Capabilities:** Client A requests router RTP capabilities from `chat-service`, which fetches them from `media-server`'s `/rooms/:roomId/router-rtp-capabilities` API.
+2.  **Router Capabilities:** Client A requests router RTP capabilities from `chat-service`, which fetches them from `media-service`'s `/rooms/:roomId/router-rtp-capabilities` API.
 3.  **Load Device:** Client A loads its Mediasoup device with the router capabilities.
-4.  **Create Transports:** Client A requests `createWebRtcTransport` from `chat-service` for send and receive transports. `chat-service` calls `media-server`'s `/rooms/:roomId/transports` API.
-5.  **Connect Transports:** Client A's Mediasoup transport emits a `connect` event. DTLS parameters are sent via `connectWebRtcTransport` to `chat-service`, which then calls `media-server`'s `/rooms/:roomId/transports/:transportId/connect` API.
+4.  **Create Transports:** Client A requests `createWebRtcTransport` from `chat-service` for send and receive transports. `chat-service` calls `media-service`'s `/rooms/:roomId/transports` API.
+5.  **Connect Transports:** Client A's Mediasoup transport emits a `connect` event. DTLS parameters are sent via `connectWebRtcTransport` to `chat-service`, which then calls `media-service`'s `/rooms/:roomId/transports/:transportId/connect` API.
 6.  **Produce Media:**
     *   Client A's Mediasoup send transport emits a `produce` event when local media (webcam/mic/screen) is ready.
     *   Client A sends `produce` (or `startScreenShare`) to `chat-service` with media kind, RTP parameters, and appData.
-    *   `chat-service` calls `media-server`'s `/rooms/:roomId/transports/:transportId/produce` API.
-    *   `media-server` creates a server-side producer and returns its ID.
+    *   `chat-service` calls `media-service`'s `/rooms/:roomId/transports/:transportId/produce` API.
+    *   `media-service` creates a server-side producer and returns its ID.
     *   `chat-service` broadcasts `newProducer` to other clients in the room.
 7.  **Consume Media:**
     *   Client B receives `newProducer` for Client A's media.
     *   Client B requests `consume` from `chat-service`, providing its RTP capabilities and the `producerId` to consume.
-    *   `chat-service` calls `media-server`'s `/rooms/:roomId/transports/:transportId/consume` API.
-    *   `media-server` creates a server-side consumer and returns its parameters (ID, kind, RTP parameters).
+    *   `chat-service` calls `media-service`'s `/rooms/:roomId/transports/:transportId/consume` API.
+    *   `media-service` creates a server-side consumer and returns its parameters (ID, kind, RTP parameters).
     *   Client B receives these parameters and creates a local Mediasoup consumer to receive and play the media track.
-8.  **Leaving/Cleanup:** When a user leaves or disconnects, `chat-service` ensures associated producers are closed on the `media-server` via the `/rooms/:roomId/producers/:producerId` (DELETE) API. Transports may also be closed if no longer needed.
+8.  **Leaving/Cleanup:** When a user leaves or disconnects, `chat-service` ensures associated producers are closed on the `media-service` via the `/rooms/:roomId/producers/:producerId` (DELETE) API. Transports may also be closed if no longer needed.
 
-This flow enables clients to exchange media through the SFU (`media-server`), with signaling orchestrated by the `chat-service`.
+This flow enables clients to exchange media through the SFU (`media-service`), with signaling orchestrated by the `chat-service`.
 ```

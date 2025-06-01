@@ -6,14 +6,14 @@ RUN npm install -g pnpm
 WORKDIR /usr/src/app
 
 # Copy package.json and pnpm-lock.yaml first for better caching
-COPY services/user-service/package*.json ./
-COPY services/user-service/pnpm-lock.yaml* ./
+COPY gateway/package*.json ./
+COPY gateway/pnpm-lock.yaml* ./
 
 # Install dependencies
 RUN pnpm install
 
-# Copy service source code
-COPY services/user-service .
+# Copy gateway source code
+COPY gateway .
 
 # Copy shared package if needed
 COPY packages/shared ./node_modules/@chat/shared
@@ -21,6 +21,6 @@ COPY packages/shared ./node_modules/@chat/shared
 # Build the application
 RUN pnpm build
 
-EXPOSE 8081
+EXPOSE 8080
 
 CMD ["pnpm", "run", "start"]

@@ -117,9 +117,9 @@ NEXT_PUBLIC_TURN_SERVER_URL=turn:localhost:3478
 NEXT_PUBLIC_TURN_SERVER_USERNAME=turnuser
 NEXT_PUBLIC_TURN_SERVER_PASSWORD=turnpassword
 
-# Media Server (if defaults in media-server/src/config.ts are not used or need override)
-# These are typically set in docker-compose.yml for the media-server service
-# MEDIA_SERVER_PORT=3001
+# Media Server (if defaults in media-service/src/config.ts are not used or need override)
+# These are typically set in docker-compose.yml for the media-service service
+# MEDIA_SERVER_PORT=8085
 # MEDIA_SERVER_MEDIASOUP_LISTEN_IP=0.0.0.0
 # MEDIA_SERVER_MEDIASOUP_ANNOUNCED_IP=127.0.0.1 # CRITICAL: See notes below
 # MEDIA_SERVER_MEDIASOUP_RTP_MIN_PORT=20000
@@ -130,11 +130,11 @@ NEXT_PUBLIC_TURN_SERVER_PASSWORD=turnpassword
 **Important Notes on Environment Variables:**
 
 *   A comprehensive list of all environment variables used by `docker-compose` can be found in the root `.env.example` file. Create a `.env` file by copying `.env.example` and customize it as needed.
-*   **`MEDIASOUP_ANNOUNCED_IP` (for `media-server` service):**
+*   **`MEDIASOUP_ANNOUNCED_IP` (for `media-service` service):**
     *   This is crucial for WebRTC to work correctly.
     *   **For local development (testing on the same machine where Docker is running):** `127.0.0.1` is usually correct if you access the UI via `http://localhost:3000`.
     *   **For testing from other devices on your LAN:** Set this to your host machine's LAN IP address (e.g., `192.168.1.100`).
-    *   **For production:** This **must** be the public IP address of the server where the `media-server` is running.
+    *   **For production:** This **must** be the public IP address of the server where the `media-service` is running.
 *   **`NEXT_PUBLIC_TURN_SERVER_URL` (for `ui` service):**
     *   For local development, `turn:localhost:3478` works when `turn_server` is running and its port 3478 is mapped to the host.
     *   If testing from other devices on LAN, change `localhost` to your host machine's LAN IP.

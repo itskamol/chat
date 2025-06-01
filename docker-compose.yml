@@ -84,13 +84,11 @@ services:
       - ./services/user-service:/usr/src/app # User-service kodini mount qilish
       - ./packages/shared:/usr/src/app/node_modules/@chat/shared # Bu x-node-service-defaults da bor, lekin aniqlik uchun
       - /usr/src/app/node_modules # Bu ham x-node-service-defaults da bor
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./services/user-service/env/.env.docker # User service uchun maxsus sozlamalar
     environment:
-      <<: *node-service-defaults.environment # Umumiy environment ni meros qilib oladi
-      # Servisga xos environment o'zgaruvchilari
-      MONGO_URI: mongodb://root:password@mongodb:27017/user-service-db?authSource=admin
-      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-      JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-      PORT: 8081
+      NODE_ENV: development # env_file dagi qiymatlarni ustidan yozish yoki to'ldirish
 
   chat:
     <<: *node-service-defaults
@@ -111,12 +109,12 @@ services:
       - ./services/chat-service:/usr/src/app
       - ./packages/shared:/usr/src/app/node_modules/@chat/shared
       - /usr/src/app/node_modules
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./services/chat-service/env/.env.docker # Chat service uchun maxsus sozlamalar
     environment:
-      <<: *node-service-defaults.environment
-      MONGO_URI: mongodb://root:password@mongodb:27017/chat-service-db?authSource=admin
-      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-      JWT_SECRET: mening_juda_maxfiy_kalitim_12345
-      FILE_SERVICE_URL: http://file:3001 # Konteyner nomi bilan
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
       PORT: 8082
 
   file:
@@ -135,14 +133,13 @@ services:
       # Agar file-service @chat/shared ni ishlatsa:
       - ./packages/shared:/usr/src/app/node_modules/@chat/shared
       - /usr/src/app/node_modules
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./services/file-service/env/.env.docker # File service uchun maxsus sozlamalar
     environment:
-      <<: *node-service-defaults.environment
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
       PORT: 3001
-      AWS_ACCESS_KEY_ID: dummy_key_for_testing # .env faylidan olish yaxshiroq
-      AWS_SECRET_ACCESS_KEY: dummy_secret_for_testing
-      AWS_REGION: us-east-1
-      BUCKET_NAME: test-bucket
-      # ... (qolgan file-service environment o'zgaruvchilari)
 
   notification:
     <<: *node-service-defaults
@@ -162,19 +159,20 @@ services:
       # Agar notification-service @chat/shared ni ishlatsa:
       - ./packages/shared:/usr/src/app/node_modules/@chat/shared
       - /usr/src/app/node_modules
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./services/notification-service/env/.env.docker # Notification service uchun maxsus sozlamalar
     environment:
-      <<: *node-service-defaults.environment
-      MESSAGE_BROKER_URL: amqp://guest:guest@rabbitmq:5672
-      SMTP_HOST: smtp-relay.brevo.com # .env faylidan olish yaxshiroq
-      # ... (qolgan notification-service environment o'zgaruvchilari)
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
       PORT: 8083
 
   gateway:
     # Gateway uchun alohida sozlamalar, agar u Node.js va pnpm workspace qismi bo'lsa,
     # <<: *node-service-defaults dan foydalanish mumkin
     build:
-      context: ./gateway # Yoki context: . agar Dockerfile monorepo rootida bo'lsa va args ishlatsa
-      dockerfile: Dockerfile # ./gateway/Dockerfile
+      context: . # Use root context like other services
+      dockerfile: ./gateway/Dockerfile # ./gateway/Dockerfile
     container_name: api-gateway
     ports:
       - "8080:8080"
@@ -184,20 +182,41 @@ services:
       # - ./packages/shared:/usr/src/app/node_modules/@chat/shared
       # - /usr/src/app/node_modules
     # working_dir va command ni gateway ning ehtiyojlariga moslang
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./gateway/env/.env.docker # Gateway uchun maxsus sozlamalar
     environment:
       NODE_ENV: development # Yoki production
       GATEWAY_PORT: 8080
-      USER_SERVICE_URL: http://user:8081
-      CHAT_SERVICE_URL: http://chat:8082
-      FILE_SERVICE_URL: http://file:3001
-      NOTIFICATION_SERVICE_URL: http://notification:8083
-      MEDIA_SERVICE_URL: http://media_server:3001 # media_server porti
     depends_on:
       - user
       - chat
       - file
       - notification
       - media_server # Gateway media_server ga bog'liq bo'lsa
+    networks:
+      - microservices-network
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: . # Use root context like other services
+      dockerfile: ./ui/Dockerfile
+    container_name: ui_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./ui/env/.env.docker # UI uchun maxsus sozlamalar
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    depends_on:
+      - gateway
     networks:
       - microservices-network
     restart: unless-stopped
@@ -220,27 +239,25 @@ services:
   media_server:
     # <<: *logging # Agar kerak bo'lsa
     build:
-      context: ./media-server # Agar monorepo qismi bo'lsa
-      dockerfile: Dockerfile
+      context: . # Use root context like other services
+      dockerfile: ./services/media-service/Dockerfile
     container_name: media_server_container
     restart: always
     ports:
       - '3002:3001' # Host portini o'zgartirdik (file-service bilan to'qnashmasligi uchun)
       - '20000-20020:20000-20020/udp'
-    volumes: # Agar media-server kodini live-reload qilish kerak bo'lsa va monorepo qismi bo'lsa
-      - ./media-server:/usr/src/app
-      # Agar media-server @chat/shared ni ishlatsa:
+    volumes: # Agar media-service kodini live-reload qilish kerak bo'lsa va monorepo qismi bo'lsa
+      - ./services/media-service:/usr/src/app
+      # Agar media-service @chat/shared ni ishlatsa:
       # - ./packages/shared:/usr/src/app/node_modules/@chat/shared
       # - /usr/src/app/node_modules
-    # working_dir va command ni media-server ehtiyojlariga moslang
+    # working_dir va command ni media-service ehtiyojlariga moslang
+    env_file:
+      - .env.docker # Umumiy Docker sozlamalari
+      - ./services/media-service/env/.env.docker # Media server uchun maxsus sozlamalar
     environment:
       NODE_ENV: development # Yoki production
       PORT: 3001
-      MEDIASOUP_LISTEN_IP: 0.0.0.0
-      MEDIASOUP_ANNOUNCED_IP: 127.0.0.1 # Tashqi IP ga o'zgartiring
-      MEDIASOUP_RTP_MIN_PORT: 20000
-      MEDIASOUP_RTP_MAX_PORT: 20020
-      DEBUG: mediasoup:*
     networks:
       - microservices-network
 

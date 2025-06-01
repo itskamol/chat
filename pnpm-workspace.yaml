@@ -1,11 +1,6 @@
 packages:
-  - shared
-  - ui
-  - chat-service
-  - user-service
-  - notification-service
-  - file-service
-  - media-server
+  - services/*
+  - packages/*
   - gateway
 onlyBuiltDependencies:
   - mediasoup

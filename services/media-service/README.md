@@ -10,9 +10,9 @@ This service is responsible for handling real-time media streaming using Mediaso
 
 ### Setup
 1. **Clone the repository (or ensure this directory is part of the main project).**
-2. **Navigate to the `media-server` directory:**
+2. **Navigate to the `media-service` directory:**
    ```bash
-   cd media-server
+   cd media-service
    ```
 3. **Install dependencies:**
    ```bash
@@ -52,11 +52,11 @@ To build and run the service using Docker:
 
 1. **Build the Docker image:**
    ```bash
-   docker build -t media-server .
+   docker build -t media-service .
    ```
 2. **Run the Docker container:**
    ```bash
-   docker run -p 3001:3001 --env-file .env media-server 
+   docker run -p 3001:3001 --env-file .env media-service 
    ```
    (Ensure you have a `.env` file with necessary environment variables if you are not using defaults, or pass them with `-e` flags).
 
