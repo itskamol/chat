@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
-import { WebRTCClient, ConsumerInfo } from '@/lib/webrtcClient';
+import { WebRTCClient } from '@/lib/webrtcClient';
 import {
   emitJoinRoom,
   emitLeaveRoom,
@@ -9,6 +9,7 @@ import {
   onUserLeft,
   onActiveProducers
 } from '@/lib/socket';
+import { ConsumerParams } from "@chat/shared";
 import { useRoom } from './RoomContext';
 import { useMedia } from './MediaContext';
 
@@ -16,7 +17,7 @@ interface WebRTCContextState {
   isInCall: boolean;
   isConnecting: boolean;
   error: string | null;
-  remoteConsumers: Map<string, ConsumerInfo>;
+  remoteConsumers: Map<string, ConsumerParams>;
   screenShareProducerId: string | null;
 }
 

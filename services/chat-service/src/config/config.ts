@@ -1,8 +1,9 @@
 import { config as dotenvConfig } from "dotenv"; // Renamed to avoid conflict
 import path from 'path';
-
+// console.log("Loading configuration...", process.env.NODE_ENV);
+const filePath = path.join(process.cwd(), 'env', '.env'); // Adjusted to match the directory structure
 // Determine the correct path to .env file based on current environment
-const envPath = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, '../../.env') : path.resolve(__dirname, '../../.env');
+const envPath = process.env.NODE_ENV === 'development' ? `${filePath}.local` : `${filePath}.production.env`;
 dotenvConfig({ path: envPath });
 
 const { 

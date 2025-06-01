@@ -9,7 +9,7 @@ import {
     RtpCapabilities,
     RtpParameters,
 } from 'mediasoup/node/lib/types';
-import { config as appConfig } from '../config';
+import { config as appConfig } from '../config/config';
 import { logger } from '../utils/logger'; // Assuming logger is in utils
 
 export interface Room {

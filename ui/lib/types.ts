@@ -1,4 +1,4 @@
-import { MESSAGE_TYPES, SOCKET_EVENTS } from './constants';
+import { SOCKET_EVENTS } from './constants';
 
 // Import shared types
 import type {

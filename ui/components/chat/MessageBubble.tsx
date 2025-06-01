@@ -128,7 +128,7 @@ export function MessageBubble({
           }`}
         >
           {renderFilePreview()}
-          {message.message && <p>{message.message}</p>}
+          {message.content && <p>{message.content}</p>}
           
           <div className="flex items-center justify-between mt-1">
             <p
@@ -137,7 +137,7 @@ export function MessageBubble({
               }`}
             >
               {formatTime(message.createdAt as unknown as string)}
-              {message.status === 'uploading' && message.uploadProgress !== undefined && (
+              {message.status === 'Pending' && message.uploadProgress !== undefined && (
                 <span className="ml-1">
                   {message.uploadProgress < 100
                     ? `Uploading ${message.uploadProgress}%`
@@ -146,7 +146,7 @@ export function MessageBubble({
               )}
             </p>
             
-            {message.status === 'failed' && isCurrentUser && (
+            {message.status === 'Failed' && isCurrentUser && (
               <Button
                 variant="link"
                 size="sm"

@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { config as appConfig } from './config';
+import { config as appConfig } from './config/config';
 import roomRoutes from './routes/roomRoutes'; // Importing room routes
 import { logger } from './utils/logger';
 import { startMediasoupWorker } from './services/mediaService';

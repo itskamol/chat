@@ -14,7 +14,7 @@ export const socketAuthMiddleware = (
         if (!token) {
             return next(new Error('Authentication token missing'));
         }
-
+        console.log('Socket authentication token:', config.JWT_SECRET);
         // Verify JWT token
         const decoded = jwt.verify(token, config.JWT_SECRET) as TokenPayload;
         if (decoded && decoded.id) {

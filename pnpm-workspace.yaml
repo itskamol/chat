@@ -2,5 +2,6 @@ packages:
   - services/*
   - packages/*
   - gateway
+  - ui
 onlyBuiltDependencies:
   - mediasoup

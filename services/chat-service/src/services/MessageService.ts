@@ -1,14 +1,14 @@
 import { 
     AuthenticatedSocket, // Assuming this is the correctly typed socket from @shared
     SocketEvent,
-    Message as SharedMessage, // Renaming to avoid conflict with Mongoose model
+    Message as IMessage, // Renaming to avoid conflict with Mongoose model
     MessageSentPayload,
     ClientToServerEvents,
     ServerToClientEvents,
     InterServerEvents,
     SocketData,
-    MessageType as SharedMessageType, // Enum for message type
-    MessageStatus as SharedMessageStatus // Enum for message status
+    MessageType, // Enum for message type
+    MessageStatus // Enum for message status
 } from '@chat/shared';
 import { Server as SocketIOServer } from 'socket.io';
 import { Message as MessageModel } from '../database'; // Mongoose model
@@ -23,16 +23,24 @@ export class MessageService {
         content: string, // Changed from 'message' to 'content' for consistency
         senderSocket: AuthenticatedSocket, // Use AuthenticatedSocket from @shared
         receiverSocketId?: string,
-        type?: SharedMessageType, // Use shared enum
+        type?: MessageType, // Use shared enum
         tempId?: string // Added tempId from client
     ): Promise<{ success: boolean; error?: string; messageId?: string; tempId?: string }> {
         try {
+            console.debug('Saving and delivering message', {
+                senderId,
+                receiverId,
+                content,
+                type,
+                receiverSocketId,
+                tempId
+            });
             const newMessage = new MessageModel({
                 senderId,
                 receiverId,
                 content: content, // Storing as 'content' in DB if model is updated, or map here
-                type: type || SharedMessageType.TEXT, // Default to TEXT
-                status: receiverSocketId ? SharedMessageStatus.DELIVERED : SharedMessageStatus.NOT_DELIVERED,
+                type: type || MessageType.TEXT, // Default to TEXT
+                status: receiverSocketId ? MessageStatus.DELIVERED : MessageStatus.NOT_DELIVERED,
                 // fileUrl, fileName etc. would be set here if it's a file message
             });
             // This part assumes the MessageModel uses 'content' and 'type' internally
@@ -42,13 +50,13 @@ export class MessageService {
             const messageId = savedMessage._id.toString();
 
             // Prepare the SharedMessage object for broadcasting and sender confirmation
-            const sharedMessageData: SharedMessage = {
+            const sharedMessageData: IMessage = {
                 id: messageId,
                 senderId,
                 receiverId,
                 content: savedMessage.content, 
-                type: savedMessage.type as SharedMessageType, // Cast if necessary
-                status: savedMessage.status as SharedMessageStatus, 
+                type: savedMessage.type as MessageType, // Cast if necessary
+                status: savedMessage.status as MessageStatus, 
                 createdAt: savedMessage.createdAt,
                 updatedAt: savedMessage.updatedAt,
                 // fileUrl, fileName, etc., if applicable
@@ -85,7 +93,7 @@ export class MessageService {
         receiverId: string,
         page = 1,
         limit = 50
-    ): Promise<{ success: boolean; messages?: SharedMessage[]; error?: string }> {
+    ): Promise<{ success: boolean; messages?: IMessage[]; error?: string }> {
         try {
             const skip = (page - 1) * limit;
             const dbMessages = await MessageModel.find({
@@ -100,13 +108,13 @@ export class MessageService {
                 .lean()
                 .exec();
 
-            const messages: SharedMessage[] = dbMessages.map(msg => ({
+            const messages: IMessage[] = dbMessages.map(msg => ({
                 id: msg._id.toString(),
                 senderId: msg.senderId,
                 receiverId: msg.receiverId,
                 content: msg.content, // Assuming model uses 'content'
-                type: msg.type as SharedMessageType,
-                status: msg.status as SharedMessageStatus, // Cast if necessary
+                type: msg.type as MessageType,
+                status: msg.status as MessageStatus, // Cast if necessary
                 createdAt: msg.createdAt,
                 updatedAt: msg.updatedAt,
                 fileUrl: msg.fileUrl,
@@ -122,12 +130,12 @@ export class MessageService {
         }
     }
 
-    public async markMessageAsRead(messageId: string, userId: string /* userId who is marking it as read */): Promise<{ success: boolean; error?: string; message?: SharedMessage }> {
+    public async markMessageAsRead(messageId: string, userId: string /* userId who is marking it as read */): Promise<{ success: boolean; error?: string; message?: IMessage }> {
         try {
             // Find the message and ensure the receiver is the one marking it as read.
             const dbMessage = await MessageModel.findOneAndUpdate(
-                { _id: messageId, receiverId: userId, status: { $ne: SharedMessageStatus.SEEN } },
-                { $set: { status: SharedMessageStatus.SEEN, updatedAt: new Date() } },
+                { _id: messageId, receiverId: userId, status: { $ne: MessageStatus.SEEN } },
+                { $set: { status: MessageStatus.SEEN, updatedAt: new Date() } },
                 { new: true }
             ).lean().exec();
 
@@ -137,13 +145,13 @@ export class MessageService {
                 if (!existingMsg) return { success: false, error: 'Message not found.' };
                 
                 // Map existingMsg to SharedMessage
-                const sharedExistingMessage: SharedMessage = {
+                const sharedExistingMessage: IMessage = {
                     id: existingMsg._id.toString(),
                     senderId: existingMsg.senderId,
                     receiverId: existingMsg.receiverId,
                     content: existingMsg.content,
-                    type: existingMsg.type as SharedMessageType,
-                    status: existingMsg.status as SharedMessageStatus,
+                    type: existingMsg.type as MessageType,
+                    status: existingMsg.status as MessageStatus,
                     createdAt: existingMsg.createdAt,
                     updatedAt: existingMsg.updatedAt,
                     fileUrl: existingMsg.fileUrl,
@@ -154,13 +162,13 @@ export class MessageService {
                 return { success: true, message: sharedExistingMessage }; // Or return success:false if strict update is required
             }
             
-            const updatedMessage: SharedMessage = {
+            const updatedMessage: IMessage = {
                 id: dbMessage._id.toString(),
                 senderId: dbMessage.senderId,
                 receiverId: dbMessage.receiverId,
                 content: dbMessage.content,
-                type: dbMessage.type as SharedMessageType,
-                status: dbMessage.status as SharedMessageStatus,
+                type: dbMessage.type as MessageType,
+                status: dbMessage.status as MessageStatus,
                 createdAt: dbMessage.createdAt,
                 updatedAt: dbMessage.updatedAt,
                 fileUrl: dbMessage.fileUrl,

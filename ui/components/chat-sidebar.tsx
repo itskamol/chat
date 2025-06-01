@@ -1,11 +1,11 @@
 'use client';
 
-import type { User } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { LogOut, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { User } from '@chat/shared';
 
 export interface ChatSidebarProps {
     currentUser: User | null;
@@ -78,11 +78,11 @@ export default function ChatSidebar({
                         CONTACTS
                     </h2>
                     <div className="space-y-1">
-                        {contacts.map((contact) => (
+                        {contacts.map((contact: any) => (
                             <button
-                                key={contact._id}
+                                key={contact.id}
                                 className={`w-full flex items-center space-x-3 px-2 py-2 rounded-md text-left ${
-                                    selectedContact?._id === contact._id
+                                    selectedContact?.id === contact.id
                                         ? 'bg-gray-100'
                                         : 'hover:bg-gray-50'
                                 }`}

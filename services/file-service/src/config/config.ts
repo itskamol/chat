@@ -5,8 +5,12 @@
  * The application will exit if critical AWS credentials or bucket information is missing.
  */
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config(); // Load environment variables from .env file into process.env
+const filePath = path.join(process.cwd(), 'env', '.env'); // Adjusted to match the directory structure
+// Determine the correct path to .env file based on current environment
+const envPath = process.env.NODE_ENV === 'development' ? `${filePath}.local` : `${filePath}.production.env`;
+dotenv.config({ path: envPath }); // Load environment variables from .env file into process.env
 
 /**
  * Retrieves an environment variable by its key.

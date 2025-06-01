@@ -15,11 +15,11 @@ export const getContacts = async (req: Request, res: Response): Promise<any> => 
 
         // Fetch all users except the currently authenticated user
         const users = await User.find({ _id: { $ne: authenticatedUserId } }).select("id name email");
-
+        console.log("Fetched users:", users);
         return res.json({
             status: 200,
             message: "Contacts fetched successfully!",
-            data: users,
+            data: users.map(user => user.toObject()),
         });
     } catch (error: any) {
         logger.error("Error in getContacts:", error);

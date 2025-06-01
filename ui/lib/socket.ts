@@ -3,8 +3,6 @@ import type {
     ServerToClientEvents,
     ClientToServerEvents,
     Message,
-    ProducerInfo,
-    ConsumerParams,
     SctpCapabilities,
     NewProducerPayload,
     ProducerClosedPayload,
@@ -18,6 +16,7 @@ import type {
     ConsumeResponsePayload,
     CreateWebRtcTransportResponsePayload,
     ConnectWebRtcTransportResponsePayload,
+    SendMessagePayload,
 } from '@chat/shared';
 import { SocketEvent, MessageType } from '@chat/shared';
 
@@ -80,17 +79,13 @@ export const emitGetOnlineUsers = (): void => {
 };
 
 // Message events
-export const emitSendMessage = (data: {
-    senderId: string;
-    receiverId: string;
-    content: string;
-    messageType?: MessageType;
-}): void => {
+export const emitSendMessage = (data: SendMessagePayload): void => {
+    console.log('Emitting send message:', data);
     const socketInstance = getSocket();
     socketInstance.emit(SocketEvent.SEND_MESSAGE, {
         receiverId: data.receiverId,
         content: data.content,
-        type: data.messageType || MessageType.TEXT,
+        type: data.type || MessageType.TEXT,
     });
 };
 

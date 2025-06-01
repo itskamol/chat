@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "NODE_NO_WARNINGS=1 nodemon --import ./loader.mjs index.ts"
+        "dev": "NODE_ENV=development nodemon --import ./loader.mjs index.ts"
     },
     "keywords": [],
     "author": "",

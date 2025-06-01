@@ -21,19 +21,19 @@ export const createServiceProxy = (url: string, options: any = {}): RequestHandl
 
 export const setupServiceProxies = (app: Application): void => {
     // Authentication service routes
-    app.use('/auth', createServiceProxy(serviceUrls.auth));
-    app.use('/users', createServiceProxy(serviceUrls.auth));
+    app.use('/api/auth', createServiceProxy(serviceUrls.auth));
+    app.use('/api/users', createServiceProxy(serviceUrls.auth));
     
     // Chat service routes
-    app.use('/chat', createServiceProxy(serviceUrls.chat));
-    app.use('/messages', createServiceProxy(serviceUrls.chat));
+    app.use('/api/chat', createServiceProxy(serviceUrls.chat));
+    app.use('/api/messages', createServiceProxy(serviceUrls.chat));
     
     // File service routes
-    app.use('/files', createServiceProxy(serviceUrls.files));
+    app.use('/api/files', createServiceProxy(serviceUrls.files));
     
     // Media service routes
-    app.use('/media', createServiceProxy(serviceUrls.media));
+    app.use('/api/media', createServiceProxy(serviceUrls.media));
     
     // Notification service routes
-    app.use('/notifications', createServiceProxy(serviceUrls.notifications));
+    app.use('/api/notifications', createServiceProxy(serviceUrls.notifications));
 };

@@ -9,7 +9,7 @@ import ChatSidebar from '@/components/chat-sidebar';
 import ChatWindow from '@/components/chat-window'; // Assuming ChatWindowProps is exported or can be defined here
 import type { Message } from '@/lib/types';
 import NoSSR from '@/components/NoSSR'; // Import NoSSR component
-import { VideoCallProvider, useVideoCall } from '@/contexts/VideoCallContext'; // Import Provider and Hook
+import { VideoCallProvider } from '@/contexts/VideoCallContext'; // Import Provider and Hook
 import VideoCallView from '@/components/video-call/VideoCallView'; // Import VideoCallView
 import IncomingCallPopup from '@/components/video-call/partials/IncomingCallPopup'; // Import IncomingCallPopup
 import {
@@ -24,15 +24,13 @@ import {
     onMessageSent,
     onMessageError,
 } from '@/lib/socket';
-import { MessageStatus, MessageType, User, validateFile } from '@chat/shared';
-
-interface DecodedToken {
-    id: string;
-    name: string;
-    email: string;
-    exp: number;
-    iat: number;
-}
+import {
+    MessageStatus,
+    MessageType,
+    TokenPayload,
+    User,
+    validateFile,
+} from '@chat/shared';
 
 export default function ChatPage() {
     const router = useRouter();
@@ -63,7 +61,7 @@ export default function ChatPage() {
         }
 
         try {
-            const decodedToken = jwtDecode<DecodedToken>(token);
+            const decodedToken = jwtDecode<TokenPayload>(token);
             if (decodedToken.exp * 1000 < Date.now()) {
                 localStorage.removeItem('jwt');
                 router.push('/');
@@ -287,38 +285,6 @@ export default function ChatPage() {
         setSelectedContact(contact);
     };
 
-    // const validateFile = (file: File, fileType: string): string | null => {
-    //     // File size check (10MB limit)
-    //     const maxSize = 10 * 1024 * 1024; // 10MB
-    //     if (file.size > maxSize) {
-    //         return 'File size must be less than 10MB';
-    //     }
-
-    //     // File type validation
-    //     const allowedTypes: Record<string, string[]> = {
-    //         image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-    //         video: ['video/mp4', 'video/webm', 'video/ogg'],
-    //         audio: ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/mpeg'],
-    //         file: [
-    //             'application/pdf',
-    //             'text/plain',
-    //             'application/msword',
-    //             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    //         ],
-    //     };
-
-    //     if (
-    //         allowedTypes[fileType] &&
-    //         !allowedTypes[fileType].includes(file.type)
-    //     ) {
-    //         return `Invalid file type for ${fileType}. Allowed types: ${allowedTypes[
-    //             fileType
-    //         ].join(', ')}`;
-    //     }
-
-    //     return null;
-    // };
-
     const uploadFileWithRetry = async (
         formData: FormData,
         tempId: string,
@@ -456,8 +422,9 @@ export default function ChatPage() {
         file?: File,
         fileType?: 'text' | 'image' | 'video' | 'audio' | 'file'
     ) => {
+        const trimmedText = text.trim();
+
         if (!currentUser?.id || !selectedContact?.id) return;
-        if (!text.trim() && !file) return;
 
         // File validation using shared utility
         if (file) {
@@ -509,12 +476,12 @@ export default function ChatPage() {
                 setError('Failed to upload file. Please try again.');
                 setMessages((prev) => prev.filter((m) => m.id !== tempId));
             }
-        } else if (text.trim()) {
+        } else {
             // Handle text message
             const messageData = {
                 senderId: currentUser.id,
                 receiverId: selectedContact.id,
-                content: text.trim(),
+                content: trimmedText,
                 type: MessageType.TEXT, // Use MessageType.TEXT for text messages
             };
 
@@ -529,6 +496,7 @@ export default function ChatPage() {
                 ...prevMessages,
                 optimisticTextMessage,
             ]);
+            console.log('Sending message:', messageData);
             emitSendMessage(messageData); // Socket.IO for real-time text
         }
     };

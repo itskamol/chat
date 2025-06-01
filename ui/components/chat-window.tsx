@@ -2,7 +2,7 @@
 
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import type { User, Message } from '@/lib/types';
+import type { Message } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -22,6 +22,7 @@ import {
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { format } from 'date-fns';
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
+import { User } from '@chat/shared';
 
 interface ChatWindowProps {
     currentUser: User | null;
@@ -245,14 +246,14 @@ export default function ChatWindow({
                             {getInitials(selectedContact.name ?? '')}
                         </AvatarFallback>
                     </Avatar>
-                    {selectedContact.online && (
+                    {(selectedContact as any).online && (
                         <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                     )}
                 </div>
                 <div>
                     <h2 className="font-medium">{selectedContact.name}</h2>
                     <p className="text-xs text-gray-500">
-                        {selectedContact.online ? 'Online' : 'Offline'}
+                        {(selectedContact as any).online ? 'Online' : 'Offline'}
                     </p>
                 </div>
             </div>
@@ -260,10 +261,10 @@ export default function ChatWindow({
             <ScrollArea className="flex-1 p-4 bg-gray-50">
                 <div className="space-y-4">
                     {messages.map((msg, index) => {
-                        const isCurrentUser = msg.senderId === currentUser?._id;
+                        const isCurrentUser = msg.senderId === currentUser?.id;
                         return (
                             <div
-                                key={msg._id || index} // Use msg._id if available, otherwise index
+                                key={msg.id || index} // Use msg._id if available, otherwise index
                                 className={`flex ${
                                     isCurrentUser
                                         ? 'justify-end'
@@ -306,10 +307,10 @@ export default function ChatWindow({
                                                     : msg.fileUrl;
 
                                             const caption =
-                                                msg.originalMessage ||
+                                                msg.content ||
                                                 (msg.type !== 'text' &&
                                                 msg.fileUrl
-                                                    ? msg.message
+                                                    ? msg.content
                                                     : null);
 
                                             const renderCaption = (
@@ -349,7 +350,7 @@ export default function ChatWindow({
                                                     ) : (
                                                         <p>
                                                             {caption ||
-                                                                msg.message}
+                                                                msg.content}
                                                         </p>
                                                     );
                                                     break;
@@ -384,7 +385,7 @@ export default function ChatWindow({
                                                     ) : (
                                                         <p>
                                                             {caption ||
-                                                                msg.message}
+                                                                msg.content}
                                                         </p>
                                                     );
                                                     break;
@@ -412,7 +413,7 @@ export default function ChatWindow({
                                                     ) : (
                                                         <p>
                                                             {caption ||
-                                                                msg.message}
+                                                                msg.content}
                                                         </p>
                                                     );
                                                     break;
@@ -498,14 +499,14 @@ export default function ChatWindow({
                                                     ) : (
                                                         <p>
                                                             {caption ||
-                                                                msg.message}
+                                                                msg.content}
                                                         </p>
                                                     );
                                                     icon = null; // Icon is part of the content block for 'file' type
                                                     break;
                                                 default: // text
                                                     content = (
-                                                        <p>{msg.message}</p>
+                                                        <p>{msg.content}</p>
                                                     );
                                                     break;
                                             }
@@ -554,25 +555,25 @@ export default function ChatWindow({
                                             {formatTime(
                                                 msg.createdAt as unknown as string
                                             )}{' '}
-                                            {msg.status === 'uploading' &&
+                                            {msg.status === 'Pending' &&
                                                 msg.uploadProgress !==
                                                     undefined &&
                                                 msg.uploadProgress < 100 &&
                                                 `(Uploading ${msg.uploadProgress}%)`}
-                                            {msg.status === 'uploading' &&
+                                            {msg.status === 'Pending' &&
                                                 (msg.uploadProgress ===
                                                     undefined ||
                                                     msg.uploadProgress ===
                                                         100) &&
                                                 '(Processing...)'}
-                                            {msg.status === 'failed' &&
+                                            {msg.status === 'Failed' &&
                                                 '(Failed)'}
-                                            {msg._id?.startsWith('temp-') &&
-                                                msg.status !== 'uploading' &&
-                                                msg.status !== 'failed' &&
+                                            {msg.id?.startsWith('temp-') &&
+                                                msg.status !== 'Pending' &&
+                                                msg.status !== 'Failed' &&
                                                 '(Sending...)'}
                                         </p>
-                                        {msg.status === 'failed' &&
+                                        {msg.status === 'Failed' &&
                                             isCurrentUser && (
                                                 <Button
                                                     variant="link"
@@ -603,7 +604,7 @@ export default function ChatWindow({
                                                             'text'
                                                         ) {
                                                             onSendMessage(
-                                                                msg.message
+                                                                msg.content
                                                             );
                                                         }
                                                     }}
@@ -611,7 +612,7 @@ export default function ChatWindow({
                                                     Retry
                                                 </Button>
                                             )}
-                                        {msg.status === 'uploading' &&
+                                        {msg.status === 'Pending' &&
                                             msg.uploadProgress !== undefined &&
                                             msg.uploadProgress < 100 &&
                                             isCurrentUser && (

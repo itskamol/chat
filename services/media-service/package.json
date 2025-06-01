@@ -6,6 +6,7 @@
     "scripts": {
         "build": "tsc",
         "start": "node dist/app.js",
+        "dev": "NODE_ENV=development nodemon src/app.ts",
         "postinstall": "pnpm rebuild mediasoup"
     },
     "keywords": [],

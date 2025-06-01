@@ -1,7 +1,8 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useEffect, useRef } from 'react';
 import { MessageBubble } from './MessageBubble';
-import type { Message, User } from '@/lib/types';
+import type { Message } from '@/lib/types';
+import { User } from '@chat/shared';
 
 interface MessageListProps {
   messages: Message[];
@@ -38,11 +39,11 @@ export function MessageList({
     <ScrollArea className="flex-1 p-4 bg-gray-50">
       <div className="space-y-4">
         {messages.map((msg, index) => {
-          const isCurrentUser = msg.senderId === currentUser?._id;
+          const isCurrentUser = msg.senderId === currentUser?.id;
 
           return (
             <MessageBubble
-              key={msg._id || index}
+              key={msg.id || index}
               message={msg}
               isCurrentUser={isCurrentUser}
               onRetry={onRetry ? () => onRetry(msg) : undefined}

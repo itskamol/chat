@@ -24,41 +24,47 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
-    const { execute: login, isLoading } = useApi(
-        () => apiClient.login(email, password),
-        {
-            manual: true,
-            onSuccess: () => {
-                toast({
-                    title: 'Success',
-                    description: 'Successfully logged in',
-                });
-                router.push('/chat');
-            },
-            onError: (err) => {
-                setError(err.message);
-                toast({
-                    variant: 'destructive',
-                    title: 'Error',
-                    description: err.message,
-                });
-            },
-        }
-    );
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
+        setIsLoading(true);
+
         e.preventDefault();
         setError('');
-        
         if (!email || !password) {
             setError('Please fill in all fields');
             return;
         }
 
         try {
-            await login();
+            const result = await apiClient.login(email, password);
+            if (!result) {
+                setIsLoading(false);
+                setError('Login failed. Please check your credentials.');
+                return;
+            }
+
+            const { token } = result;
+
+            if (!token) {
+                setIsLoading(false);
+                setError('Login failed. Please check your credentials.');
+                return;
+            }
+
+            localStorage.setItem('jwt', token);
+
+            toast({
+                title: 'Login successful',
+                description: 'Welcome back!',
+                variant: 'default',
+            });
+            setIsLoading(false);
+            router.push('/chat');
         } catch (err) {
+            setIsLoading(false);
+            setError('Login failed. Please check your credentials.');
+            console.error('Login error:', err);
             // Error is handled by useApi hook
         }
     };
