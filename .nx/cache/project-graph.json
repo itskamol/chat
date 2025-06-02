@@ -177,6 +177,45 @@
         "tags": []
       }
     },
+    "media-service-e2e": {
+      "name": "media-service-e2e",
+      "type": "e2e",
+      "data": {
+        "root": "apps/media-service-e2e",
+        "name": "media-service-e2e",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "implicitDependencies": [
+          "media-service"
+        ],
+        "projectType": "application",
+        "targets": {
+          "e2e": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{e2eProjectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/media-service-e2e/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {}
+          },
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/media-service-e2e/**/*.{js,ts}"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "tags": []
+      }
+    },
     "chat-service-e2e": {
       "name": "chat-service-e2e",
       "type": "e2e",
@@ -587,6 +626,84 @@
             ],
             "options": {
               "jestConfig": "apps/message-service/jest.config.ts"
+            },
+            "configurations": {}
+          }
+        },
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "media-service": {
+      "name": "media-service",
+      "type": "app",
+      "data": {
+        "root": "apps/media-service",
+        "name": "media-service",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/media-service/src",
+        "projectType": "application",
+        "targets": {
+          "build": {
+            "dependsOn": [
+              "^build"
+            ],
+            "executor": "@nx/webpack:webpack",
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "defaultConfiguration": "production",
+            "options": {
+              "target": "node",
+              "compiler": "tsc",
+              "outputPath": "dist/apps/media-service",
+              "main": "apps/media-service/src/main.ts",
+              "tsConfig": "apps/media-service/tsconfig.app.json",
+              "assets": [
+                "apps/media-service/src/assets"
+              ],
+              "isolatedConfig": true,
+              "webpackConfig": "apps/media-service/webpack.config.js"
+            },
+            "configurations": {
+              "development": {},
+              "production": {}
+            }
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+              "buildTarget": "media-service:build"
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "media-service:build:development"
+              },
+              "production": {
+                "buildTarget": "media-service:build:production"
+              }
+            }
+          },
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/media-service/**/*.ts"
+              ]
+            },
+            "configurations": {}
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/media-service/jest.config.ts"
             },
             "configurations": {}
           }
@@ -15608,6 +15725,13 @@
       }
     ],
     "legacy-media-service": [],
+    "media-service-e2e": [
+      {
+        "source": "media-service-e2e",
+        "target": "media-service",
+        "type": "implicit"
+      }
+    ],
     "chat-service-e2e": [
       {
         "source": "chat-service-e2e",
@@ -15646,6 +15770,7 @@
       }
     ],
     "message-service": [],
+    "media-service": [],
     "chat-service": [],
     "file-service": [],
     "user-service": [],

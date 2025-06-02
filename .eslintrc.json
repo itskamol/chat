@@ -1,6 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": [
+    "!**/*",
+    ".git",
+    "node_modules",
+    "dist",
+    "tmp",
+    ".nx/cache"
+  ],
   "plugins": ["@nx"],
   "overrides": [
     {
@@ -23,7 +30,11 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
+      "extends": [
+        "plugin:@nx/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
       "rules": {}
     },
     {
