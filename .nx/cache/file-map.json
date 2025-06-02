@@ -20,7 +20,7 @@
     "@nx/webpack": "17.1.3",
     "@nx/workspace": "17.1.3",
     "@swc-node/register": "~1.6.7",
-    "@swc/core": "~1.3.85",
+    "@swc/core": "~1.3.107",
     "@types/express": "^5.0.2",
     "@types/jest": "^29.4.0",
     "@types/node": "~18.16.9",
@@ -46,80 +46,120 @@
   },
   "fileMap": {
     "projectFileMap": {
-      "chat-service-e2e": [
+      "gateway": [
         {
-          "file": "apps/chat-service-e2e/.eslintrc.json",
+          "file": "apps/gateway/.eslintrc.json",
           "hash": "2295303304320410742"
         },
         {
-          "file": "apps/chat-service-e2e/jest.config.ts",
-          "hash": "12994023205528544050"
+          "file": "apps/gateway/jest.config.ts",
+          "hash": "5045538119222316024"
         },
         {
-          "file": "apps/chat-service-e2e/project.json",
-          "hash": "17586556761556710265"
+          "file": "apps/gateway/project.json",
+          "hash": "334139039335766969"
         },
         {
-          "file": "apps/chat-service-e2e/src/chat-service/chat-service.spec.ts",
-          "hash": "2263470703898423778"
+          "file": "apps/gateway/src/app/app.controller.spec.ts",
+          "hash": "11156443618385188612"
         },
         {
-          "file": "apps/chat-service-e2e/src/support/global-setup.ts",
-          "hash": "7274431510626514584"
+          "file": "apps/gateway/src/app/app.controller.ts",
+          "hash": "12797158806938560873"
         },
         {
-          "file": "apps/chat-service-e2e/src/support/global-teardown.ts",
-          "hash": "10856769668484651558"
+          "file": "apps/gateway/src/app/app.module.ts",
+          "hash": "9630392064378039230"
         },
         {
-          "file": "apps/chat-service-e2e/src/support/test-setup.ts",
-          "hash": "9379448616442792630"
+          "file": "apps/gateway/src/app/app.service.spec.ts",
+          "hash": "10601044450234745126"
         },
         {
-          "file": "apps/chat-service-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
+          "file": "apps/gateway/src/app/app.service.ts",
+          "hash": "14519170924260821055"
         },
         {
-          "file": "apps/chat-service-e2e/tsconfig.spec.json",
-          "hash": "14519349202314136898"
+          "file": "apps/gateway/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/gateway/src/main.ts",
+          "hash": "5397400221679482479"
+        },
+        {
+          "file": "apps/gateway/tsconfig.app.json",
+          "hash": "17628448778285850515"
+        },
+        {
+          "file": "apps/gateway/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/gateway/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        },
+        {
+          "file": "apps/gateway/webpack.config.js",
+          "hash": "12759027257167031159"
         }
       ],
-      "gateway-e2e": [
+      "user-service": [
         {
-          "file": "apps/gateway-e2e/.eslintrc.json",
+          "file": "apps/user-service/.eslintrc.json",
           "hash": "2295303304320410742"
         },
         {
-          "file": "apps/gateway-e2e/jest.config.ts",
-          "hash": "17204698082253755290"
+          "file": "apps/user-service/jest.config.ts",
+          "hash": "13816375733868837380"
         },
         {
-          "file": "apps/gateway-e2e/project.json",
-          "hash": "16174257754440199239"
+          "file": "apps/user-service/project.json",
+          "hash": "3730069561524993775"
         },
         {
-          "file": "apps/gateway-e2e/src/gateway/gateway.spec.ts",
-          "hash": "2263470703898423778"
+          "file": "apps/user-service/src/app/app.controller.spec.ts",
+          "hash": "11156443618385188612"
         },
         {
-          "file": "apps/gateway-e2e/src/support/global-setup.ts",
-          "hash": "7274431510626514584"
+          "file": "apps/user-service/src/app/app.controller.ts",
+          "hash": "15583552174609092028"
         },
         {
-          "file": "apps/gateway-e2e/src/support/global-teardown.ts",
-          "hash": "10856769668484651558"
+          "file": "apps/user-service/src/app/app.module.ts",
+          "hash": "17096259575820339406"
         },
         {
-          "file": "apps/gateway-e2e/src/support/test-setup.ts",
-          "hash": "9379448616442792630"
+          "file": "apps/user-service/src/app/app.service.spec.ts",
+          "hash": "10601044450234745126"
         },
         {
-          "file": "apps/gateway-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
+          "file": "apps/user-service/src/app/app.service.ts",
+          "hash": "7854395399820553333"
         },
         {
-          "file": "apps/gateway-e2e/tsconfig.spec.json",
-          "hash": "14519349202314136898"
+          "file": "apps/user-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/user-service/src/main.ts",
+          "hash": "11040035854821942023"
+        },
+        {
+          "file": "apps/user-service/tsconfig.app.json",
+          "hash": "17628448778285850515"
+        },
+        {
+          "file": "apps/user-service/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/user-service/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        },
+        {
+          "file": "apps/user-service/webpack.config.js",
+          "hash": "12759027257167031159"
         }
       ],
       "chat-service": [
@@ -180,102 +220,6 @@
           "hash": "12759027257167031159"
         }
       ],
-      "gateway": [
-        {
-          "file": "apps/gateway/.eslintrc.json",
-          "hash": "2295303304320410742"
-        },
-        {
-          "file": "apps/gateway/jest.config.ts",
-          "hash": "5045538119222316024"
-        },
-        {
-          "file": "apps/gateway/project.json",
-          "hash": "334139039335766969"
-        },
-        {
-          "file": "apps/gateway/src/app/app.controller.spec.ts",
-          "hash": "11156443618385188612"
-        },
-        {
-          "file": "apps/gateway/src/app/app.controller.ts",
-          "hash": "12797158806938560873"
-        },
-        {
-          "file": "apps/gateway/src/app/app.module.ts",
-          "hash": "9630392064378039230"
-        },
-        {
-          "file": "apps/gateway/src/app/app.service.spec.ts",
-          "hash": "10601044450234745126"
-        },
-        {
-          "file": "apps/gateway/src/app/app.service.ts",
-          "hash": "14519170924260821055"
-        },
-        {
-          "file": "apps/gateway/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/gateway/src/main.ts",
-          "hash": "5397400221679482479"
-        },
-        {
-          "file": "apps/gateway/tsconfig.app.json",
-          "hash": "17628448778285850515"
-        },
-        {
-          "file": "apps/gateway/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/gateway/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        },
-        {
-          "file": "apps/gateway/webpack.config.js",
-          "hash": "12759027257167031159"
-        }
-      ],
-      "message-service-e2e": [
-        {
-          "file": "apps/message-service-e2e/.eslintrc.json",
-          "hash": "2295303304320410742"
-        },
-        {
-          "file": "apps/message-service-e2e/jest.config.ts",
-          "hash": "6274600225733630097"
-        },
-        {
-          "file": "apps/message-service-e2e/project.json",
-          "hash": "1797466477630393416"
-        },
-        {
-          "file": "apps/message-service-e2e/src/message-service/message-service.spec.ts",
-          "hash": "2263470703898423778"
-        },
-        {
-          "file": "apps/message-service-e2e/src/support/global-setup.ts",
-          "hash": "7274431510626514584"
-        },
-        {
-          "file": "apps/message-service-e2e/src/support/global-teardown.ts",
-          "hash": "10856769668484651558"
-        },
-        {
-          "file": "apps/message-service-e2e/src/support/test-setup.ts",
-          "hash": "9379448616442792630"
-        },
-        {
-          "file": "apps/message-service-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/message-service-e2e/tsconfig.spec.json",
-          "hash": "14519349202314136898"
-        }
-      ],
       "message-service": [
         {
           "file": "apps/message-service/.eslintrc.json",
@@ -333,125 +277,9 @@
           "file": "apps/message-service/webpack.config.js",
           "hash": "12759027257167031159"
         }
-      ],
-      "user-service-e2e": [
-        {
-          "file": "apps/user-service-e2e/.eslintrc.json",
-          "hash": "2295303304320410742"
-        },
-        {
-          "file": "apps/user-service-e2e/jest.config.ts",
-          "hash": "13757219458130628522"
-        },
-        {
-          "file": "apps/user-service-e2e/project.json",
-          "hash": "16808904904370053968"
-        },
-        {
-          "file": "apps/user-service-e2e/src/support/global-setup.ts",
-          "hash": "7274431510626514584"
-        },
-        {
-          "file": "apps/user-service-e2e/src/support/global-teardown.ts",
-          "hash": "10856769668484651558"
-        },
-        {
-          "file": "apps/user-service-e2e/src/support/test-setup.ts",
-          "hash": "9379448616442792630"
-        },
-        {
-          "file": "apps/user-service-e2e/src/user-service/user-service.spec.ts",
-          "hash": "2263470703898423778"
-        },
-        {
-          "file": "apps/user-service-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/user-service-e2e/tsconfig.spec.json",
-          "hash": "14519349202314136898"
-        }
-      ],
-      "user-service": [
-        {
-          "file": "apps/user-service/.eslintrc.json",
-          "hash": "2295303304320410742"
-        },
-        {
-          "file": "apps/user-service/jest.config.ts",
-          "hash": "13816375733868837380"
-        },
-        {
-          "file": "apps/user-service/project.json",
-          "hash": "3730069561524993775"
-        },
-        {
-          "file": "apps/user-service/src/app/app.controller.spec.ts",
-          "hash": "11156443618385188612"
-        },
-        {
-          "file": "apps/user-service/src/app/app.controller.ts",
-          "hash": "15583552174609092028"
-        },
-        {
-          "file": "apps/user-service/src/app/app.module.ts",
-          "hash": "17096259575820339406"
-        },
-        {
-          "file": "apps/user-service/src/app/app.service.spec.ts",
-          "hash": "10601044450234745126"
-        },
-        {
-          "file": "apps/user-service/src/app/app.service.ts",
-          "hash": "7854395399820553333"
-        },
-        {
-          "file": "apps/user-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/user-service/src/main.ts",
-          "hash": "11040035854821942023"
-        },
-        {
-          "file": "apps/user-service/tsconfig.app.json",
-          "hash": "17628448778285850515"
-        },
-        {
-          "file": "apps/user-service/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/user-service/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        },
-        {
-          "file": "apps/user-service/webpack.config.js",
-          "hash": "12759027257167031159"
-        }
       ]
     },
     "nonProjectFiles": [
-      {
-        "file": ".env.development",
-        "hash": "4955829894048641463"
-      },
-      {
-        "file": ".env.docker",
-        "hash": "2505816197042859384"
-      },
-      {
-        "file": ".env.example",
-        "hash": "6599974622907476801"
-      },
-      {
-        "file": ".env.local",
-        "hash": "1627844406465150688"
-      },
-      {
-        "file": ".env.production",
-        "hash": "8977714135061437414"
-      },
       {
         "file": ".eslintrc.json",
         "hash": "17866138117546000433"
@@ -654,27 +482,23 @@
       },
       {
         "file": ".nx/cache/d/daemon.log",
-        "hash": "15598263161303581504"
-      },
-      {
-        "file": ".nx/cache/d/server-process.json",
-        "hash": "16837970173606294971"
+        "hash": "14059340011773642697"
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "6125285334597660543"
+        "hash": "14205797117481115219"
       },
       {
         "file": ".nx/cache/lockfile.hash",
-        "hash": "8027583083375621393"
+        "hash": "11036673384734000414"
       },
       {
         "file": ".nx/cache/parsed-lock-file.json",
-        "hash": "15384432080788467914"
+        "hash": "14042201202843160893"
       },
       {
         "file": ".nx/cache/project-graph.json",
-        "hash": "10283335234294229897"
+        "hash": "4551318983104276534"
       },
       {
         "file": ".nx/cache/run.json",
@@ -701,8 +525,16 @@
         "hash": "8488401878250479805"
       },
       {
+        "file": ".nx/cache/terminalOutputs/14171440845143019685",
+        "hash": "1357642953747547447"
+      },
+      {
         "file": ".nx/cache/terminalOutputs/14275043970010150788",
         "hash": "5452690182338174767"
+      },
+      {
+        "file": ".nx/cache/terminalOutputs/1439911730569861902",
+        "hash": "6021083626558678303"
       },
       {
         "file": ".nx/cache/terminalOutputs/15359903161649382345",
@@ -818,11 +650,11 @@
       },
       {
         "file": "package.json",
-        "hash": "5697922916042132932"
+        "hash": "13242007150759906547"
       },
       {
         "file": "pnpm-lock.yaml",
-        "hash": "14075022528910825592"
+        "hash": "16336175368940717267"
       },
       {
         "file": "pnpm-workspace.yaml",
