@@ -1,0 +1,67 @@
+{
+  "name": "file-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/file-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/file-service",
+        "main": "apps/file-service/src/main.ts",
+        "tsConfig": "apps/file-service/tsconfig.app.json",
+        "assets": [
+          "apps/file-service/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/file-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "file-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "file-service:build:development"
+        },
+        "production": {
+          "buildTarget": "file-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/file-service/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/file-service/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,18 +1,18 @@
 {
   "run": {
-    "command": "nx build message-service",
-    "startTime": "2025-06-02T02:19:44.309Z",
-    "endTime": "2025-06-02T02:19:51.290Z",
+    "command": "nx build file-service --skip-nx-cache",
+    "startTime": "2025-06-02T04:11:38.458Z",
+    "endTime": "2025-06-02T04:11:43.537Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "message-service:build:production",
+      "taskId": "file-service:build:production",
       "target": "build",
-      "projectName": "message-service",
-      "hash": "86409893752287109",
-      "startTime": "2025-06-02T02:19:44.332Z",
-      "endTime": "2025-06-02T02:19:51.289Z",
+      "projectName": "file-service",
+      "hash": "2137560543302672494",
+      "startTime": "2025-06-02T04:11:38.467Z",
+      "endTime": "2025-06-02T04:11:43.537Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0

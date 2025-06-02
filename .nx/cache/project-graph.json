@@ -46,6 +46,45 @@
         "tags": []
       }
     },
+    "presence-service-e2e": {
+      "name": "presence-service-e2e",
+      "type": "e2e",
+      "data": {
+        "root": "apps/presence-service-e2e",
+        "name": "presence-service-e2e",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "implicitDependencies": [
+          "presence-service"
+        ],
+        "projectType": "application",
+        "targets": {
+          "e2e": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{e2eProjectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/presence-service-e2e/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {}
+          },
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/presence-service-e2e/**/*.{js,ts}"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "tags": []
+      }
+    },
     "message-service-e2e": {
       "name": "message-service-e2e",
       "type": "e2e",
@@ -85,14 +124,12 @@
         "tags": []
       }
     },
-    "media-service": {
-      "name": "media-service",
+    "legacy-media-service": {
+      "name": "legacy-media-service",
       "type": "lib",
       "data": {
         "root": "services/media-service",
-        "sourceRoot": "services/media-service",
-        "name": "media-service",
-        "projectType": "library",
+        "name": "legacy-media-service",
         "targets": {
           "build": {
             "dependsOn": [
@@ -134,6 +171,8 @@
             "configurations": {}
           }
         },
+        "sourceRoot": "services/media-service",
+        "projectType": "library",
         "implicitDependencies": [],
         "tags": []
       }
@@ -177,49 +216,42 @@
         "tags": []
       }
     },
-    "file-service": {
-      "name": "file-service",
-      "type": "lib",
+    "file-service-e2e": {
+      "name": "file-service-e2e",
+      "type": "e2e",
       "data": {
-        "root": "services/file-service",
-        "sourceRoot": "services/file-service",
-        "name": "file-service",
-        "projectType": "library",
+        "root": "apps/file-service-e2e",
+        "name": "file-service-e2e",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "implicitDependencies": [
+          "file-service"
+        ],
+        "projectType": "application",
         "targets": {
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
+          "e2e": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{e2eProjectRoot}"
             ],
-            "executor": "nx:run-script",
             "options": {
-              "script": "build"
+              "jestConfig": "apps/file-service-e2e/jest.config.ts",
+              "passWithNoTests": true
             },
             "configurations": {}
           },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
             ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
+            "options": {
+              "lintFilePatterns": [
+                "apps/file-service-e2e/**/*.{js,ts}"
+              ]
+            },
             "configurations": {}
           }
         },
-        "implicitDependencies": [],
         "tags": []
       }
     },
@@ -276,6 +308,52 @@
         "tags": []
       }
     },
+    "legacy-file-service": {
+      "name": "legacy-file-service",
+      "type": "lib",
+      "data": {
+        "root": "services/file-service",
+        "name": "legacy-file-service",
+        "targets": {
+          "start": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "start"
+            },
+            "configurations": {}
+          },
+          "dev": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "dev"
+            },
+            "configurations": {}
+          },
+          "build": {
+            "dependsOn": [
+              "^build"
+            ],
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "configurations": {}
+          },
+          "nx-release-publish": {
+            "dependsOn": [
+              "^nx-release-publish"
+            ],
+            "executor": "@nx/js:release-publish",
+            "options": {},
+            "configurations": {}
+          }
+        },
+        "sourceRoot": "services/file-service",
+        "projectType": "library",
+        "implicitDependencies": [],
+        "tags": []
+      }
+    },
     "legacy-user-service": {
       "name": "legacy-user-service",
       "type": "lib",
@@ -320,6 +398,84 @@
         "projectType": "library",
         "implicitDependencies": [],
         "tags": []
+      }
+    },
+    "presence-service": {
+      "name": "presence-service",
+      "type": "app",
+      "data": {
+        "root": "apps/presence-service",
+        "name": "presence-service",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/presence-service/src",
+        "projectType": "application",
+        "targets": {
+          "build": {
+            "dependsOn": [
+              "^build"
+            ],
+            "executor": "@nx/webpack:webpack",
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "defaultConfiguration": "production",
+            "options": {
+              "target": "node",
+              "compiler": "tsc",
+              "outputPath": "dist/apps/presence-service",
+              "main": "apps/presence-service/src/main.ts",
+              "tsConfig": "apps/presence-service/tsconfig.app.json",
+              "assets": [
+                "apps/presence-service/src/assets"
+              ],
+              "isolatedConfig": true,
+              "webpackConfig": "apps/presence-service/webpack.config.js"
+            },
+            "configurations": {
+              "development": {},
+              "production": {}
+            }
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+              "buildTarget": "presence-service:build"
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "presence-service:build:development"
+              },
+              "production": {
+                "buildTarget": "presence-service:build:production"
+              }
+            }
+          },
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/presence-service/**/*.ts"
+              ]
+            },
+            "configurations": {}
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/presence-service/jest.config.ts"
+            },
+            "configurations": {}
+          }
+        },
+        "tags": [],
+        "implicitDependencies": []
       }
     },
     "user-service-e2e": {
@@ -509,6 +665,84 @@
             ],
             "options": {
               "jestConfig": "apps/chat-service/jest.config.ts"
+            },
+            "configurations": {}
+          }
+        },
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "file-service": {
+      "name": "file-service",
+      "type": "app",
+      "data": {
+        "root": "apps/file-service",
+        "name": "file-service",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/file-service/src",
+        "projectType": "application",
+        "targets": {
+          "build": {
+            "dependsOn": [
+              "^build"
+            ],
+            "executor": "@nx/webpack:webpack",
+            "outputs": [
+              "{options.outputPath}"
+            ],
+            "defaultConfiguration": "production",
+            "options": {
+              "target": "node",
+              "compiler": "tsc",
+              "outputPath": "dist/apps/file-service",
+              "main": "apps/file-service/src/main.ts",
+              "tsConfig": "apps/file-service/tsconfig.app.json",
+              "assets": [
+                "apps/file-service/src/assets"
+              ],
+              "isolatedConfig": true,
+              "webpackConfig": "apps/file-service/webpack.config.js"
+            },
+            "configurations": {
+              "development": {},
+              "production": {}
+            }
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+              "buildTarget": "file-service:build"
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "file-service:build:development"
+              },
+              "production": {
+                "buildTarget": "file-service:build:production"
+              }
+            }
+          },
+          "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "apps/file-service/**/*.ts"
+              ]
+            },
+            "configurations": {}
+          },
+          "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "apps/file-service/jest.config.ts"
             },
             "configurations": {}
           }
@@ -3045,6 +3279,15 @@
         "version": "@nestjs/core@10.4.18",
         "packageName": "@nestjs/core@10.4.18",
         "hash": "sha512-+cs96rnpHIfkn9o0DLZFKuE1RZ3FFQkpkzz+DY2U8C3Wn3VX5fQaO4YuabweLIhUKTLr9DMxPycA5qk5rAPFBw=="
+      }
+    },
+    "npm:@nestjs/microservices@10.4.18": {
+      "type": "npm",
+      "name": "npm:@nestjs/microservices@10.4.18",
+      "data": {
+        "version": "@nestjs/microservices@10.4.18",
+        "packageName": "@nestjs/microservices@10.4.18",
+        "hash": "sha512-DKE3GSkA0aAubBVurmlQGWBnUE1TzekT1pCof8/k6t9RPFyr3jf/o9tFDKi7x5icGrq+DwDvD75fRR6pnvBccw=="
       }
     },
     "npm:@nestjs/platform-express@10.4.18": {
@@ -15350,6 +15593,13 @@
         "type": "static"
       }
     ],
+    "presence-service-e2e": [
+      {
+        "source": "presence-service-e2e",
+        "target": "presence-service",
+        "type": "implicit"
+      }
+    ],
     "message-service-e2e": [
       {
         "source": "message-service-e2e",
@@ -15357,7 +15607,7 @@
         "type": "implicit"
       }
     ],
-    "media-service": [],
+    "legacy-media-service": [],
     "chat-service-e2e": [
       {
         "source": "chat-service-e2e",
@@ -15365,11 +15615,11 @@
         "type": "implicit"
       }
     ],
-    "file-service": [
+    "file-service-e2e": [
       {
-        "source": "file-service",
-        "target": "@chat/shared",
-        "type": "static"
+        "source": "file-service-e2e",
+        "target": "file-service",
+        "type": "implicit"
       }
     ],
     "legacy-chat-service": [
@@ -15379,7 +15629,15 @@
         "type": "static"
       }
     ],
+    "legacy-file-service": [
+      {
+        "source": "legacy-file-service",
+        "target": "@chat/shared",
+        "type": "static"
+      }
+    ],
     "legacy-user-service": [],
+    "presence-service": [],
     "user-service-e2e": [
       {
         "source": "user-service-e2e",
@@ -15389,6 +15647,7 @@
     ],
     "message-service": [],
     "chat-service": [],
+    "file-service": [],
     "user-service": [],
     "dev": [],
     "gateway-e2e": [

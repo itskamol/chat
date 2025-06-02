@@ -2205,6 +2205,15 @@
         "hash": "sha512-+cs96rnpHIfkn9o0DLZFKuE1RZ3FFQkpkzz+DY2U8C3Wn3VX5fQaO4YuabweLIhUKTLr9DMxPycA5qk5rAPFBw=="
       }
     },
+    "npm:@nestjs/microservices@10.4.18": {
+      "type": "npm",
+      "name": "npm:@nestjs/microservices@10.4.18",
+      "data": {
+        "version": "@nestjs/microservices@10.4.18",
+        "packageName": "@nestjs/microservices@10.4.18",
+        "hash": "sha512-DKE3GSkA0aAubBVurmlQGWBnUE1TzekT1pCof8/k6t9RPFyr3jf/o9tFDKi7x5icGrq+DwDvD75fRR6pnvBccw=="
+      }
+    },
     "npm:@nestjs/platform-express@10.4.18": {
       "type": "npm",
       "name": "npm:@nestjs/platform-express@10.4.18",

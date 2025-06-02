@@ -1,0 +1,67 @@
+{
+  "name": "presence-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/presence-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/presence-service",
+        "main": "apps/presence-service/src/main.ts",
+        "tsConfig": "apps/presence-service/tsconfig.app.json",
+        "assets": [
+          "apps/presence-service/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/presence-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "presence-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "presence-service:build:development"
+        },
+        "production": {
+          "buildTarget": "presence-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/presence-service/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/presence-service/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
