@@ -1,51 +1,5 @@
 {
   "nodes": {
-    "notification-service": {
-      "name": "notification-service",
-      "type": "lib",
-      "data": {
-        "root": "services/notification-service",
-        "sourceRoot": "services/notification-service",
-        "name": "notification-service",
-        "projectType": "library",
-        "targets": {
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
-        "tags": []
-      }
-    },
     "message-service-e2e": {
       "name": "message-service-e2e",
       "type": "e2e",
@@ -85,59 +39,6 @@
         "tags": []
       }
     },
-    "media-service": {
-      "name": "media-service",
-      "type": "lib",
-      "data": {
-        "root": "services/media-service",
-        "sourceRoot": "services/media-service",
-        "name": "media-service",
-        "projectType": "library",
-        "targets": {
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "postinstall": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "postinstall"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
-        "tags": []
-      }
-    },
     "chat-service-e2e": {
       "name": "chat-service-e2e",
       "type": "e2e",
@@ -174,151 +75,6 @@
             "configurations": {}
           }
         },
-        "tags": []
-      }
-    },
-    "file-service": {
-      "name": "file-service",
-      "type": "lib",
-      "data": {
-        "root": "services/file-service",
-        "sourceRoot": "services/file-service",
-        "name": "file-service",
-        "projectType": "library",
-        "targets": {
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
-        "tags": []
-      }
-    },
-    "legacy-chat-service": {
-      "name": "legacy-chat-service",
-      "type": "lib",
-      "data": {
-        "root": "services/chat-service",
-        "name": "legacy-chat-service",
-        "targets": {
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "test": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "test"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "sourceRoot": "services/chat-service",
-        "projectType": "library",
-        "implicitDependencies": [],
-        "tags": []
-      }
-    },
-    "legacy-user-service": {
-      "name": "legacy-user-service",
-      "type": "lib",
-      "data": {
-        "root": "services/user-service",
-        "name": "legacy-user-service",
-        "targets": {
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "sourceRoot": "services/user-service",
-        "projectType": "library",
-        "implicitDependencies": [],
         "tags": []
       }
     },
@@ -595,35 +351,6 @@
         "implicitDependencies": []
       }
     },
-    "dev": {
-      "name": "dev",
-      "type": "lib",
-      "data": {
-        "root": "services/gateway",
-        "sourceRoot": "services/gateway",
-        "name": "dev",
-        "projectType": "library",
-        "targets": {
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
-        "tags": []
-      }
-    },
     "gateway-e2e": {
       "name": "gateway-e2e",
       "type": "e2e",
@@ -660,52 +387,6 @@
             "configurations": {}
           }
         },
-        "tags": []
-      }
-    },
-    "@chat/shared": {
-      "name": "@chat/shared",
-      "type": "lib",
-      "data": {
-        "root": "packages/shared",
-        "sourceRoot": "packages/shared",
-        "name": "@chat/shared",
-        "projectType": "library",
-        "targets": {
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "clean": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "clean"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
         "tags": []
       }
     },
@@ -785,59 +466,6 @@
         },
         "tags": [],
         "implicitDependencies": []
-      }
-    },
-    "my-v0-project": {
-      "name": "my-v0-project",
-      "type": "lib",
-      "data": {
-        "root": "ui",
-        "sourceRoot": "ui",
-        "name": "my-v0-project",
-        "projectType": "library",
-        "targets": {
-          "dev": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "dev"
-            },
-            "configurations": {}
-          },
-          "build": {
-            "dependsOn": [
-              "^build"
-            ],
-            "executor": "nx:run-script",
-            "options": {
-              "script": "build"
-            },
-            "configurations": {}
-          },
-          "start": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "start"
-            },
-            "configurations": {}
-          },
-          "lint": {
-            "executor": "nx:run-script",
-            "options": {
-              "script": "lint"
-            },
-            "configurations": {}
-          },
-          "nx-release-publish": {
-            "dependsOn": [
-              "^nx-release-publish"
-            ],
-            "executor": "@nx/js:release-publish",
-            "options": {},
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": [],
-        "tags": []
       }
     }
   },
@@ -15343,13 +14971,6 @@
     }
   },
   "dependencies": {
-    "notification-service": [
-      {
-        "source": "notification-service",
-        "target": "@chat/shared",
-        "type": "static"
-      }
-    ],
     "message-service-e2e": [
       {
         "source": "message-service-e2e",
@@ -15357,7 +14978,6 @@
         "type": "implicit"
       }
     ],
-    "media-service": [],
     "chat-service-e2e": [
       {
         "source": "chat-service-e2e",
@@ -15365,21 +14985,6 @@
         "type": "implicit"
       }
     ],
-    "file-service": [
-      {
-        "source": "file-service",
-        "target": "@chat/shared",
-        "type": "static"
-      }
-    ],
-    "legacy-chat-service": [
-      {
-        "source": "legacy-chat-service",
-        "target": "@chat/shared",
-        "type": "static"
-      }
-    ],
-    "legacy-user-service": [],
     "user-service-e2e": [
       {
         "source": "user-service-e2e",
@@ -15390,7 +14995,6 @@
     "message-service": [],
     "chat-service": [],
     "user-service": [],
-    "dev": [],
     "gateway-e2e": [
       {
         "source": "gateway-e2e",
@@ -15398,15 +15002,7 @@
         "type": "implicit"
       }
     ],
-    "@chat/shared": [],
-    "gateway": [],
-    "my-v0-project": [
-      {
-        "source": "my-v0-project",
-        "target": "@chat/shared",
-        "type": "static"
-      }
-    ]
+    "gateway": []
   },
   "version": "6.0"
 }
