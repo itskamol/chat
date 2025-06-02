@@ -1,0 +1,860 @@
+Okay, this is a significant task! Creating a full-fledged Technical Specification (TZ), also often known as a Software Requirements Specification (SRS), is a detailed process. I will provide a comprehensive TZ based on our discussion, aiming to cover as many "small details" as possible.
+
+This document will be structured according to common SRS/TZ practices.
+
+Technical Specification: Chat Application Backend Migration to NestJS
+
+Document Version: 1.0
+Date: October 26, 2023
+Project: Chat Application Backend Modernization
+Author: [Your Name/Team Name]
+
+Table of Contents:
+
+Introduction
+1.1. Purpose
+1.2. Scope
+1.3. Definitions, Acronyms, and Abbreviations
+1.4. References
+1.5. Document Overview
+
+Overall Description
+2.1. Product Perspective
+2.2. Product Functions (High-Level)
+2.3. User Characteristics
+2.4. Constraints
+2.5. Assumptions and Dependencies
+
+Specific Requirements
+3.1. Functional Requirements
+3.1.1. API Gateway (gateway)
+3.1.2. User Service (user-service)
+3.1.3. Chat Service (chat-service)
+3.1.4. Message Service (message-service)
+3.1.5. Presence Service (presence-service)
+3.1.6. File Service (file-service)
+3.1.7. Media Service (media-service)
+3.1.8. Notification Service (notification-service)
+3.2. Non-Functional Requirements
+3.2.1. Performance
+3.2.2. Scalability
+3.2.3. Availability & Reliability
+3.2.4. Security
+3.2.5. Maintainability
+3.2.6. Testability
+3.2.7. Usability (Developer Experience)
+3.3. Interface Requirements
+3.3.1. External Interfaces (Frontend via API Gateway)
+3.3.2. Internal Interfaces (Inter-service Communication)
+3.3.3. Database Interfaces
+3.4. Data Requirements
+
+System Architecture
+4.1. Architectural Style: Microservices
+4.2. Monorepo Structure (NX Workspace)
+4.3. Microservice Descriptions (Recap)
+4.4. Inter-service Communication Strategy
+4.4.1. Asynchronous Communication (RabbitMQ)
+4.4.2. Synchronous Communication (gRPC)
+4.5. API Gateway Pattern
+4.6. Database Strategy (Database per Service)
+
+Migration Strategy
+5.1. Overall Approach: Strangler Fig Pattern
+5.2. Phased Rollout
+5.3. Parallel Run
+5.4. Traffic Routing via API Gateway
+5.5. Data Handling during Migration
+5.6. Rollback Strategy
+
+Technology Stack
+
+Development and Operational Environment (DevOps)
+7.1. Version Control
+7.2. Containerization
+7.3. Orchestration (Target)
+7.4. CI/CD Pipeline
+7.5. Configuration Management
+7.6. Secrets Management
+7.7. Logging
+7.8. Monitoring and Alerting
+7.9. Tracing
+
+Migration Timeline (High-Level Phases)
+
+Risk Assessment and Mitigation
+
+Glossary (Extended)
+
+1. Introduction
+1.1. Purpose
+
+This document specifies the technical requirements and architectural design for migrating the existing chat application's backend from its current technology stack to a modern, scalable, and maintainable microservices architecture based on NestJS. The primary goal is to improve system performance, developer productivity, scalability, and resilience.
+
+1.2. Scope
+
+In Scope:
+
+Complete backend rewrite and migration to NestJS.
+
+Decomposition of the existing monolithic backend (or existing services) into the defined microservices.
+
+Implementation of an API Gateway for client-backend interaction.
+
+Integration of asynchronous messaging (RabbitMQ) and synchronous communication (gRPC) between services.
+
+Preservation of existing WebRTC (Mediasoup) functionality, with signaling handled by a new NestJS service.
+
+Database strategy implementation ("Database per Service" as the target).
+
+Setup of CI/CD pipelines, monitoring, logging, and tracing for the new architecture.
+
+Adherence to security best practices.
+
+Out of Scope:
+
+Changes to the existing Next.js frontend UI. The new backend API must remain compatible or be adapted via the API Gateway.
+
+Major new feature development beyond what is required for the migration and architectural improvements.
+
+Migration of historical Mediasoup media stream data (if any). Focus is on signaling and session management.
+
+Desktop/mobile client application changes (unless API contract necessitates minor updates).
+
+1.3. Definitions, Acronyms, and Abbreviations
+
+ACL: Anti-Corruption Layer
+
+API: Application Programming Interface
+
+CI/CD: Continuous Integration / Continuous Delivery
+
+CRUD: Create, Read, Update, Delete
+
+DB: Database
+
+DI: Dependency Injection
+
+DTO: Data Transfer Object
+
+E2E: End-to-End (testing)
+
+gRPC: Google Remote Procedure Call
+
+JWT: JSON Web Token
+
+K8s: Kubernetes
+
+NFR: Non-Functional Requirement
+
+NX: Nrwl Extensions (monorepo tool)
+
+RBAC: Role-Based Access Control
+
+REST: Representational State Transfer
+
+SRS: Software Requirements Specification
+
+TZ: Technical Specification (this document)
+
+UI: User Interface
+
+WebRTC: Web Real-Time Communication
+
+WS: WebSocket
+
+1.4. References
+
+NestJS Documentation
+
+NX Workspace Documentation
+
+RabbitMQ Documentation
+
+gRPC Documentation
+
+Mediasoup Documentation
+
+[Existing System Architecture Document] (if available)
+
+[Existing API Documentation] (if available)
+
+1.5. Document Overview
+
+This document details the planned architecture, specific functional and non-functional requirements, migration strategy, technology stack, and DevOps considerations for the Chat Application Backend Migration project.
+
+2. Overall Description
+2.1. Product Perspective
+
+The new backend system will serve as the server-side infrastructure for the existing chat application. It will replace the current backend system while ensuring seamless integration with the existing Next.js frontend and any other client applications. The system will be composed of several independent microservices, orchestrated to provide a cohesive set of functionalities.
+
+2.2. Product Functions (High-Level)
+
+The migrated backend system SHALL provide the following core functionalities:
+
+User authentication and management.
+
+Real-time chat messaging (one-to-one, group).
+
+User presence status (online, offline, typing indicators).
+
+File sharing and management.
+
+Real-time audio/video communication via WebRTC (Mediasoup).
+
+Push and in-app notifications.
+
+2.3. User Characteristics
+
+The primary users interacting with this backend system (indirectly, via clients) are end-users of the chat application.
+Direct interactors with the system (for development, deployment, maintenance) include:
+
+Backend Developers
+
+Frontend Developers (consuming APIs)
+
+DevOps Engineers
+
+System Administrators
+
+2.4. Constraints
+
+C1: The existing Next.js frontend UI SHALL NOT be significantly modified. The API Gateway must ensure compatibility.
+
+C2: NestJS framework MUST be used for all new backend services.
+
+C3: TypeScript MUST be the primary programming language.
+
+C4: The migration process MUST minimize downtime for end-users.
+
+C5: Existing Mediasoup integration for WebRTC MUST be preserved and integrated.
+
+C6: The system MUST be deployable using Docker containers.
+
+C7: Security best practices (OWASP Top 10) MUST be considered and implemented.
+
+2.5. Assumptions and Dependencies
+
+A1: The existing frontend can adapt to minor API changes if absolutely necessary and communicated, or the API Gateway can handle transformations.
+
+A2: Necessary infrastructure (e.g., RabbitMQ, databases, Mediasoup servers) will be available or provisioned.
+
+A3: The development team possesses or will acquire sufficient expertise in NestJS, microservices, gRPC, RabbitMQ, and Mediasoup.
+
+A4: Existing data can be migrated or accessed by new services with acceptable performance.
+
+D1: The system depends on external STUN/TURN server services for WebRTC NAT traversal.
+
+D2: The system may depend on external services for push notifications (e.g., FCM, APNS).
+
+3. Specific Requirements
+3.1. Functional Requirements
+
+Each microservice SHALL be implemented as a separate NestJS application within the NX monorepo.
+
+FR-GW-001: SHALL serve as the single entry point for all client (HTTP/WebSocket) requests.
+
+FR-GW-002: SHALL route HTTP requests to appropriate downstream microservices (primarily via gRPC, fallback to REST if necessary for specific legacy integrations).
+
+FR-GW-003: SHALL manage WebSocket connections for real-time communication.
+
+FR-GW-003.1: SHALL authenticate WebSocket connections (e.g., using JWT in handshake).
+
+FR-GW-003.2: SHALL route WebSocket messages/events to/from chat-service, presence-service, and media-service (for signaling).
+
+FR-GW-004: SHALL implement centralized authentication (JWT validation) for all incoming requests.
+
+FR-GW-004.1: SHALL attach authenticated user context to requests forwarded to downstream services.
+
+FR-GW-005: SHALL implement centralized authorization (RBAC) based on user roles/permissions.
+
+FR-GW-006: SHALL provide rate limiting capabilities.
+
+FR-GW-007: SHALL implement request/response transformation if needed to maintain compatibility with the existing frontend.
+
+FR-GW-008: SHALL handle API versioning.
+
+FR-GW-009: SHALL provide aggregated responses by calling multiple microservices if required by the frontend.
+
+FR-GW-010: SHALL provide standard CORS handling.
+
+FR-GW-011: SHALL log all incoming requests and their corresponding upstream service calls (with correlation IDs).
+
+FR-US-001: SHALL manage user lifecycle: registration, login, profile update, account deactivation/deletion.
+
+FR-US-001.1: POST /auth/register - User registration with email/password.
+
+FR-US-001.2: POST /auth/login - User login, returns JWT.
+
+FR-US-001.3: POST /auth/refresh - Refresh JWT.
+
+FR-US-001.4: GET /users/me - Get current user profile.
+
+FR-US-001.5: PATCH /users/me - Update current user profile.
+
+FR-US-001.6: GET /users/{id} - Get user profile by ID (for authorized requests).
+
+FR-US-001.7: GET /users/search?query= - Search users.
+
+FR-US-002: SHALL securely store user credentials (e.g., hashed passwords).
+
+FR-US-003: SHALL manage user roles and permissions (if not handled entirely by a separate auth service).
+
+FR-US-004: SHALL publish events (e.g., UserCreated, UserProfileUpdated) to RabbitMQ for other services to consume.
+
+FR-US-005: SHALL provide gRPC endpoints for internal services to fetch user data (e.g., getUserById, validateUserCredentials).
+
+FR-US-006: SHALL handle password reset functionality.
+
+FR-CS-001: SHALL manage chat rooms/conversations (one-to-one, group).
+
+FR-CS-001.1: Create, update, delete chat rooms.
+
+FR-CS-001.2: Add/remove participants from chat rooms.
+
+FR-CS-002: SHALL handle real-time message broadcasting within chat rooms via WebSocket events (relayed by API Gateway or direct WS handling if decided).
+
+FR-CS-002.1: Emit NewMessage event to room participants.
+
+FR-CS-002.2: Emit MessageRead event.
+
+FR-CS-002.3: Emit UserTyping event.
+
+FR-CS-003: SHALL interact with message-service (via gRPC/RabbitMQ) to persist and retrieve messages.
+
+FR-CS-004: SHALL manage user permissions within chat rooms (e.g., admin, moderator).
+
+FR-CS-005: SHALL provide gRPC endpoints for fetching chat room details, participants, etc.
+
+FR-CS-006: SHALL publish events like ChatRoomCreated, UserJoinedChat to RabbitMQ.
+
+FR-MS-001: SHALL be responsible for persisting chat messages to a database optimized for write-heavy loads (e.g., MongoDB, Cassandra).
+
+FR-MS-001.1: Store message content, sender ID, chat room ID, timestamp, attachments metadata.
+
+FR-MS-002: SHALL provide gRPC endpoints for chat-service to:
+
+FR-MS-002.1: Save new messages.
+
+FR-MS-002.2: Retrieve message history for a chat room (with pagination).
+
+FR-MS-002.3: Update message status (e.g., read, deleted).
+
+FR-MS-002.4: Search messages.
+
+FR-MS-003: SHALL handle message editing and deletion logic (soft/hard delete).
+
+FR-MS-004: SHALL manage message read receipts.
+
+FR-PS-001: SHALL track and manage user online/offline status.
+
+FR-PS-002: SHALL track and manage user "typing" status in specific chat rooms.
+
+FR-PS-003: SHALL consume user connect/disconnect events from the API Gateway (WebSocket lifecycle).
+
+FR-PS-004: SHALL provide gRPC endpoints for other services to query user presence status.
+
+FR-PS-005: SHALL broadcast presence updates (e.g., UserOnline, UserOffline, UserTyping) to relevant clients via the API Gateway's WebSocket connections.
+
+FR-PS-006: SHALL use a fast in-memory store like Redis for managing presence states.
+
+FR-FS-001: SHALL handle file uploads and downloads.
+
+FR-FS-002: SHALL integrate with a blob storage solution (e.g., AWS S3, MinIO, Google Cloud Storage).
+
+FR-FS-002.1: Store actual file content in blob storage.
+
+FR-FS-002.2: Store file metadata (name, size, type, owner, storage path) in its own database.
+
+FR-FS-003: SHALL provide gRPC endpoints for:
+
+FR-FS-003.1: Generating pre-signed URLs for uploads.
+
+FR-FS-003.2: Generating pre-signed URLs for downloads.
+
+FR-FS-003.3: Recording file upload completion and metadata.
+
+FR-FS-003.4: Deleting files (and their metadata).
+
+FR-FS-004: SHALL implement access control for files based on user permissions and chat room context.
+
+FR-FS-005: SHALL publish events like FileUploaded to RabbitMQ (e.g., for message-service to link it to a message).
+
+FR-MDS-001: SHALL act as the signaling server for WebRTC (Mediasoup) communication.
+
+FR-MDS-002: SHALL handle Mediasoup-specific signaling messages (e.g., RTP capabilities, transport creation, producer/consumer creation) via WebSocket (relayed by API Gateway).
+
+FR-MDS-003: SHALL manage Mediasoup Routers and Workers.
+
+FR-MDS-004: SHALL provide clients with necessary Mediasoup server information and TURN/STUN server configurations.
+
+FR-MDS-005: SHALL authenticate and authorize users before allowing them to join/create media sessions.
+
+FR-MDS-006: SHALL interact with chat-service (or a dedicated session service) to manage media session lifecycle associated with chat rooms or calls.
+
+FR-MDS-007: SHALL NOT handle media stream processing itself; this is done by Mediasoup workers. This service is for control and signaling.
+
+FR-NS-001: SHALL consume events from other services via RabbitMQ (e.g., NewMessageEvent, UserMentionedEvent, CallIncomingEvent).
+
+FR-NS-002: SHALL manage user notification preferences.
+
+FR-NS-003: SHALL send push notifications to mobile/desktop clients via external providers (FCM, APNS).
+
+FR-NS-003.1: Manage device tokens for push notifications.
+
+FR-NS-004: SHALL send in-app notifications via WebSocket (relayed by API Gateway).
+
+FR-NS-005: SHALL provide gRPC endpoints for triggering ad-hoc notifications if needed.
+
+FR-NS-006: SHALL handle notification templating and localization.
+
+FR-NS-007: SHALL manage notification read/unread status.
+
+3.2. Non-Functional Requirements
+
+NFR-PERF-001: API Gateway response time for 95th percentile user-facing requests SHALL be < 300ms (excluding external network latency to client).
+
+NFR-PERF-002: Real-time message delivery latency (server-side from sender to receiver via WebSocket) SHALL be < 100ms for 95th percentile.
+
+NFR-PERF-003: User presence updates SHALL be propagated within < 500ms.
+
+NFR-PERF-004: Each microservice SHALL handle at least [X] requests per second with an average response time of < [Y] ms (Specify X, Y based on current/expected load, e.g., X=100, Y=50).
+
+NFR-PERF-005: System SHALL support [N] concurrent active users (e.g., N=10,000) with active WebSocket connections.
+
+NFR-PERF-006: Database queries critical to user experience (e.g., loading chat history) SHALL execute in < 200ms.
+
+NFR-SCAL-001: All microservices SHALL be designed for horizontal scalability (stateless where possible, or state managed externally e.g., Redis, DB).
+
+NFR-SCAL-002: The system architecture MUST support scaling individual microservices independently based on their load.
+
+NFR-SCAL-003: Database solutions chosen MUST support scaling to accommodate projected data growth and query load.
+
+NFR-SCAL-004: RabbitMQ and gRPC infrastructure MUST be scalable.
+
+NFR-AVRL-001: The overall system SHALL achieve 99.9% uptime (excluding planned maintenance).
+
+NFR-AVRL-002: Failure of one microservice SHOULD NOT cascade to cause a total system outage (graceful degradation).
+
+NFR-AVRL-003: Critical data (user accounts, messages) MUST be backed up regularly, and a recovery plan MUST be in place. RPO/RTO to be defined.
+
+NFR-AVRL-004: Inter-service communication SHALL implement retries and circuit breaker patterns for resilience.
+
+NFR-AVRL-005: RabbitMQ messages SHALL be persisted to prevent loss in case of broker failure. Dead-letter queues (DLQs) SHALL be configured.
+
+NFR-SEC-001: All external communication SHALL use HTTPS/WSS.
+
+NFR-SEC-002: All inter-service communication via gRPC MAY use mTLS if deployed in an untrusted network segment.
+
+NFR-SEC-003: Authentication SHALL be JWT-based, with short-lived access tokens and refresh tokens.
+
+NFR-SEC-004: Passwords MUST be hashed using a strong, salted algorithm (e.g., Argon2, bcrypt).
+
+NFR-SEC-005: Authorization SHALL be implemented using RBAC.
+
+NFR-SEC-006: Input validation (DTOs with class-validator) MUST be enforced at service boundaries.
+
+NFR-SEC-007: System SHALL be protected against common web vulnerabilities (OWASP Top 10), including XSS, SQLi (or NoSQLi), CSRF.
+
+NFR-SEC-008: Sensitive configuration data (API keys, passwords) MUST be managed via a secure secrets management system.
+
+NFR-SEC-009: Regular security audits and penetration testing SHOULD be planned.
+
+NFR-SEC-010: Dependency vulnerability scanning SHALL be part of the CI pipeline.
+
+NFR-MAIN-001: Code SHALL follow NestJS and TypeScript best practices and a consistent style guide (e.g., Prettier, ESLint).
+
+NFR-MAIN-002: Services and modules SHALL be loosely coupled and highly cohesive.
+
+NFR-MAIN-003: Comprehensive JSDoc/TSDoc documentation SHALL be provided for public APIs and complex logic.
+
+NFR-MAIN-004: The NX monorepo structure SHALL facilitate code sharing and reduce boilerplate.
+
+NFR-MAIN-005: Configuration SHALL be externalized and environment-specific.
+
+NFR-TEST-001: Unit test coverage for critical business logic SHALL be >= 80%.
+
+NFR-TEST-002: Integration tests SHALL cover interactions between services and with databases/message brokers.
+
+NFR-TEST-003: E2E tests SHALL validate key user flows through the API Gateway.
+
+NFR-TEST-004: All tests SHALL be automated and run as part of the CI pipeline.
+
+NFR-DX-001: Local development setup SHALL be streamlined using Docker Compose.
+
+NFR-DX-002: NX tooling SHALL be leveraged for code generation, linting, testing, and building.
+
+NFR-DX-003: Logging SHALL be structured and provide sufficient context for debugging.
+
+NFR-DX-004: API contracts (gRPC .proto files, OpenAPI specs for Gateway) SHALL be well-defined and versioned.
+
+3.3. Interface Requirements
+
+IF-EXT-001: The API Gateway SHALL expose RESTful HTTP endpoints for synchronous operations. The API contract SHOULD aim for compatibility with the existing frontend's expectations.
+
+IF-EXT-002: The API Gateway SHALL expose WebSocket endpoints for real-time bidirectional communication.
+
+IF-EXT-003: Data interchange format for REST APIs SHALL be JSON.
+
+IF-EXT-004: Authentication via JWT in Authorization: Bearer <token> header for HTTP and during WS handshake.
+
+IF-INT-001: Synchronous request/response communication between microservices SHALL primarily use gRPC.
+
+IF-INT-001.1: Protocol Buffer (.proto) files SHALL define service contracts for gRPC.
+
+IF-INT-002: Asynchronous event-driven communication between microservices SHALL use RabbitMQ.
+
+IF-INT-002.1: Message payloads SHALL be clearly defined (e.g., JSON).
+
+IF-INT-002.2: Exchanges, queues, and bindings SHALL be well-defined and documented.
+
+IF-DB-001: Each service that requires persistence SHALL interact with its dedicated database instance/schema.
+
+IF-DB-002: Interaction with SQL databases (e.g., PostgreSQL for user-service) SHALL use an ORM like TypeORM.
+
+IF-DB-003: Interaction with NoSQL databases (e.g., MongoDB for message-service) SHALL use official drivers or an ODM like Mongoose.
+
+IF-DB-004: Interaction with Redis (for presence-service, caching) SHALL use a standard Redis client library.
+
+3.4. Data Requirements
+
+DR-001: User Data: Includes profile information, credentials (hashed), preferences, roles.
+
+DR-002: Chat Data: Includes chat room information, participants, message content, timestamps, sender/receiver IDs, read receipts.
+
+DR-003: File Metadata: Includes filename, type, size, owner, storage path, access permissions.
+
+DR-004: Presence Data: User online/offline status, typing indicators (largely ephemeral).
+
+DR-005: Notification Data: Device tokens, user notification preferences, notification history.
+
+DR-006: Data consistency across services for eventually consistent data SHALL be managed via event-driven patterns (e.g., Saga pattern for complex transactions if needed, though aim to minimize distributed transactions).
+
+DR-007: Data retention policies for messages, files, and logs MUST be defined and implemented.
+
+DR-008: Personally Identifiable Information (PII) MUST be handled in compliance with relevant data privacy regulations (e.g., GDPR, CCPA). Encryption at rest and in transit for sensitive data.
+
+4. System Architecture
+4.1. Architectural Style: Microservices
+
+The system will be built using a microservices architecture. Each core domain of the application (user management, chat, files, etc.) will be implemented as an independent, deployable service.
+
+4.2. Monorepo Structure (NX Workspace)
+chat-app-nx-workspace/
+├── apps/                    # Deployable NestJS applications (microservices)
+│   ├── gateway/
+│   ├── user-service/
+│   ├── chat-service/
+│   ├── message-service/
+│   ├── presence-service/
+│   ├── file-service/
+│   ├── media-service/
+│   └── notification-service/
+├── libs/                   # Shareable libraries
+│   ├── common/             # Common DTOs, enums, utils, global pipes/filters
+│   ├── config/             # Centralized configuration module (NestJS ConfigModule)
+│   ├── database/           # Shared DB connection logic/schemas (if any, ideally minimal)
+│   ├── auth/               # Shared authentication logic (JWT strategies, Guards)
+│   └── types/              # Core TypeScript interfaces
+├── tools/                  # Build scripts, Docker configurations
+└── nx.json, package.json, etc.
+
+4.3. Microservice Descriptions (Recap)
+
+Gateway: Single entry point, routing, auth, WS management.
+
+User Service: User identity, profiles, authentication.
+
+Chat Service: Chat room logic, real-time event coordination.
+
+Message Service: Message persistence and retrieval.
+
+Presence Service: User online/offline/typing status.
+
+File Service: File upload/download, metadata management.
+
+Media Service: WebRTC/Mediasoup signaling.
+
+Notification Service: Push and in-app notifications.
+
+4.4. Inter-service Communication Strategy
+
+Used for event-driven decoupling and non-blocking operations.
+
+Examples: UserCreatedEvent from user-service consumed by notification-service. NewMessagePersistedEvent from message-service consumed by chat-service (to then broadcast via WS).
+
+Guaranteed delivery (persistent messages) and dead-letter queues (DLQs) for reliability.
+
+Used for direct request/response interactions where an immediate answer is needed.
+
+High-performance, type-safe communication using Protocol Buffers.
+
+Examples: gateway calling user-service to validate credentials. chat-service calling message-service to fetch message history.
+
+4.5. API Gateway Pattern
+
+As detailed in Functional Requirements (3.1.1) and Architecture (4.3). It centralizes cross-cutting concerns and simplifies client interaction.
+
+4.6. Database Strategy (Database per Service)
+
+Goal: Each microservice owns its data and database.
+
+user-service: PostgreSQL (relational data, transactions).
+
+message-service: MongoDB (flexible schema, high write throughput, good for chat messages).
+
+presence-service: Redis (fast key-value store for ephemeral state).
+
+file-service: PostgreSQL or MongoDB for metadata.
+
+Other services: Choose DB based on specific needs (e.g., PostgreSQL for relational data, MongoDB for flexible documents).
+
+Migration Phase: Initially, some services might share a database or collections if immediate separation is too complex, with a clear roadmap to full separation. An Anti-Corruption Layer (ACL) might be used if new services read from old DB structures.
+
+5. Migration Strategy
+5.1. Overall Approach: Strangler Fig Pattern
+
+Gradually replace parts of the old system with new microservices. The API Gateway plays a crucial role in routing traffic to either the old system or new services.
+
+5.2. Phased Rollout
+
+Infrastructure Setup: Monorepo, CI/CD, base Docker images, RabbitMQ, initial DBs.
+
+Core Service Migration: Start with user-service and authentication. Implement in API Gateway.
+
+Chat & WebSocket Migration: chat-service, message-service, presence-service. Integrate WebSocket handling in API Gateway.
+
+Specialized Services: file-service, media-service (signaling), notification-service.
+
+Testing & Optimization: Thorough E2E testing, performance tuning.
+
+Decommission Old System: Once all functionality is migrated and stable.
+
+5.3. Parallel Run
+
+New services will run in parallel with the old system. The API Gateway will initially route all traffic to the old system. As new services become ready, traffic for specific functionalities will be rerouted.
+
+5.4. Traffic Routing via API Gateway
+
+The API Gateway will be configured to route requests based on path, headers, or feature flags.
+
+Example: /api/v1/users might initially go to the old system. After user-service is ready, the Gateway routes /api/v1/users (or a new /api/v2/users) to the NestJS user-service.
+
+Feature flags can be used for A/B testing or gradual rollout to a percentage of users.
+
+5.5. Data Handling during Migration
+
+Option 1 (Preferred if feasible): New services own new data. Data from old system is migrated to new databases in batches or via a one-time cutover for each service.
+
+Option 2 (Interim): New services read/write to existing database (via ACL if schema is different) until data migration is complete. This increases risk and coupling.
+
+Data Synchronization: If dual-write is necessary (writing to both old and new DBs for a period), implement robust synchronization mechanisms and reconciliation processes. This is complex and should be avoided if possible.
+
+5.6. Rollback Strategy
+
+For each migrated piece of functionality, a clear rollback plan MUST exist. This typically involves reconfiguring the API Gateway to route traffic back to the old system component. Automated scripts for rollback SHOULD be prepared.
+
+6. Technology Stack
+
+Backend Framework: NestJS (Node.js, TypeScript)
+
+Monorepo Tool: NX (Nrwl Extensions)
+
+Language: TypeScript
+
+Databases:
+
+PostgreSQL (for relational data, e.g., User Service)
+
+MongoDB (for document data, e.g., Message Service)
+
+Redis (for caching, presence, session management)
+
+Asynchronous Messaging: RabbitMQ
+
+Synchronous Inter-service Communication: gRPC (with Protocol Buffers)
+
+Real-time Communication (Client-Server): WebSockets (Socket.IO adapter for NestJS)
+
+WebRTC Media Handling: Mediasoup (existing integration to be maintained for media plane, signaling via NestJS Media Service)
+
+API Gateway: NestJS application
+
+Authentication: JWT (Passport.js integration in NestJS)
+
+Containerization: Docker
+
+Logging Libraries: Pino or Winston
+
+Validation: class-validator, class-transformer
+
+Testing Frameworks: Jest (Unit & Integration), Supertest (E2E HTTP), (Consider Playwright/Cypress for full E2E if frontend involved)
+
+7. Development and Operational Environment (DevOps)
+7.1. Version Control
+
+Git (e.g., GitHub, GitLab, Bitbucket). Branching strategy: GitFlow or a simpler trunk-based development with feature branches.
+
+7.2. Containerization
+
+Each microservice SHALL have its own Dockerfile optimized for production (multi-stage builds).
+
+docker-compose.yml SHALL be provided for easy local development and testing environment setup.
+
+7.3. Orchestration (Target)
+
+Kubernetes (K8s) is the target orchestration platform for production deployments for scalability, resilience, and service discovery. Alternatives: AWS ECS, Docker Swarm (if K8s is overkill initially).
+
+7.4. CI/CD Pipeline
+
+(e.g., GitHub Actions, GitLab CI, Jenkins)
+
+Trigger: On every push to main/develop branches and for pull requests.
+
+Stages:
+
+Linting & Static Analysis
+
+Unit Tests (NX affected:test)
+
+Integration Tests (NX affected:test)
+
+Build Docker Images (NX affected:build)
+
+Push Images to Container Registry (e.g., Docker Hub, ECR, GCR)
+
+Security Scan (image vulnerabilities, dependency check)
+
+Deploy to Staging Environment
+
+Run E2E Tests on Staging
+
+(Manual/Automated) Deploy to Production
+
+7.5. Configuration Management
+
+NestJS ConfigModule using .env files for environment-specific configurations.
+
+No hardcoded secrets or configurations in code.
+
+Configuration validation using Joi or class-validator.
+
+7.6. Secrets Management
+
+HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, or Kubernetes Secrets for managing database credentials, API keys, JWT secrets, etc.
+
+7.7. Logging
+
+Structured logging (JSON format) using Pino or Winston.
+
+Logs from all services SHALL be aggregated into a centralized logging platform (e.g., ELK Stack - Elasticsearch, Logstash, Kibana; or Grafana Loki).
+
+Correlation IDs SHALL be used to trace requests across multiple services.
+
+7.8. Monitoring and Alerting
+
+Metrics: Prometheus for collecting metrics from each service (e.g., request rates, error rates, latency, resource usage via prom-client).
+
+Dashboards: Grafana for visualizing metrics.
+
+Alerting: Alertmanager (integrated with Prometheus) or Grafana Alerting for notifying on critical issues (e.g., high error rates, service unavailability, resource exhaustion).
+
+Health Checks: Each microservice MUST expose a /health endpoint for liveness and readiness probes (used by orchestrators like Kubernetes).
+
+7.9. Tracing
+
+Distributed tracing using OpenTelemetry with an exporter to Jaeger or Zipkin. This is crucial for understanding request flows and debugging performance issues in a microservices architecture.
+
+8. Migration Timeline (High-Level Phases)
+
+Phase 0: Preparation & Foundation (Weeks 1-2)
+
+NX Monorepo setup, shared libs (common, config, auth).
+
+Base Dockerfiles, Docker Compose for local dev.
+
+Initial CI/CD pipeline setup.
+
+API Gateway skeleton.
+
+RabbitMQ, core DBs setup in dev/staging.
+
+Phase 1: User Service & Auth (Weeks 3-5)
+
+Implement user-service.
+
+Integrate auth (JWT) in API Gateway.
+
+Route user-related traffic via API Gateway. Unit & Integration tests.
+
+Phase 2: Core Chat & WebSocket (Weeks 6-8)
+
+Implement chat-service, message-service, presence-service.
+
+WebSocket integration in API Gateway.
+
+Basic real-time messaging. Unit & Integration tests.
+
+Phase 3: File & Media Services (Weeks 9-11)
+
+Implement file-service with blob storage integration.
+
+Implement media-service for Mediasoup signaling.
+
+Implement notification-service (basic). Unit & Integration tests.
+
+Phase 4: Testing, Optimization & Full Migration (Weeks 12-14)
+
+Comprehensive E2E testing.
+
+Performance/load testing and optimization.
+
+Full monitoring and alerting setup.
+
+Migrate remaining functionalities.
+
+Documentation review and finalization.
+
+Phase 5: Stabilization & Old System Decommission (Weeks 15+)
+
+Monitor new system in production.
+
+Address any post-migration issues.
+
+Gradually decommission old system components.
+
+(This timeline is indicative and depends on team size, experience, and complexity of the existing system.)
+
+9. Risk Assessment and Mitigation
+Risk ID	Description	Likelihood	Impact	Mitigation Strategy
+R-001	Incompatibility with existing frontend API	Medium	High	Thorough API contract analysis. API Gateway transformation layer. Prioritize backward compatibility. Frequent communication with frontend team.
+R-002	Data migration issues (loss, corruption)	Medium	High	Detailed data migration plan. Dry runs. Backups before migration. Validation scripts. Phased data migration.
+R-003	Performance degradation in new system	Medium	High	Early performance testing (load tests). Profiling. Database query optimization. Scalable infrastructure design.
+R-004	Extended downtime during cutover	Low	High	Strangler Fig pattern to minimize big-bang cutovers. Blue/Green or Canary deployments. Detailed rollback plans.
+R-005	Lack of team expertise in new technologies	Medium	Medium	Training, workshops. Pair programming. Hire experienced consultants if needed. Start with less critical services.
+R-006	Inter-service communication failures	Medium	Medium	Implement resilience patterns (retries, timeouts, circuit breakers). Robust monitoring and alerting for service health. gRPC deadliness.
+R-007	Scope creep / underestimated complexity	High	High	Strict scope management. Prioritize core migration over new features. Detailed breakdown of tasks. Regular review of progress and estimates.
+R-008	Security vulnerabilities introduced	Medium	High	Adhere to security best practices. Code reviews focused on security. Dependency scanning. Penetration testing before full launch.
+R-009	Issues with Mediasoup integration	Medium	Medium	Isolate Mediasoup signaling logic. Thorough testing of WebRTC flows. Leverage existing Mediasoup expertise if available.
+R-010	RabbitMQ message loss or processing errors	Low	Medium	Persistent messages, publisher confirms, consumer acknowledgments. Dead-letter queues (DLQs) and monitoring of DLQs. Idempotent consumers.
+10. Glossary (Extended)
+
+Anti-Corruption Layer (ACL): A software layer that translates between two different systems or parts of a system (e.g., new microservice and old database schema).
+
+Circuit Breaker: A design pattern used in microservices to detect failures and prevent a recurring failure from constantly trying to execute, which could lead to system-wide issues.
+
+Dead Letter Queue (DLQ): In messaging systems like RabbitMQ, a queue where messages are sent if they cannot be processed successfully by a consumer.
+
+Feature Flag: A technique that allows parts of a program to be turned on or off remotely without deploying new code.
+
+Idempotent Consumer: A message consumer that can safely process the same message multiple times without unintended side effects.
+
+Liveness Probe: A check used by orchestrators (like Kubernetes) to determine if an application instance is running. If it fails, the instance is restarted.
+
+Readiness Probe: A check used by orchestrators to determine if an application instance is ready to accept traffic. If it fails, the instance is not sent new requests.
+
+Saga Pattern: A way to manage data consistency across microservices in distributed transactions using a sequence of local transactions.
+
+Strangler Fig Pattern: An architectural approach to incrementally migrating a legacy system by gradually replacing specific pieces of functionality with new applications and services.
+
+TURN/STUN Servers: Servers used in WebRTC to facilitate NAT traversal and enable peer-to-peer connections.
