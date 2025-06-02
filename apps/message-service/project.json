@@ -1,0 +1,67 @@
+{
+  "name": "message-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/message-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/message-service",
+        "main": "apps/message-service/src/main.ts",
+        "tsConfig": "apps/message-service/tsconfig.app.json",
+        "assets": [
+          "apps/message-service/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/message-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "message-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "message-service:build:development"
+        },
+        "production": {
+          "buildTarget": "message-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/message-service/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/message-service/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,13 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 12.7 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/user-service/src/app/app.controller.ts:48:28[39m[22m
+[1mTS2551: Property 'updateCurrentUserProfilePlaceholder' does not exist on type 'AppService'. [1m[32mDid you mean 'getCurrentUserProfilePlaceholder'?[39m[22m[1m
+    46 |     // FR-US-004: Publish UserProfileUpdated event
+    47 |     // return this.appService.updateUserProfile(userId, userProfileUpdateDto);
+  > 48 |     return this.appService.updateCurrentUserProfilePlaceholder(userProfileUpdateDto);
+       |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    49 |   }
+    50 |
+    51 |   // FR-US-001.6: GET /users/{id} - Get user profile by ID[39m[22m
+
+webpack compiled with [1m[31m1 error[39m[22m (bbe0610a5fcc69ab)

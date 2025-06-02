@@ -1,0 +1,16 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 7.98 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/app/app.controller.ts[39m[22m [1m[32m8:18-36[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve 'express' in '/app/apps/gateway/src/app'[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/gateway/src/app/app.service.ts:27:5[39m[22m
+[1mTS2322: Type 'Response<any, Record<string, any>>' is not assignable to type 'void'.
+    25 |     //   // ...
+    26 |     // }
+  > 27 |     return res.status(501).json({ message: '[1m[31mNot Implemented[39m[22m[1m: Request Routing' });
+       |     ^^^^^^
+    28 |   }
+    29 |
+    30 |   // Placeholder for WebSocket related service logic[39m[22m
+
+webpack compiled with [1m[31m2 errors[39m[22m (21df29a2c7373430)
