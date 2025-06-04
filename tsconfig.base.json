@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@chat/shared/domain": ["libs/shared/domain/src/index.ts"],
+      "@chat/shared/infrastructure": ["libs/shared/infrastructure/src/index.ts"]
+    },
     "esModuleInterop": true
   },
   "exclude": ["node_modules", "tmp"]

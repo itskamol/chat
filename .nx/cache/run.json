@@ -1,18 +1,18 @@
 {
   "run": {
-    "command": "nx build file-service --skip-nx-cache",
-    "startTime": "2025-06-02T04:11:38.458Z",
-    "endTime": "2025-06-02T04:11:43.537Z",
+    "command": "nx build chat-service",
+    "startTime": "2025-06-02T13:55:26.986Z",
+    "endTime": "2025-06-02T13:55:30.402Z",
     "inner": false
   },
   "tasks": [
     {
-      "taskId": "file-service:build:production",
+      "taskId": "chat-service:build:production",
       "target": "build",
-      "projectName": "file-service",
-      "hash": "2137560543302672494",
-      "startTime": "2025-06-02T04:11:38.467Z",
-      "endTime": "2025-06-02T04:11:43.537Z",
+      "projectName": "chat-service",
+      "hash": "3306607763412224270",
+      "startTime": "2025-06-02T13:55:26.991Z",
+      "endTime": "2025-06-02T13:55:30.402Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0

@@ -1,82 +1,156 @@
-import { Controller, Get, Post, Patch, Param, Body, Query } from '@nestjs/common';
-import { AppService } from './app.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Body,
+  UseGuards,
+  HttpStatus,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { AuthService } from './services/auth.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { Public } from './decorators/public.decorator';
+import { CurrentUser } from './decorators/current-user.decorator';
+import {
+  CreateUserDto,
+  LoginDto,
+  UpdateUserDto,
+  UserResponseDto,
+} from './dto/user.dto';
 
-// DTOs removed for diagnostics - will use Record<string, unknown> or any
-
-@Controller() // Base path can be set here e.g. @Controller('users') or rely on method paths
+@ApiTags('auth')
+@Controller('auth')
+@UsePipes(new ValidationPipe({ transform: true }))
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  // FR-US-001: Manage user lifecycle
-  // FR-US-001.1: POST /auth/register - User registration
-  @Post('auth/register')
-  register(@Body() userRegistrationDto: Record<string, unknown>) {
-    // FR-US-002: Securely store user credentials
-    // FR-US-004: Publish UserCreated event to RabbitMQ
-    return this.appService.register(userRegistrationDto);
+  @Public()
+  @Post('register')
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'User registered successfully',
+    type: UserResponseDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already exists',
+  })
+  async register(@Body() createUserDto: CreateUserDto) {
+    const result = await this.authService.register(createUserDto);
+    return {
+      status: HttpStatus.CREATED,
+      message: 'User registered successfully',
+      data: {
+        user: new UserResponseDto(result.user),
+        token: result.token,
+      },
+    };
   }
 
-  // FR-US-001.2: POST /auth/login - User login, returns JWT
-  @Post('auth/login')
-  login(@Body() userLoginDto: Record<string, unknown>) {
-    return this.appService.login(userLoginDto);
+  @Public()
+  @Post('login')
+  @ApiOperation({ summary: 'Login user' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User logged in successfully',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Invalid credentials',
+  })
+  async login(@Body() loginDto: LoginDto) {
+    const result = await this.authService.login(loginDto);
+    return {
+      status: HttpStatus.OK,
+      message: 'Login successful',
+      data: {
+        user: new UserResponseDto(result.user),
+        token: result.token,
+      },
+    };
   }
 
-  // FR-US-001.3: POST /auth/refresh - Refresh JWT
-  @Post('auth/refresh')
-  refreshAccessToken(@Body() body: { refreshToken: string }) {
-    // This would typically involve validating the refresh token
-    return this.appService.refreshAccessToken(body.refreshToken);
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Logout user' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User logged out successfully',
+  })
+  async logout(@CurrentUser() user: any) {
+    const result = await this.authService.logout(user.id);
+    return {
+      status: HttpStatus.OK,
+      data: result,
+    };
   }
 
-  // FR-US-001.4: GET /users/me - Get current user profile
-  // (Requires authentication - to be added via Guards)
-  @Get('users/me')
-  getCurrentUserProfile(/* @Req() req */) {
-    // const userId = req.user.id; // Assuming user context from auth guard
-    // return this.appService.getUserProfile(userId);
-    return this.appService.getCurrentUserProfilePlaceholder();
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get current user profile' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User profile retrieved successfully',
+    type: UserResponseDto,
+  })
+  async getProfile(@CurrentUser() user: any) {
+    const profile = await this.authService.getProfile(user.id);
+    return {
+      status: HttpStatus.OK,
+      message: 'Profile retrieved successfully',
+      data: new UserResponseDto(profile),
+    };
   }
 
-  // FR-US-001.5: PATCH /users/me - Update current user profile
-  // (Requires authentication)
-  @Patch('users/me')
-  updateCurrentUserProfile(@Body() userProfileUpdateDto: Record<string, unknown> /* @Req() req */) {
-    // const userId = req.user.id;
-    // FR-US-004: Publish UserProfileUpdated event
-    // return this.appService.updateUserProfile(userId, userProfileUpdateDto);
-    return this.appService.patchCurrentUserProfilePlaceholder(userProfileUpdateDto); // Calling renamed method
+  @UseGuards(JwtAuthGuard)
+  @Put('profile')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update user profile' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Profile updated successfully',
+    type: UserResponseDto,
+  })
+  async updateProfile(
+    @CurrentUser() user: any,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const updatedProfile = await this.authService.updateProfile(
+      user.id,
+      updateUserDto,
+    );
+    return {
+      status: HttpStatus.OK,
+      message: 'Profile updated successfully',
+      data: new UserResponseDto(updatedProfile),
+    };
   }
 
-  // FR-US-001.6: GET /users/{id} - Get user profile by ID
-  // (Requires authentication/authorization)
-  @Get('users/:id')
-  getUserProfileById(@Param('id') id: string) {
-    return this.appService.getUserProfileById(id);
+  @UseGuards(JwtAuthGuard)
+  @Post('refresh')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Refresh access token' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Token refreshed successfully',
+  })
+  async refreshToken(@CurrentUser() user: any) {
+    const result = await this.authService.refreshToken(user.id);
+    return {
+      status: HttpStatus.OK,
+      message: 'Token refreshed successfully',
+      data: result,
+    };
   }
-
-  // FR-US-001.7: GET /users/search?query= - Search users
-  // (Requires authentication/authorization)
-  @Get('users/search')
-  searchUsers(@Query('query') query: string) {
-    return this.appService.searchUsers(query);
-  }
-
-  // FR-US-006: Handle password reset functionality
-  @Post('auth/request-password-reset')
-  requestPasswordReset(@Body() body: { email: string }) {
-    return this.appService.requestPasswordReset(body.email);
-  }
-
-  @Post('auth/reset-password')
-  resetPassword(@Body() body: { token: string; newPassword: string }) {
-    return this.appService.resetPassword(body.token, body.newPassword);
-  }
-
-  // FR-US-005: Provide gRPC endpoints for internal services
-  // This will be handled by a separate gRPC controller or by defining gRPC methods
-  // directly in the service and exposing them via the main NestJS microservice listener.
-  // Example (conceptual, actual gRPC methods in service, exposed via module):
-  // @GrpcMethod('UserService', 'GetUserById')
-  // grpcGetUserById(data: { id: string }): User { ... }
 }
