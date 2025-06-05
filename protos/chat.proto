@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package chat;
+
+service ChatService {
+  rpc GetRoomDetails(GetRoomDetailsRequest) returns (GetRoomDetailsResponse);
+  rpc GetRoomMembers(GetRoomMembersRequest) returns (GetRoomMembersResponse);
+  rpc GetUserRooms(GetUserRoomsRequest) returns (GetUserRoomsResponse);
+  rpc SaveMessage(SaveMessageRequest) returns (SaveMessageResponse);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+  rpc UpdateMessageStatus(UpdateMessageStatusRequest) returns (UpdateMessageStatusResponse);
+}
+
+message GetRoomDetailsRequest {
+  string roomId = 1;
+}
+
+message GetRoomDetailsResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string type = 4;
+  bool isPrivate = 5;
+  string createdBy = 6;
+  string createdAt = 7;
+  string updatedAt = 8;
+  repeated RoomMember members = 9;
+}
+
+message RoomMember {
+  string userId = 1;
+  string role = 2;
+  string joinedAt = 3;
+  string lastSeen = 4;
+}
+
+message GetRoomMembersRequest {
+  string roomId = 1;
+}
+
+message GetRoomMembersResponse {
+  repeated RoomMember members = 1;
+}
+
+message GetUserRoomsRequest {
+  string userId = 1;
+}
+
+message GetUserRoomsResponse {
+  repeated UserRoom rooms = 1;
+}
+
+message UserRoom {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string lastActivity = 4;
+  int32 unreadCount = 5;
+}
+
+message SaveMessageRequest {
+  string content = 1;
+  string type = 2;
+  string senderId = 3;
+  string roomId = 4;
+  string replyTo = 5;
+  string metadata = 6;
+}
+
+message SaveMessageResponse {
+  string id = 1;
+  string content = 2;
+  string type = 3;
+  string senderId = 4;
+  string roomId = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+  string replyTo = 8;
+  string metadata = 9;
+}
+
+message GetMessagesRequest {
+  string roomId = 1;
+  int32 limit = 2;
+  int32 skip = 3;
+  string before = 4;
+  string after = 5;
+}
+
+message GetMessagesResponse {
+  repeated Message messages = 1;
+  int32 total = 2;
+  bool hasMore = 3;
+}
+
+message Message {
+  string id = 1;
+  string content = 2;
+  string type = 3;
+  string senderId = 4;
+  string roomId = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+  string replyTo = 8;
+  string metadata = 9;
+  repeated ReadReceipt readBy = 10;
+}
+
+message ReadReceipt {
+  string userId = 1;
+  string readAt = 2;
+}
+
+message UpdateMessageStatusRequest {
+  string messageId = 1;
+  string userId = 2;
+  string status = 3; // "read", "deleted", etc.
+}
+
+message UpdateMessageStatusResponse {
+  bool success = 1;
+  string message = 2;
+}

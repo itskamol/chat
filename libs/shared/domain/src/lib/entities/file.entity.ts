@@ -10,32 +10,32 @@ export class FileEntity {
   _id?: string;
 
   @ApiProperty({ description: 'Original filename' })
-  @Prop({ required: true, trim: true })
+  @Prop({ type: String, required: true, trim: true })
   originalName!: string;
 
   @ApiProperty({ description: 'Stored filename' })
-  @Prop({ required: true, unique: true })
-  fileName: string = '';
+  @Prop({ type: String, required: true, unique: true })
+  fileName = '';
 
   @ApiProperty({ description: 'File MIME type' })
-  @Prop({ required: true })
-  mimeType: string = '';
+  @Prop({ type: String, required: true })
+  mimeType = '';
 
   @ApiProperty({ description: 'File size in bytes' })
-  @Prop({ required: true })
-  size: number = 0;
+  @Prop({ type: Number, required: true })
+  size = 0;
 
   @ApiProperty({ description: 'File URL' })
-  @Prop({ required: true })
-  url: string = '';
+  @Prop({ type: String, required: true })
+  url = '';
 
   @ApiProperty({ description: 'Thumbnail URL for images' })
-  @Prop({ default: null })
+  @Prop({ type: String, default: null })
   thumbnailUrl?: string;
 
   @ApiProperty({ description: 'User who uploaded the file' })
   @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
-  uploadedBy: string = '';
+  uploadedBy = '';
 
   @ApiProperty({ description: 'Room where file was shared' })
   @Prop({ type: Types.ObjectId, ref: 'Room', default: null })
@@ -47,14 +47,15 @@ export class FileEntity {
 
   @ApiProperty({ description: 'File processing status' })
   @Prop({ 
+    type: String,
     enum: ['pending', 'processing', 'completed', 'failed'], 
     default: 'completed' 
   })
-  status: string = 'completed';
+  status = 'completed';
 
   @ApiProperty({ description: 'File download count' })
-  @Prop({ default: 0 })
-  downloadCount: number = 0;
+  @Prop({ type: Number, default: 0 })
+  downloadCount = 0;
 
   @ApiProperty({ description: 'File creation date' })
   createdAt?: Date;

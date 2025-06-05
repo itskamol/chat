@@ -61,6 +61,16 @@ export class AuthService {
     return this.sanitizeUser(user);
   }
 
+  async validateJwtPayload(payload: any): Promise<any> {
+    // Validate JWT payload - payload should contain user ID and email
+    const user = await this.userRepository.findByEmail(payload.email);
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return this.sanitizeUser(user);
+  }
+
   private sanitizeUser(user: any): any {
     const { password, ...sanitizedUser } = user.toObject();
     return sanitizedUser;

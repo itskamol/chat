@@ -1,12 +1,14 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { IMessageRepository, IRoomRepository } from '@chat/shared/domain';
 import { CreateMessageDto, UpdateMessageDto } from './dto';
+import { EventService } from '../events/event.service';
 
 @Injectable()
 export class MessageService {
   constructor(
     @Inject('IMessageRepository') private messageRepository: IMessageRepository,
     @Inject('IRoomRepository') private roomRepository: IRoomRepository,
+    private readonly eventService: EventService,
   ) {}
 
   async createMessage(createMessageDto: CreateMessageDto) {
@@ -17,6 +19,17 @@ export class MessageService {
       if (createMessageDto.roomId) {
         await this.roomRepository.updateLastActivity(createMessageDto.roomId);
       }
+
+      // Emit event for real-time broadcasting
+      this.eventService.emitMessageCreated({
+        messageId: message.id,
+        content: message.content,
+        senderId: message.senderId,
+        roomId: message.roomId,
+        timestamp: message.createdAt || new Date(),
+        type: message.type,
+        metadata: message.metadata,
+      });
       
       return {
         success: true,
@@ -86,6 +99,14 @@ export class MessageService {
       // This would typically update the message's readBy array
       const message = await this.messageRepository.update(messageId, {
         readBy: [{ userId, readAt: new Date() }],
+      });
+
+      // Emit event for real-time broadcasting
+      this.eventService.emitMessageRead({
+        messageId,
+        userId,
+        roomId: message.roomId,
+        timestamp: new Date(),
       });
       
       return {

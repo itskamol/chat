@@ -31,8 +31,7 @@ export class User {
     unique: true, 
     trim: true, 
     minlength: 3, 
-    maxlength: 30,
-    index: true 
+    maxlength: 30
   })
   username!: string;
 
@@ -41,8 +40,7 @@ export class User {
     required: true, 
     unique: true, 
     trim: true, 
-    lowercase: true,
-    index: true 
+    lowercase: true
   })
   email!: string;
 
@@ -62,12 +60,12 @@ export class User {
   displayName!: string;
 
   @ApiProperty({ description: 'User avatar URL' })
-  @Prop({ default: null })
+  @Prop({ type: String, default: null })
   avatar?: string;
 
   @ApiProperty({ description: 'User online status' })
-  @Prop({ default: false })
-  isOnline: boolean = false;
+  @Prop({ type: Boolean, default: false })
+  isOnline = false;
 
   @ApiProperty({ description: 'Last seen timestamp (nullable)' })
   @Prop({ type: Date, default: null })

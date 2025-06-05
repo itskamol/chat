@@ -23,16 +23,16 @@ export class Message {
   _id?: string;
 
   @ApiProperty({ description: 'Message content' })
-  @Prop({ required: true, trim: true, maxlength: 4000 })
-  content: string = '';
+  @Prop({ type: String, required: true, trim: true, maxlength: 4000 })
+  content = '';
 
   @ApiProperty({ description: 'Room ID where message was sent' })
   @Prop({ required: true, type: Types.ObjectId, ref: 'Room' })
-  roomId: string = '';
+  roomId = '';
 
   @ApiProperty({ description: 'User ID who sent the message' })
   @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
-  senderId: string = '';
+  senderId = '';
 
   @ApiProperty({ description: 'Message type' })
   @Prop({ 
@@ -62,16 +62,16 @@ export class Message {
   readBy: Array<{ userId: string; readAt: Date }> = [];
 
   @ApiProperty({ description: 'Message edited status' })
-  @Prop({ default: false })
-  edited: boolean = false;
+  @Prop({ type: Boolean, default: false })
+  edited = false;
 
   @ApiProperty({ description: 'Message last edit time' })
-  @Prop({ default: null })
+  @Prop({ type: Date, default: null })
   editedAt?: Date;
 
   @ApiProperty({ description: 'Message deleted status' })
-  @Prop({ default: false })
-  deleted: boolean = false;
+  @Prop({ type: Boolean, default: false })
+  deleted = false;
 
   @ApiProperty({ description: 'Message creation date' })
   createdAt?: Date;

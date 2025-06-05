@@ -1,0 +1,686 @@
+[1m[2mDetermining test suites to run...[22m[22m[999D[K
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 6 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 6 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        1 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 55020  - [39m06/05/2025, 9:25:43 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to add message notification job[39m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1AError: Queue error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:104:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:94:80)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 55020  - [39m06/05/2025, 9:25:43 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to get job stats[39m
+Error: Queue stats error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:193:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:192:66)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 55020  - [39m06/05/2025, 9:25:43 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to clean queue[39m
+Error: Clean jobs error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:212:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:211:62)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m ([0m[1m[41m5.112 s[49m[22m[0m)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m ([0m[1m[41m5.109 s[49m[22m[0m)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m7 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55014) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m7 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55014) [MONGOOSE] Warning: Duplicate schema index on {"username":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m7 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m ([0m[1m[41m6.939 s[49m[22m[0m)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m34 passed[39m[22m, 34 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m7 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m7 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m8 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55013) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55013) [MONGOOSE] Warning: Duplicate schema index on {"username":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55013) [MONGODB DRIVER] Warning: useNewUrlParser is a deprecated option: useNewUrlParser has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A(node:55013) [MONGODB DRIVER] Warning: useUnifiedTopology is a deprecated option: useUnifiedTopology has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[31m FAIL [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m ([0m[1m[41m9.262 s[49m[22m[0m)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[1m[31m  [1m● [22m[1mChat Service Integration Tests › /health (Health Check) › should return health status[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › /chat-rooms (Room Management) › should create a new room[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › /chat-rooms (Room Management) › should update a room[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › /chat-rooms (Room Management) › should add participant to room[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › /chat-rooms (Room Management) › should remove participant from room[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › /chat-rooms (Room Management) › should delete a room[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › WebSocket Integration › should handle WebSocket connections[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › gRPC Integration › should handle gRPC calls[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › Event System Integration › should emit and handle events[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+[1m[31m  [1m● [22m[1mChat Service Integration Tests › Queue System Integration › should process background jobs[39m[22m
+
+    Nest can't resolve dependencies of the ChatGateway (?, RoomService, WebSocketAuthService). Please make sure that the argument dependency at index [0] is available in the WebSocketModule context.
+
+    Potential solutions:
+    - Is WebSocketModule a valid NestJS module?
+    - If dependency is a provider, is it part of the current WebSocketModule?
+    - If dependency is exported from a separate @Module, is that module imported within WebSocketModule?
+      @Module({
+        imports: [ /* the Module containing dependency */ ]
+      })
+[2m[22m
+[2m      [2mat TestingInjector.resolveSingleParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:199:19)[22m[2m[22m
+[2m      [2mat resolveParam ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:129:49)[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInjector.resolveConstructorParams ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:144:58)[22m[2m[22m
+[2m      [2mat TestingInjector.loadInstance ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:24)[22m[2m[22m
+[2m      [2mat TestingInjector.loadProvider ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:20)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:33[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:36)[22m[2m[22m
+[2m      [2mat [22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:24[22m[2m[22m
+[2m          at Array.map (<anonymous>)[22m
+[2m      [2mat TestingInstanceLoader.createInstances ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:39:49)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:22:24)[22m[2m[22m
+[2m      [2mat TestingInstanceLoader.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-instance-loader.js[2m:9:21)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.createInstancesOfDependencies ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:118:30)[22m[2m[22m
+[2m      [2mat TestingModuleBuilder.compile ([22m[2m../../node_modules/.pnpm/@nestjs+testing@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0._4b265673c2f319a0c25284d3254bdfea/node_modules/@nestjs/testing/testing-module.builder.js[2m:74:20)[22m[2m[22m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[32m5 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m42 passed[39m[22m, 42 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m5 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[31m10 failed[39m[22m, [1m[32m42 passed[39m[22m, 52 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A
+ReferenceError: You are trying to `import` a file after the Jest environment has been torn down. From src/app/integration.spec.ts.
+
+      [2mat applyMethods ([22m../../node_modules/.pnpm/mongoose@8.15.1/node_modules/mongoose/lib/helpers/model/applyMethods.js[2m:15:17)[22m
+      [2mat Function.compile ([22m../../node_modules/.pnpm/mongoose@8.15.1/node_modules/mongoose/lib/model.js[2m:4868:3)[22m
+      [2mat Mongoose._model ([22m../../node_modules/.pnpm/mongoose@8.15.1/node_modules/mongoose/lib/mongoose.js[2m:669:27)[22m
+      [2mat NativeConnection.model ([22m../../node_modules/.pnpm/mongoose@8.15.1/node_modules/mongoose/lib/connection.js[2m:1465:23)[22m
+      [2mat InstanceWrapper.useFactory [as metatype] ([22m../../node_modules/.pnpm/@nestjs+mongoose@11.0.3_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0_2b22a97538fe2672ee18a278ccd87460/node_modules/@nestjs/mongoose/lib/mongoose.providers.ts[2m:24:26)[22m
+      [2mat TestingInjector.instantiateClass ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:376:55)[22m
+      [2mat callback ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:65:45)[22m
+      [2mat TestingInjector.resolveConstructorParams ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:145:24)[22m
+      [2mat TestingInjector.loadInstance ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:70:13)[22m
+      [2mat TestingInjector.loadProvider ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/injector.js[2m:98:9)[22m
+      [2mat [22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:56:13[22m
+          at async Promise.all (index 3)
+      [2mat TestingInstanceLoader.createInstancesOfProviders ([22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:55:9)[22m
+      [2mat [22m../../node_modules/.pnpm/@nestjs+core@11.1.2_@nestjs+common@11.1.2_class-transformer@0.5.1_class-validator@0.14._cf28e4c954b4dd5be1f02a6abf5c2eb4/node_modules/@nestjs/core/injector/instance-loader.js[2m:40:13[22m
+          at async Promise.all (index 13)
+
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m5 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[31m10 failed[39m[22m, [1m[32m42 passed[39m[22m, 52 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m9 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m5 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[31m10 failed[39m[22m, [1m[32m42 passed[39m[22m, 52 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m10 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[33mA worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.[39m
+
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m5 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[31m10 failed[39m[22m, [1m[32m42 passed[39m[22m, 52 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m10 s[39m[22m[K[1A[K[1A[K[1A[K[1A[K[1A[999D[K[1mTest Suites: [22m[1m[31m1 failed[39m[22m, [1m[32m5 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[31m10 failed[39m[22m, [1m[32m42 passed[39m[22m, 52 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        [1m[33m10.323 s[39m[22m
+[2mRan all test suites[22m[2m.[22m

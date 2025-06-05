@@ -26,11 +26,11 @@ export class Room {
   _id?: string;
 
   @ApiProperty({ description: 'Room name' })
-  @Prop({ required: true, trim: true, maxlength: 100 })
-  name: string = '';
+  @Prop({ type: String, required: true, trim: true, maxlength: 100 })
+  name = '';
 
   @ApiProperty({ description: 'Room description' })
-  @Prop({ trim: true, maxlength: 500 })
+  @Prop({ type: String, trim: true, maxlength: 500 })
   description?: string;
 
   @ApiProperty({ description: 'Room type' })
@@ -42,12 +42,12 @@ export class Room {
   type: RoomType = RoomType.GROUP;
 
   @ApiProperty({ description: 'Room privacy setting' })
-  @Prop({ default: false })
-  isPrivate: boolean = false;
+  @Prop({ type: Boolean, default: false })
+  isPrivate = false;
 
   @ApiProperty({ description: 'Room creator' })
   @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
-  createdBy: string = '';
+  createdBy = '';
 
   @ApiProperty({ description: 'Room members' })
   @Prop({ 
@@ -67,7 +67,7 @@ export class Room {
   }> = [];
 
   @ApiProperty({ description: 'Room avatar URL' })
-  @Prop({ default: null })
+  @Prop({ type: String, default: null })
   avatar?: string | null = null;
 
   @ApiProperty({ description: 'Last message in room' })
@@ -75,7 +75,7 @@ export class Room {
   lastMessage?: string | null = null;
 
   @ApiProperty({ description: 'Last activity timestamp' })
-  @Prop({ default: Date.now })
+  @Prop({ type: Date, default: Date.now })
   lastActivity: Date = new Date();
 
   @ApiProperty({ description: 'Room settings' })

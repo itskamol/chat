@@ -12,7 +12,7 @@ export class RoomRepository implements IRoomRepository {
     return this.roomModel.find({ 'members.userId': userId }).exec();
   }
 
-  async addMember(roomId: string, userId: string, role: string = 'member'): Promise<void> {
+  async addMember(roomId: string, userId: string, role = 'member'): Promise<void> {
     await this.roomModel.updateOne(
       { _id: roomId },
       { $addToSet: { members: { userId, role } } }

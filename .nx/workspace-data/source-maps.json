@@ -1,0 +1,3672 @@
+{
+  "apps/chat-service": {
+    "root": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/chat-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/chat-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/chat-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/file-service": {
+    "root": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/file-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/file-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/file-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/gateway": {
+    "root": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/gateway/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/gateway/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/gateway/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/media-service": {
+    "root": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/media-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/media-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/media-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/message-service": {
+    "root": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/message-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/message-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/message-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/presence-service": {
+    "root": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/presence-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/presence-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/presence-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/user-service": {
+    "root": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.cache": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.dependsOn": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.inputs": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.outputs": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.executor": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.cwd": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.args": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.options.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.technologies.0": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.description": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:build.metadata.help.example": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.continuous": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.executor": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.cwd": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.args": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.options.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.technologies.0": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.description": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.webpack:serve.metadata.help.example": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.continuous": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.executor": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.cwd": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.args": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.options.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.technologies.0": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.description": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.preview.metadata.help.example": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.continuous": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.dependsOn": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.executor": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.buildTarget": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.serve-static.options.spa": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.build-deps.dependsOn": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.continuous": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.dependsOn": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.executor": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.watch-deps.options.command": [
+      "apps/user-service/webpack.config.js",
+      "@nx/webpack/plugin"
+    ],
+    "targets.eslint:lint": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "apps/user-service/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.isolatedConfig": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/user-service/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "libs/shared/domain": {
+    "root": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "libs/shared/domain/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "libs/shared/domain/project.json",
+      "nx/core/project-json"
+    ]
+  },
+  "libs/shared/infrastructure": {
+    "root": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.cache": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.inputs": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.outputs": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.executor": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.cwd": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.env": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.options.command": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.technologies.0": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.description": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.command": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "targets.eslint:lint.metadata.help.example": [
+      "libs/shared/infrastructure/.eslintrc.json",
+      "@nx/eslint/plugin"
+    ],
+    "name": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "libs/shared/infrastructure/project.json",
+      "nx/core/project-json"
+    ]
+  }
+}

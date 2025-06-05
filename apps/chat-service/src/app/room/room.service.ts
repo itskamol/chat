@@ -1,13 +1,15 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { IRoomRepository, IUserRepository, RoomType, RoomMemberRole } from '@chat/shared/domain';
 import { CreateRoomDto, UpdateRoomDto, AddMemberDto } from './dto';
+import { EventService } from '../events/event.service';
 
 @Injectable()
 export class RoomService {
   constructor(
     @Inject('IRoomRepository') private roomRepository: IRoomRepository,
     @Inject('IUserRepository') private userRepository: IUserRepository,
-  ) {}
+    private readonly eventService: EventService,
+  ) { }
 
   async createRoom(createRoomDto: CreateRoomDto) {
     try {
@@ -23,7 +25,16 @@ export class RoomService {
       };
 
       const room = await this.roomRepository.create(roomData);
-      
+
+      // Emit room created event
+      this.eventService.emitRoomCreated({
+        roomId: room.id,
+        name: room.name,
+        createdBy: room.createdBy,
+        type: room.type,
+        timestamp: room.createdAt || new Date(),
+      });
+
       return {
         success: true,
         data: room,
@@ -47,7 +58,7 @@ export class RoomService {
           error: 'Room not found',
         };
       }
-      
+
       return {
         success: true,
         data: room,
@@ -131,7 +142,7 @@ export class RoomService {
       }
 
       await this.roomRepository.addMember(roomId, addMemberDto.userId, addMemberDto.role);
-      
+
       return {
         success: true,
         message: 'Member added successfully',
@@ -148,7 +159,7 @@ export class RoomService {
   async removeMember(roomId: string, userId: string) {
     try {
       await this.roomRepository.removeMember(roomId, userId);
-      
+
       return {
         success: true,
         message: 'Member removed successfully',
@@ -165,7 +176,7 @@ export class RoomService {
   async updateMemberRole(roomId: string, userId: string, role: RoomMemberRole) {
     try {
       await this.roomRepository.updateMemberRole(roomId, userId, role);
-      
+
       return {
         success: true,
         message: 'Member role updated successfully',

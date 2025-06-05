@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MessageController } from './message.controller';
 import { MessageService } from './message.service';
 import { DatabaseModule } from '@chat/shared/infrastructure';
+import { EventsModule } from '../events';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, forwardRef(() => EventsModule)],
   controllers: [MessageController],
   providers: [MessageService],
   exports: [MessageService],

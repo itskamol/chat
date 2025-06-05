@@ -1,0 +1,484 @@
+[1m[2mDetermining test suites to run...[22m[22m[999D[K
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 6 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 6 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        1 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        4 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[31m FAIL [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A  [1m● [22mTest suite failed to run
+
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m25[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'message' does not exist on type 'Promise<PlaceholderResult>'.
+
+    [7m25[0m       expect(result.message).toContain('Chat room created');
+    [7m  [0m [91m                    ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m25[0m:[93m21[0m
+        [7m25[0m       expect(result.message).toContain('Chat room created');
+        [7m  [0m [96m                    ~~~~~~~[0m
+        Did you forget to use 'await'?
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m34[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'message' does not exist on type 'Promise<PlaceholderResult>'.
+
+    [7m34[0m       expect(result.message).toContain('Chat room updated');
+    [7m  [0m [91m                    ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m34[0m:[93m21[0m
+        [7m34[0m       expect(result.message).toContain('Chat room updated');
+        [7m  [0m [96m                    ~~~~~~~[0m
+        Did you forget to use 'await'?
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m42[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'message' does not exist on type 'Promise<PlaceholderResult>'.
+
+    [7m42[0m       expect(result.message).toContain('Chat room deleted');
+    [7m  [0m [91m                    ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m42[0m:[93m21[0m
+        [7m42[0m       expect(result.message).toContain('Chat room deleted');
+        [7m  [0m [96m                    ~~~~~~~[0m
+        Did you forget to use 'await'?
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m51[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'message' does not exist on type 'Promise<PlaceholderResult>'.
+
+    [7m51[0m       expect(result.message).toContain('Participant added');
+    [7m  [0m [91m                    ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m51[0m:[93m21[0m
+        [7m51[0m       expect(result.message).toContain('Participant added');
+        [7m  [0m [96m                    ~~~~~~~[0m
+        Did you forget to use 'await'?
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m58[0m:[93m58[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ userId: string; }' is not assignable to parameter of type 'string'.
+
+    [7m58[0m       const result = service.removeParticipant('room-1', removeDto);
+    [7m  [0m [91m                                                         ~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m60[0m:[93m21[0m - [91merror[0m[90m TS2339: [0mProperty 'message' does not exist on type 'Promise<PlaceholderResult>'.
+
+    [7m60[0m       expect(result.message).toContain('Participant removed');
+    [7m  [0m [91m                    ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/app.service.spec.ts[0m:[93m60[0m:[93m21[0m
+        [7m60[0m       expect(result.message).toContain('Participant removed');
+        [7m  [0m [96m                    ~~~~~~~[0m
+        Did you forget to use 'await'?
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m0 of 6 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, 1 of 6 total
+[1mTests:       [22m[1m[32m4 passed[39m[22m, 4 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[31m FAIL [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, 1 of 6 total
+[1mTests:       [22m[1m[32m4 passed[39m[22m, 4 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A  [1m● [22mTest suite failed to run
+
+    [96mapps/chat-service/src/app/app.controller.spec.ts[0m:[93m58[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'addParticipant' does not exist on type 'AppController'.
+
+    [7m58[0m       const result = appController.addParticipant('room-1', addDto);
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/app.controller.spec.ts[0m:[93m65[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'removeParticipant' does not exist on type 'AppController'.
+
+    [7m65[0m       const result = appController.removeParticipant('room-1', removeDto);
+    [7m  [0m [91m                                   ~~~~~~~~~~~~~~~~~[0m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, 1 of 6 total
+[1mTests:       [22m[1m[32m4 passed[39m[22m, 4 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m��[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/websocket/[22m[1mwebsocket-jwt-auth.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mapp.controller.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, 1 of 6 total
+[1mTests:       [22m[1m[32m4 passed[39m[22m, 4 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m2 failed[39m[22m, [1m[32m1 passed[39m[22m, 3 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[31m FAIL [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m2 failed[39m[22m, [1m[32m1 passed[39m[22m, 3 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A  [1m● [22mTest suite failed to run
+
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m8[0m:[93m27[0m - [91merror[0m[90m TS2307: [0mCannot find module '../app.module' or its corresponding type declarations.
+
+    [7m8[0m import { AppModule } from '../app.module';
+    [7m [0m [91m                          ~~~~~~~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m41[0m:[93m11[0m - [91merror[0m[90m TS2304: [0mCannot find name 'setupTestData'.
+
+    [7m41[0m     await setupTestData();
+    [7m  [0m [91m          ~~~~~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m45[0m:[93m11[0m - [91merror[0m[90m TS2304: [0mCannot find name 'cleanupTestData'.
+
+    [7m45[0m     await cleanupTestData();
+    [7m  [0m [91m          ~~~~~~~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m55[0m:[93m14[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
+      Type '{ default: SuperTestStatic; Test: typeof Test; agent: typeof TestAgent & ((app?: App, options?: AgentOptions) => TestAgent<Test>); }' has no call signatures.
+
+    [7m55[0m       return request(app.getHttpServer())
+    [7m  [0m [91m             ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m7[0m:[93m1[0m
+        [7m7[0m import * as request from 'supertest';
+        [7m [0m [96m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        Type originates at this import. A namespace-style import cannot be called or constructed, and will cause a failure at runtime. Consider using a default import or import require here instead.
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m71[0m:[93m14[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
+      Type '{ default: SuperTestStatic; Test: typeof Test; agent: typeof TestAgent & ((app?: App, options?: AgentOptions) => TestAgent<Test>); }' has no call signatures.
+
+    [7m71[0m       return request(app.getHttpServer())
+    [7m  [0m [91m             ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m7[0m:[93m1[0m
+        [7m7[0m import * as request from 'supertest';
+        [7m [0m [96m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        Type originates at this import. A namespace-style import cannot be called or constructed, and will cause a failure at runtime. Consider using a default import or import require here instead.
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m85[0m:[93m14[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
+      Type '{ default: SuperTestStatic; Test: typeof Test; agent: typeof TestAgent & ((app?: App, options?: AgentOptions) => TestAgent<Test>); }' has no call signatures.
+
+    [7m85[0m       return request(app.getHttpServer())
+    [7m  [0m [91m             ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m7[0m:[93m1[0m
+        [7m7[0m import * as request from 'supertest';
+        [7m [0m [96m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        Type originates at this import. A namespace-style import cannot be called or constructed, and will cause a failure at runtime. Consider using a default import or import require here instead.
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m97[0m:[93m14[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
+      Type '{ default: SuperTestStatic; Test: typeof Test; agent: typeof TestAgent & ((app?: App, options?: AgentOptions) => TestAgent<Test>); }' has no call signatures.
+
+    [7m97[0m       return request(app.getHttpServer())
+    [7m  [0m [91m             ~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m7[0m:[93m1[0m
+        [7m7[0m import * as request from 'supertest';
+        [7m [0m [96m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        Type originates at this import. A namespace-style import cannot be called or constructed, and will cause a failure at runtime. Consider using a default import or import require here instead.
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m99[0m:[93m31[0m - [91merror[0m[90m TS1127: [0mInvalid character.
+
+    [7m99[0m         .set('Authorization', \`Bearer \${authToken}\`)
+    [7m  [0m [91m                              [0m
+    [96mapps/chat-service/src/app/integration.spec.ts[0m:[93m292[0m:[93m1[0m - [91merror[0m[90m TS1160: [0mUnterminated template literal.
+
+    [7m292[0m 
+    [7m   [0m [91m[0m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/[22m[1mintegration.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m2 failed[39m[22m, [1m[32m1 passed[39m[22m, 3 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m3 failed[39m[22m, [1m[32m1 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[31m FAIL [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m3 failed[39m[22m, [1m[32m1 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A  [1m● [22mTest suite failed to run
+
+    [96mapps/chat-service/src/app/events/event.service.spec.ts[0m:[93m53[0m:[93m40[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: string; roomId: string; senderId: string; content: string; timestamp: Date; }' is not assignable to parameter of type 'MessageCreatedEvent'.
+      Type '{ id: string; roomId: string; senderId: string; content: string; timestamp: Date; }' is missing the following properties from type 'MessageCreatedEvent': messageId, type
+
+    [7m53[0m       await service.emitMessageCreated(messageData);
+    [7m  [0m [91m                                       ~~~~~~~~~~~[0m
+    [96mapps/chat-service/src/app/events/event.service.spec.ts[0m:[93m67[0m:[93m37[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ messageId: string; userId: string; readAt: Date; }' is not assignable to parameter of type 'MessageReadEvent'.
+      Type '{ messageId: string; userId: string; readAt: Date; }' is missing the following properties from type 'MessageReadEvent': roomId, timestamp
+
+    [7m67[0m       await service.emitMessageRead(readData);
+    [7m  [0m [91m                                    ~~~~~~~~[0m
+    [96mapps/chat-service/src/app/events/event.service.spec.ts[0m:[93m81[0m:[93m36[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ userId: string; roomId: string; isTyping: boolean; }' is not assignable to parameter of type 'UserTypingEvent'.
+      Property 'timestamp' is missing in type '{ userId: string; roomId: string; isTyping: boolean; }' but required in type 'UserTypingEvent'.
+
+    [7m81[0m       await service.emitUserTyping(typingData);
+    [7m  [0m [91m                                   ~~~~~~~~~~[0m
+
+      [96mapps/chat-service/src/app/events/event.service.ts[0m:[93m26[0m:[93m3[0m
+        [7m26[0m   timestamp: Date;
+        [7m  [0m [96m  ~~~~~~~~~[0m
+        'timestamp' is declared here.
+    [96mapps/chat-service/src/app/events/event.service.spec.ts[0m:[93m124[0m:[93m37[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: string; name: string; createdBy: string; timestamp: Date; }' is not assignable to parameter of type 'RoomCreatedEvent'.
+      Type '{ id: string; name: string; createdBy: string; timestamp: Date; }' is missing the following properties from type 'RoomCreatedEvent': roomId, type
+
+    [7m124[0m       await service.emitRoomCreated(roomData);
+    [7m   [0m [91m                                    ~~~~~~~~[0m
+    [96mapps/chat-service/src/app/events/event.service.spec.ts[0m:[93m132[0m:[93m15[0m - [91merror[0m[90m TS2339: [0mProperty 'onModuleInit' does not exist on type 'EventService'.
+
+    [7m132[0m       service.onModuleInit();
+    [7m   [0m [91m              ~~~~~~~~~~~~[0m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/events/[22m[1mevent.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m3 failed[39m[22m, [1m[32m1 passed[39m[22m, 4 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        5 s, estimated 6 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 35514  - [39m06/05/2025, 9:04:06 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to add message notification job[39m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1AError: Queue error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:104:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:94:80)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 35514  - [39m06/05/2025, 9:04:06 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to get job stats[39m
+Error: Queue stats error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:193:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:192:66)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[31m[Nest] 35514  - [39m06/05/2025, 9:04:06 AM [31m  ERROR[39m [38;5;3m[QueueService] [39m[31mFailed to clean queue[39m
+Error: Clean jobs error
+    at /home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:212:21
+    at Generator.next (<anonymous>)
+    at /home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/tslib.js:166:16)
+    at Object.<anonymous> (/home/dev/Desktop/projects/chat/apps/chat-service/src/app/queue/queue.service.spec.ts:211:62)
+    at Promise.then.completed (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:121:9)
+    at run (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-circus@29.7.0_babel-plugin-macros@3.1.0/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/home/dev/Desktop/projects/chat/node_modules/.pnpm/jest-runner@29.7.0/node_modules/jest-runner/build/testWorker.js:106:12)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m ([0m[1m[41m5.781 s[49m[22m[0m)
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [0m[7m[37m chat-service [39m[27m[0m [2mapps/chat-service/src/app/queue/[22m[1mqueue.service.spec.ts[22m
+
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m1 passed[39m[22m, 5 of 6 total
+[1mTests:       [22m[1m[32m12 passed[39m[22m, 12 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[999D[K
+[1mTest Suites: [22m[1m[31m4 failed[39m[22m, [1m[32m2 passed[39m[22m, 6 total
+[1mTests:       [22m[1m[32m22 passed[39m[22m, 22 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        6.543 s
+[2mRan all test suites[22m[2m.[22m

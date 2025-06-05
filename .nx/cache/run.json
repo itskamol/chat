@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx test chat-service",
+    "startTime": "2025-06-05T04:25:36.937Z",
+    "endTime": "2025-06-05T04:25:48.380Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "chat-service:test",
+      "target": "test",
+      "projectName": "chat-service",
+      "hash": "5932369349847999218",
+      "startTime": "2025-06-05T04:25:36.958Z",
+      "endTime": "2025-06-05T04:25:48.373Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}
